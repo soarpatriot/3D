@@ -4,92 +4,203 @@
     <title>Welcome to Compound</title>
     <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
     <meta name="viewport" content="width=500, initial-scale=0.5">
+      <style>
+          body {
+              font-family: Monospace;
+              background-color: #f0f0f0;
+              margin: 0px;
+              overflow: hidden;
+          }
+      </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/rails.js"></script>
+    <script type="text/javascript" src="/javascripts/three.min.js"></script>
+    <script type="text/javascript" src="/libs/stats.min.js"></script>
+    <script type="text/javascript">
+        var container, stats;
+
+        var camera, scene, renderer;
+
+        var cube, plane;
+
+        var targetRotation = 0;
+        var targetRotationOnMouseDown = 0;
+
+        var mouseX = 0;
+        var mouseXOnMouseDown = 0;
+
+        var windowHalfX = window.innerWidth / 2;
+        var windowHalfY = window.innerHeight / 2;
+        $(function(){
+            init();
+            animate();
+
+            function init() {
+
+                container = document.createElement( 'div' );
+                document.body.appendChild( container );
+
+                var info = document.createElement( 'div' );
+                info.style.position = 'absolute';
+                info.style.top = '10px';
+                info.style.width = '100%';
+                info.style.textAlign = 'center';
+                info.innerHTML = 'Drag to spin the cube';
+                container.appendChild( info );
+
+                camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+                camera.position.y = 150;
+                camera.position.z = 500;
+
+                scene = new THREE.Scene();
+
+                // Cube
+
+                var geometry = new THREE.CubeGeometry( 200, 200, 200 );
+
+                for ( var i = 0; i < geometry.faces.length; i ++ ) {
+
+                    geometry.faces[ i ].color.setHex( Math.random() * 0xffffff );
+
+                }
+
+                var material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors } );
+
+                cube = new THREE.Mesh( geometry, material );
+                cube.position.y = 150;
+                scene.add( cube );
+
+                // Plane
+
+                var geometry = new THREE.PlaneGeometry( 200, 200 );
+                geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+
+                var material = new THREE.MeshBasicMaterial( { color: 0xe0e0e0 } );
+
+                plane = new THREE.Mesh( geometry, material );
+                scene.add( plane );
+
+                renderer = new THREE.CanvasRenderer();
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+                container.appendChild( renderer.domElement );
+
+                stats = new Stats();
+                stats.domElement.style.position = 'absolute';
+                stats.domElement.style.top = '0px';
+                container.appendChild( stats.domElement );
+
+                document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+                document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+                document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+
+                //
+
+                window.addEventListener( 'resize', onWindowResize, false );
+
+            }
+
+            function onWindowResize() {
+
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+            }
+
+            //
+
+            function onDocumentMouseDown( event ) {
+
+                event.preventDefault();
+
+                document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+                document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+                document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+
+                mouseXOnMouseDown = event.clientX - windowHalfX;
+                targetRotationOnMouseDown = targetRotation;
+
+            }
+
+            function onDocumentMouseMove( event ) {
+
+                mouseX = event.clientX - windowHalfX;
+
+                targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.02;
+
+            }
+
+            function onDocumentMouseUp( event ) {
+
+                document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+                document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+                document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+            }
+
+            function onDocumentMouseOut( event ) {
+
+                document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+                document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+                document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+            }
+
+            function onDocumentTouchStart( event ) {
+
+                if ( event.touches.length === 1 ) {
+
+                    event.preventDefault();
+
+                    mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
+                    targetRotationOnMouseDown = targetRotation;
+
+                }
+
+            }
+
+            function onDocumentTouchMove( event ) {
+
+                if ( event.touches.length === 1 ) {
+
+                    event.preventDefault();
+
+                    mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                    targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
+
+                }
+
+            }
+
+            //
+
+            function animate() {
+
+                requestAnimationFrame( animate );
+
+                render();
+                stats.update();
+
+            }
+
+            function render() {
+
+                plane.rotation.y = cube.rotation.y += ( targetRotation - cube.rotation.y ) * 0.05;
+                renderer.render( scene, camera );
+
+            }
+
+        });
+
+    </script>
   </head>
   <body>
-    <div class="container">
-      <div class="page-header" style="text-align: center;">
-        <h1 style="text-align:left; padding-top: 35px; padding-left: 100px">Welcome to</h1>
-        <img src="/images/compound.png" alt="CompoundJS" />
-      </div>
-      <h6 style="text-align: center;">
-        <a href="/compound/environment.json" id="show-env-info-link" data-remote="true" data-jsonp="load">Information about application environment</a>
-      </h6>
-      <div id="env-info"></div>
-      <hr />
-      <div class="row">
-        <div class="span8 offset4">
-          <div class="content">
-            <h6>1. Start with <a href="http://compoundjs.com/docs.html#generators">generators</a></h6>
-            <p> This is the fastest way to create an application:</p>
-            <pre>compound generate crud post title content date:date published:boolean</pre>
-            <h6>2. Then describe a <a href="http://compoundjs.com/docs.html#routing">route</a></h6>
-            <p>in <code>config/routes.js</code> and remove this file (<code>public/index.html</code>)</p>
-            <pre>exports.routes = function (map) {
-    map.get('/', 'posts#index');
-};</pre>
-            <h6>3. Design your <a href="http://compoundjs.com/docs.html#orm">database</a></h6>
-            <p>in <code>db/schema.js</code> and describe models in <code>app/models/*</code></p>
-            <h6>4. Keep your <a href="http://compoundjs.com/docs.html#controllers">controllers</a> thin!</h6>
-            <p>Write tests, and good luck.<br> If you have any questions feel free to ask at <a href="http://groups.google.com/group/compoundjs">CompoundJS Google Group</a> or <a href="irc://irc.freenode.net/compoundjs">#compoundjs on irc.freenode.net</a>.</p>
-            <p>Track CompoundJS project state on our <a href="https://trello.com/board/railwayjs/4f0a0d49128365065e008a1d">Trello board</a>, vote for features, discuss. Help us to get better!</p>
-          </div>
-        </div>
 
-        <div class="span4">
-          <p>
-            <h6>5. Links in sidebar</h6>
-            <ul style="padding-left: 0px;">
-              <li><a href="http://compoundjs.com">CompoundJS project docs</a></li>
-              <li><a href="http://expressjs.com">ExpressJS project homepage</a></li>
-              <li><a href="http://jsdoc.info/1602/jugglingdb">JugglingDB ORM API docs</a></li>
-              <li><a href="http://compoundjs.com/juggling.html">Try JugglingDB in your browser, docs</a></li>
-            </ul>
-          </p>
-        </div>
 
-      </div>
-      <footer>
-      </footer>
-      <script>
-        function load(data) {
-          $('#show-env-info-link').hide();
-          if (data.forbidden) {
-            return '';
-          }
-          var html = '<table class="zebra-striped">';
-          html += makeList('Versions', data.versions);
-          html += makeList('Settings', data.settings);
-          html += makeList('Application', data.application);
-          html += makeList('ENV', data.env);
-          html += '</table>';
-
-          $('#env-info').html(html);
-        }
-
-        function makeList(title, obj) {
-          var res = '<tr><td colspan="2"><h6>' + title + '</h6></td></tr>';
-          for (var i in obj) {
-            res += '<tr><td>' + i + '</td><td>' + toS(obj[i]) + '</td></tr>';
-          }
-          return res;
-        }
-
-        function toS(obj) {
-          if (obj instanceof Array) {
-            return obj.join('<br />');
-          } else if (typeof obj === 'object') {
-            var s = [];
-            for (var i in obj) {
-              s.push(i + ': ' + obj[i]);
-            }
-            return s.join(', ');
-          } else {
-            return obj;
-          }
-        }
-      </script>
-    </div>
   </body>
 </html>
