@@ -1,3 +1,96 @@
-body {
-  background: #fff;
+
+body{
+    background: -webkit-radial-gradient(center center,transparent 60%,rgba(0, 0, 0, 0.05)),url("/images/grid.png");
+    background: radial-gradient(at center center , transparent 60%, rgba(0, 0, 0, 0.05)) repeat scroll 0 0%, url("/images/grid.png") repeat scroll 0 0 transparent;
+    background: white;
+    color: #333333;
+    font-size: 13px;
+}
+
+.content{
+    background-color: #E0E0E0;
+    border-top: 1px white solid;
+    min-height: 700px;
+}
+
+.navbar{
+    margin-bottom: 0px;
+}
+.introduce{
+    margin-top: 100px;
+}
+.site-slogan{
+    text-align: center;
+}
+.site-slogan h1{
+    padding-top: 38px;
+    text-align: center;
+    color: white;
+    font-family: "Museo500";
+    font-size: 38px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.46);
+}
+
+.publish{
+    margin-top: 300px;
+}
+
+.model{
+    margin: 10px;
+    margin-top: 70px;
+    background-color: #282828;
+    border: 6px solid white;
+    height: 390px;
+    position: absolute;
+    top: 100px;
+    width: 675px;
+    z-index: 9;
+    background: -webkit-radial-gradient(center center,transparent 60%,rgba(0, 0, 0, 0.05)),url("/images/grid.png");
+    background: radial-gradient(at center center , transparent 60%, rgba(0, 0, 0, 0.05)) repeat scroll 0 0%, url("/images/grid.png") repeat scroll 0 0 transparent;
+}
+
+
+
+.landscape{
+    background-color: #1CAAD9;
+    border-bottom: 1px solid #6C6C6C;
+    box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.3) inset;
+
+    width: 100%;
+}
+.display-region{
+    margin-top: 30px;
+}
+#canvas-element-id {
+    margin: 10px;
+    margin-top: 70px;
+    background-color: #282828;
+    border: 6px solid white;
+    height: 390px;
+    position: absolute;
+    top: 100px;
+    width: 675px;
+    z-index: 9;
+}
+
+.footer{
+    height: 30px;
+    text-align: center;
+
+    background-image: -webkit-linear-gradient(#111,#222);
+    background-image: -moz-linear-gradient(#111,#222);
+    background-image: -o-linear-gradient(#111,#222);
+    background-image: linear-gradient(#111,#222);
+    zoom: 1;
+    border-top: 4px solid #1BA9D8;
+    color: #AAA;
+    padding-top: 10px;
+    -webkit-box-shadow: #555 0 0 10px;
+    -moz-box-shadow: #555 0 0 10px;
+    box-shadow: #555 0 0 10px;
+
+}
+
+#signin-li{
+    margin-top: 10px;
 }

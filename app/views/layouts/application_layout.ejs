@@ -2,40 +2,67 @@
 <html lang="en">
     <head>
         <title><%= title %></title>
-        <%- stylesheet_link_tag('bootstrap', 'application', 'bootstrap-responsive') %>
+        <%- stylesheet_link_tag('bootstrap','bootstrap-responsive','application') %>
         <%- javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js', 'bootstrap', 'rails', 'application') %>
         <%- csrf_meta_tag() %>
     </head>
     <body>
-        <div class="navbar">
+
+        <div class="navbar navbar-inverse">
             <div class="navbar-inner">
-                <div class="container">
-                    <a class="brand" href="#">Project name</a>
+                <div class="container-fluid">
+                    <a class="brand" href="#">3D</a>
+                    <div class="nav-collapse.collapse">
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="/">主页</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
-
-        <div class="container">
-            <% var flash = request.flash('info').pop(); if (flash) { %>
-                <div class="alert alert-info">
-                    <a class="close" data-dismiss="alert">×</a>
-                    <%- flash %>
+        <!--
+        <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <a class="brand" href="#">Project name</a>
+                        </div>
+                    </div>
                 </div>
-            <% } %>
+        -->
 
-            <% flash = request.flash('error').pop(); if (flash) { %>
-                <div class="alert alert-error">
-                    <a class="close" data-dismiss="alert">×</a>
-                    <%- flash %>
-                </div>
-            <% }; %>
+        <div class="content">
+            <div class="container-fluid">
+                <% var flash = request.flash('info').pop(); if (flash) { %>
+                    <div class="alert alert-info">
+                        <a class="close" data-dismiss="alert">×</a>
+                        <%- flash %>
+                    </div>
+                <% } %>
 
+                <% flash = request.flash('error').pop(); if (flash) { %>
+                    <div class="alert alert-error">
+                        <a class="close" data-dismiss="alert">×</a>
+                        <%- flash %>
+                    </div>
+                <% }; %>
+
+
+
+            </div>
             <%- body %>
 
             <hr />
-            <footer>
-                <p>&copy; Company 2012</p>
+            <footer class="footer">
+                <p>&copy; Company 2013 Build for all love in the world</p>
             </footer>
+        </div>
+
+
+
         </div>
     </body>
 </html>
