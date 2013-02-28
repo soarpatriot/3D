@@ -56,6 +56,12 @@ customSchema(function () {
 });**/
 module.exports = function (mongoose, compound) {
 
+    var schemaOptions = {
+        toJSON: {
+            virtuals: true
+        }
+    };
+
     var Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
 
     var BlogPost = new Schema({
@@ -71,5 +77,24 @@ module.exports = function (mongoose, compound) {
     Post.modelName = 'BlogPost'; // this is for some features inside compound (helpers, etc)
 
     //module.exports['BlogPost'] = Post;
-    compound.models.Post = Post
+    compound.models.Post = Post;
+
+
+    var UserSchema = mongoose.Schema({
+        name: 'String',
+        password: 'String',
+        faceId: 'String',
+        gender: { type: String, default: '未知' },
+        email:'String',
+        regTime:{ type: Date, default: Date.now }
+    },schemaOptions);
+
+    var User = mongoose.model('UserSchema', UserSchema);
+    User.modelName = 'User'; // this is for some features inside compound (helpers, etc)
+
+    //module.exports['User'] = Post;
+    compound.models.User = User;
+
 };
+
+

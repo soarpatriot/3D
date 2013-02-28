@@ -1,9 +1,7 @@
 
 body{
-    background: -webkit-radial-gradient(center center,transparent 60%,rgba(0, 0, 0, 0.05)),url("/images/grid.png");
-    background: radial-gradient(at center center , transparent 60%, rgba(0, 0, 0, 0.05)) repeat scroll 0 0%, url("/images/grid.png") repeat scroll 0 0 transparent;
-    background: white;
-    color: #333333;
+
+
     font-size: 13px;
 }
 
@@ -93,4 +91,19 @@ body{
 
 #signin-li{
     margin-top: 10px;
+}
+
+/** login sign in nav bar**/
+.vertical-align{
+    vertical-align: baseline;
+    position: relative;
+}
+.height-auto{
+    height: auto !important;
+    line-height: 20px;
+}
+
+.li-padding{
+    padding: 10px 20px;
+
 }

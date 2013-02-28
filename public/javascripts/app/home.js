@@ -83,13 +83,13 @@ $(function(){
 
     function onWindowResize() {
 
-        windowHalfX = window.innerWidth / 2;
-        windowHalfY = window.innerHeight / 2;
+        windowHalfX = 200;
+        windowHalfY = 200;
 
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
 
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( 400,400 );
 
     }
 
