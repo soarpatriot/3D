@@ -1,0 +1,87 @@
+@nice-blue: #5B83AD;
+@light-blue: @nice-blue + #111;
+@grey:#E0E0E0;
+
+@min-height:500px;
+@z-index:10000;
+@margin-top:140px;
+@dialog-width:343px;
+@width-full:100%;
+@tip-height:60px;
+/**utilies css for other**/
+.text-center{
+    text-align:center;
+}
+.text-left{
+    text-align:left;
+}
+
+.auto-center-layout{
+    margin:0 auto;
+}
+
+.rounded-corners (@radius: 5px) {
+    border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+}
+.background-image(  @alpha: 0.1){
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #E0E0E0), color-stop(100%, rgba(44, 38, 63, @alpha)));
+    background-image: -moz-linear-gradient(top, #E0E0E0 0%, rgba(44, 38, 63, @alpha) 100%);
+    background-image: linear-gradient(top, #E0E0E0 0%, rgba(44, 38, 63, @alpha) 100%);
+}
+
+/**login page cess**/
+.body-grey{
+    background: @grey;
+}
+
+.min-container{
+    min-height: @min-height;
+}
+
+.dialog-section{
+    margin-top: @margin-top;
+    .text-center;
+    width: @width-full;
+    z-index: @z-index;
+}
+.padding-20{
+  padding: 20px 40px 5px 40px;
+}
+.login-common{
+    .rounded-corners;
+    width:@dialog-width ;
+    .auto-center-layout;
+    .text-center;
+}
+
+.dialog{
+    .login-common;
+    .padding-20;
+    form{
+        .text-left;
+        color:#0A0A0A;
+    }
+    color: #BFB8E5;
+    border: 1px solid #373553;
+    .background-image;
+}
+.tip{
+    .login-common;
+    margin-bottom: 20px;
+}
+
+
+.dialog-footer{
+    .login-common;
+    padding: 10px 40px 1px 40px;
+    margin-top: 10px;
+    height: 30px;
+    color: #0A0A0A;
+    border: 1px solid #373553;
+    .background-image;
+    a{
+        color:#04C;
+    }
+}

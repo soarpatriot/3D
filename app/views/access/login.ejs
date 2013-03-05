@@ -1,0 +1,39 @@
+
+<section class="dialog-section">
+        <div class="tip">
+
+        </div>
+        <div class="dialog">
+            <% var form = formFor(user, {action: pathTo.login(), method: 'POST', id: "login-form", class: 'form-vertical form-inline'}) %>
+            <%- form.begin() %>
+                <%- errorMessagesFor(user) %>
+                <div class="control-group">
+                   <%- form.label("用户名", false, {class: "control-label"}) %>
+                   <div class="controls">
+                       <%- form.input("name") %>
+                   </div>
+                </div>
+                <div class="control-group">
+                   <%- form.label("密码", false, {class: "control-label"}) %>
+                   <div class="controls">
+                       <%- form.input("password") %>
+                   </div>
+                </div>
+                <div class="control-group">
+                    <%- form.submit('<i class="icon-ok icon-white"></i> 登陆', {class: 'btn btn-primary'}) %>
+                    <%- linkTo('忘记密码', pathTo.users(), {class: 'btn pull-right'}) %>
+                </div>
+            <%- form.end() %>
+        </div>
+        <div class="dialog-footer">
+            <span class="pull-left">
+                 开始你的3D奇幻旅程
+            </span>
+            <span>
+                 <%- linkTo('注册', pathTo.signup(), {class: 'pull-right'}) %>
+            </span>
+
+        </div>
+
+</section>
+
