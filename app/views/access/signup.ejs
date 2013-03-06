@@ -1,5 +1,35 @@
 
 <section class="dialog-section">
+    <div class="tip">
 
+    </div>
+    <div class="dialog">
+    <% var form = formFor(user, {action: pathTo.reg(), method: 'POST', id: "login-form", class: 'form-vertical form-inline'}) %>
+    <%- form.begin() %>
+        <%- errorMessagesFor(user) %>
+        <div class="control-group">
+           <%- form.label("用户名", false, {class: "control-label"}) %>
+           <div class="controls">
+               <%- form.input("name",{placeholder:"最多50个字符"}) %>
+           </div>
+        </div>
+        <div class="control-group">
+           <%- form.label("密码", false, {class: "control-label"}) %>
+           <div class="controls">
+               <%- form.input("password",{type:"password",placeholder:"最多40个字符"}) %>
+           </div>
+        </div>
+        <div class="control-group">
+           <%- form.label("email", false, {class: "control-label"}) %>
+           <div class="controls">
+               <%- form.input("email",{placeholder:"电子邮箱地址"}) %>
+           </div>
+        </div>
+        <div class="control-group">
+            <%- form.submit('<i class="icon-ok icon-white"></i> 注册', {class: 'btn btn-primary'}) %>
+            <%- linkTo('重置', pathTo.users(), {class: 'btn pull-right'}) %>
+        </div>
+    <%- form.end() %>
+    </div>
 </section>
 

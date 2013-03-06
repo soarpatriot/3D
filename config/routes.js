@@ -1,12 +1,14 @@
 exports.routes = function (map) {
 
+    map.get('root', 'home#index');
     map.get('/', 'home#index');
     map.resources('posts');
     map.resources('users');
 
 
     map.get('signup', 'access#signup');
-    map.get('login','access#enter');
+    map.post('reg', 'access#reg');
+    map.get('enter','access#enter');
     map.post('login','access#login');
     // map.get('bunny', 'bunny#show', {as: 'rabbit'});
     // Generic routes. Add all your routes below this line
