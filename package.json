@@ -12,6 +12,7 @@
   , "stylus":           "latest"
   , "seedjs": "latest"
   , "mongoose":"3.4.0"
+  , "supervisor":"0.5.2"
   },
   "devDependencies":
   { "nodeunit":         "*"

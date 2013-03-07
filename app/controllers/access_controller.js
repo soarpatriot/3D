@@ -3,6 +3,7 @@ load('application');
 before(logoLayout, {
     only: ['enter', 'login','signup']
 });
+
 /**
  * enter into user login page
  */
@@ -11,6 +12,7 @@ action('enter',function enter() {
     this.user = new User;
     render('login');
 });
+
 /**
  *  do user login action
  */
@@ -26,7 +28,7 @@ action(function login() {
             flash('user', user);
             redirect(path_to.enter);
         } else {
-            flash('info', 'login successfully');
+            flash('info', '已成功登陆！');
             req.session.user = user;
             redirect(path_to.root);
         }
@@ -52,32 +54,58 @@ action(function reg() {
         email: req.body.User.email,
         password: req.body.User.password
     });
-
-    newUser.save(function (err, user) {
-        respondTo(function (format) {
-            format.json(function () {
-                if (err) {
-                    send({code: 500, error: user && user.errors || err});
-                } else {
-                    send({code: 200, data: user.toObject()});
-                }
+    User.findOne({'name': newUser.name}, function(err, user){
+        if (err) {
+            flash('error', '系统发生异常！');
+            render('signup', {
+                user: user,
+                title: '用户注册'
             });
-            format.html(function () {
-                if (err) {
-                    flash('error', 'user can not be created');
-                    render('signup', {
-                        user: user,
-                        title: '用户注册'
+        }
+        if(user){
+            flash('error', '用户名已经存在，请更换其它用户名！');
+            flash('user', newUser);
+            redirect(path_to.signup);
+        }else{
+            newUser.save(function (err, user) {
+                respondTo(function (format) {
+                    format.json(function () {
+                        if (err) {
+                            send({code: 500, error: user && user.errors || err});
+                        } else {
+                            send({code: 200, data: user.toObject()});
+                        }
                     });
-                } else {
-                    flash('info', 'user created');
-                    req.session.user = user;
-                    redirect(path_to.root);
-                }
+                    format.html(function () {
+                        if (err) {
+                            flash('error', 'user can not be created');
+                            render('signup', {
+                                user: user,
+                                title: '用户注册'
+                            });
+                        } else {
+                            flash('info', 'user created');
+                            req.session.user = user;
+                            redirect(path_to.root);
+                        }
+                    });
+                });
             });
-        });
+        }
+
     });
 });
+
+/**
+ * user logout action
+ */
+action(function logout(){
+    if(req.session.user){
+        req.session.user = null;
+    }
+    flash('info', '注销成功！');
+    redirect(path_to.root);
+})
 /**
  * load user
  * param _id
