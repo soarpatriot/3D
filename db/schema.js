@@ -64,17 +64,16 @@ module.exports = function (mongoose, compound) {
 
     var Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
 
-    var BlogPost = new Schema({
+    var PostSchema = new Schema({
         author    : ObjectId
         , title     : String
         , content    : String
-        , published : Boolean
-        , body      : String
-        , date      : Date
-    });
+        , published : { type: Boolean, default: false }
+        , publishDate: { type: Date, default: Date.now }
+    },schemaOptions);
 
-    var Post = mongoose.model('BlogPost', BlogPost);
-    Post.modelName = 'BlogPost'; // this is for some features inside compound (helpers, etc)
+    var Post = mongoose.model('PostSchema', PostSchema);
+    Post.modelName = 'Post'; // this is for some features inside compound (helpers, etc)
 
     //module.exports['BlogPost'] = Post;
     compound.models.Post = Post;

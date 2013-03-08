@@ -11,7 +11,16 @@ action('new', function () {
 });
 
 action(function create() {
-    Post.create(req.body.Post, function (err, post) {
+
+
+    var post = new Post({
+        title: req.body.Post.title,
+        content: req.body.Post.content,
+        published:req.body.Post.published
+    });
+    this.post = post;
+
+    this.post.save(function (err, post) {
         respondTo(function (format) {
             format.json(function () {
                 if (err) {
@@ -74,9 +83,9 @@ action(function edit() {
 });
 
 action(function update() {
-    var post = this.post;
-    this.title = 'Edit post details';
-    this.post.updateAttributes(body.Post, function (err) {
+
+    this.title = '编辑';
+    this.post.update(req.body.Post, function (err,numberAffected, post) {
         respondTo(function (format) {
             format.json(function () {
                 if (err) {
@@ -99,7 +108,7 @@ action(function update() {
 });
 
 action(function destroy() {
-    this.post.destroy(function (error) {
+    this.post.remove(function (error) {
         respondTo(function (format) {
             format.json(function () {
                 if (error) {
@@ -121,7 +130,7 @@ action(function destroy() {
 });
 
 function loadPost() {
-    Post.find(params.id, function (err, post) {
+    Post.findOne({'_id': params.id}, function(err, post){
         if (err || !post) {
             if (!err && !post && params.format === 'json') {
                 return send({code: 404, error: 'Not found'});

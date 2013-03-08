@@ -19,19 +19,7 @@
         </div>
         <div class="image-back">
             <div class="container">
-                <% var flash = request.flash('info').pop(); if (flash) { %>
-                    <div class="alert alert-info">
-                        <a class="close" data-dismiss="alert">×</a>
-                        <%- flash %>
-                    </div>
-                <% } %>
 
-                <% flash = request.flash('error').pop(); if (flash) { %>
-                    <div class="alert alert-error">
-                        <a class="close" data-dismiss="alert">×</a>
-                        <%- flash %>
-                    </div>
-                <% }; %>
                 <div class="min-container">
                     <%- body %>
                 </div>
