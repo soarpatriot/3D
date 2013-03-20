@@ -16,3 +16,31 @@
     <%- linkTo('Cancel', pathTo.posts(), {class: 'btn'}) %>
 </div>
 <%- form.end() %>
+ <form id="fileupload" action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="files[]" multiple>
+    <button type="submit" class="btn btn-primary start">
+        <i class="icon-upload icon-white"></i>
+        <span>Start upload</span>
+    </button>
+</form>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="/javascripts/fileupload/vendor/jquery.ui.widget.js"></script>
+<script src="/javascripts/fileupload/jquery.iframe-transport.js"></script>
+<script src="/javascripts/fileupload/jquery.fileupload.js"></script>
+<script>
+$(function () {
+
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+           console.log(data);
+             $.each(data.files, function (index, file) {
+                            $('<p/>').text(file.name).appendTo(document.body);
+                        });
+        }
+    });
+});
+</script>
+
+
+

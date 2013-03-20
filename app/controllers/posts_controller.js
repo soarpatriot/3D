@@ -129,6 +129,10 @@ action(function destroy() {
     });
 });
 
+action(function upload(){
+    render();
+})
+
 function loadPost() {
     Post.findOne({'_id': params.id}, function(err, post){
         if (err || !post) {
@@ -139,6 +143,7 @@ function loadPost() {
         } else {
             this.post = post;
             next();
+
         }
     }.bind(this));
 }
