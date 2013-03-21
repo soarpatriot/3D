@@ -11,6 +11,19 @@
        <%- form.input("content") %>
    </div>
 </div>
+<div class="control-group download-area">
+   <%- form.label("files", false, {class: "control-label"}) %>
+   <div class="controls upload-area">
+
+       <div class="bar" style="width: 0%;"></div>
+       <div id="percent"></div>
+       <div id="upload-result">
+       <p>上传成功</p>
+       </div>
+       <input id="fileupload" type="file" data-url="/upload" name="files[]" multiple/>
+   </div>
+
+</div>
 <div class="control-group">
 
    <%- form.label("published", false, {class: "control-label"}) %>
@@ -22,3 +35,35 @@
    </div>
 
 </div>
+<script data-main="/javascripts/app/post.js" src="/javascripts/require-jquery.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="/javascripts/fileupload/vendor/jquery.ui.widget.js"></script>
+<script src="/javascripts/fileupload/jquery.iframe-transport.js"></script>
+<script src="/javascripts/fileupload/jquery.fileupload.js"></script>
+<script>
+$(function () {
+
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        drop: function (e, data) {
+            $.each(data.files, function (index, file) {
+                alert('Dropped file: ' + file.name);
+            });
+        },
+        done: function (e, data) {
+            console.log(data);
+            $.each(data.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo($("#upload-result"));
+            });
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#percent').text(progress+'%')
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
+});
+</script>

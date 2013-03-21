@@ -1,6 +1,6 @@
 load('application');
 
-before(loadPost, {
+before(loadPost,applicationLayout, {
     only: ['show', 'edit', 'update', 'destroy']
     });
 
@@ -146,4 +146,9 @@ function loadPost() {
 
         }
     }.bind(this));
+}
+
+function applicationLayout() {
+    layout('application');
+    next();
 }
