@@ -2,9 +2,8 @@
  * post function js
  *
  */
-require(["jquery", "jquery.ui.widget","jquery.iframe-transport","jquery.fileupload"],function($) {
+require(["underscore","require","jquery","jquery.ui.widget","jquery.iframe-transport","jquery.fileupload"],function(_,require,$) {
 
-    //file upload function
     $('#fileupload').fileupload({
         dataType: 'json',
         drop: function (e, data) {
@@ -12,6 +11,7 @@ require(["jquery", "jquery.ui.widget","jquery.iframe-transport","jquery.fileuplo
                 alert('Dropped file: ' + file.name);
             });
         },
+
         done: function (e, data) {
             console.log(data);
             $.each(data.files, function (index, file) {
@@ -32,3 +32,15 @@ require(["jquery", "jquery.ui.widget","jquery.iframe-transport","jquery.fileuplo
 });
 
 define("post", function(){});
+
+/**
+add: function (e, data) {
+
+    var files = data.files;
+    console.log("files: "+files);
+},
+change: function (e, data) {
+    $.each(data.files, function (index, file) {
+        alert('Selected file: ' + file.name);
+    });
+},**/
