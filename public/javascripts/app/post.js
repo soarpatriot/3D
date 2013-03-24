@@ -5,7 +5,53 @@
 require(["underscore","require","jquery","jquery.ui.widget","jquery.iframe-transport","jquery.fileupload"],function(_,require,$) {
 
     $('#fileupload').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+
+    });
+    $('#fileupload').fileupload('option', {
+
+        maxFileSize: 5000000,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        process: [
+            {
+                action: 'load',
+                fileTypes: /^image\/(gif|jpeg|png)$/,
+                maxFileSize: 20000000 // 20MB
+            },
+            {
+                action: 'resize',
+                maxWidth: 1440,
+                maxHeight: 900
+            },
+            {
+                action: 'save'
+            }
+        ]
+    });
+
+    // Enable iframe cross-domain access via redirect option:
+    $('#fileupload').fileupload(
+        'option',
+        'redirect',
+        window.location.href.replace(
+            /\/[^\/]*$/,
+            '/cors/result.html?%s'
+        )
+    );
+
+    $('#fileupload').fileupload({
         dataType: 'json',
+
+        add: function (e, data) {
+
+            data.submit();
+        },
+        change: function (e, data) {
+            $.each(data.files, function (index, file) {
+                //alert('Selected file: ' + file.name);
+            });
+        },
         drop: function (e, data) {
             $.each(data.files, function (index, file) {
                 alert('Dropped file: ' + file.name);
@@ -13,7 +59,7 @@ require(["underscore","require","jquery","jquery.ui.widget","jquery.iframe-trans
         },
 
         done: function (e, data) {
-            console.log(data);
+
             $.each(data.files, function (index, file) {
                 $('<p/>').text(file.name).appendTo($("#upload-result"));
             });
