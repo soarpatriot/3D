@@ -7,6 +7,10 @@ require.config({
     shim: {
         "underscore": {
             exports: '_'
+        },
+        'backbone': {
+            deps: ['underscore'],
+            exports: 'Backbone'
         }
     },
 
@@ -15,7 +19,9 @@ require.config({
         "post":"app/post",
 
         //js framework
-        "underscore":"underscore-min",
+        "underscore": "underscore-min",
+        "backbone": "backbone-1.0.0.min",
+
         "jquery.ui.widget": "fileupload/vendor/jquery.ui.widget",
         "jquery.iframe-transport":"fileupload/jquery.iframe-transport",
         "jquery.fileupload":"fileupload/jquery.fileupload"

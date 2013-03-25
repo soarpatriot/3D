@@ -48,6 +48,24 @@
 
 
         </div>
+        <div id="upload-result-div" class="row-fluid">
+            <table id="upload-table">
+                <tr>
+                    <th class="span1">
+                        文件名
+                    </th>
+                    <th class="span1">
+                        进度
+                    </th>
+                    <th class="span1">
+                        大小
+                    </th>
+                    <th class="span1">
+                        操作
+                    </th>
+                </tr>
+            </table>
+        </div>
    </div>
 
 </div>
@@ -69,21 +87,22 @@
 <script data-main="post" src="/javascripts/require-jquery.js"></script>
 <script src="/javascripts/app/requirejs-config.js"></script>
 
-<script id="upload-content-template" type="text/template">
-    <tr>
-        <td class="span1">
 
-        </td>
-        <td class="span1">
-            进度
-        </td>
-        <td class="span1">
-            大小
-        </td>
-        <td class="span1">
-            操作
-        </td>
-    </tr>
+<script id="upload-content-template" type="text/template">
+
+    <td class="span1">
+        {{ name }}
+    </td>
+    <td class="span1">
+        进度
+    </td>
+    <td class="span1">
+        {{ size }}
+    </td>
+    <td class="span1">
+        操作
+    </td>
+
 </script>
 
 <script id="upload-header-template" type="text/template">

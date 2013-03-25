@@ -2,7 +2,71 @@
  * post function js
  *
  */
-require(["underscore","require","jquery","jquery.ui.widget","jquery.iframe-transport","jquery.fileupload"],function(_,require,$) {
+require(["underscore","backbone","require","jquery","jquery.ui.widget","jquery.iframe-transport","jquery.fileupload"],function(_,Backbone,require,$) {
+
+    _.templateSettings = {
+        interpolate : /\{\{(.+?)\}\}/g
+    };
+
+    var File = Backbone.Model.extend({
+        idAttribute: "_id"
+
+    });
+
+    var FileList = Backbone.Collection.extend({
+        Model:File,
+        url: '/files'
+    });
+
+
+    var FileView= Backbone.View.extend({
+
+        tagName: "tr",
+
+        template: _.template($('#upload-content-template').html()),
+
+        events: {
+
+        },
+
+        initialize: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+
+
+        },
+
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+            return this;
+        }
+
+    });
+
+    var UploadView = Backbone.View.extend({
+
+        el: $("#upload-result-div"),
+
+
+
+        events: {
+
+        },
+
+        initialize: function() {
+            this.table = this.$('#upload-table')
+        },
+        addOne: function(file) {
+            var view = new FileView({model: file});
+            this.table.append(view.render().el);
+        },
+
+        render: function() {
+
+        }
+
+    });
+
+    var uploadView = new UploadView();
 
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
@@ -41,10 +105,20 @@ require(["underscore","require","jquery","jquery.ui.widget","jquery.iframe-trans
     );
 
     $('#fileupload').fileupload({
+
         dataType: 'json',
 
         add: function (e, data) {
+            $.each(data.files, function (index, file) {
+                alert('files: ' + file.name);
+                console.log(JSON.stringify(file));
+                var f = new File();
+                f.set('name',file.name);
+                f.set('size',file.size);
 
+                uploadView.addOne(f);
+
+            });
             data.submit();
         },
         change: function (e, data) {
