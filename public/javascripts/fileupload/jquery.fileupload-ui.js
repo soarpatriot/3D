@@ -140,11 +140,18 @@
             },
             // Callback for successful uploads:
             done: function (e, data) {
+
+                console.log("data"+JSON.stringify(data.result));
+
                 var that = $(this).data('blueimp-fileupload') ||
                         $(this).data('fileupload'),
                     files = that._getFilesFromResponse(data),
+
+
                     template,
                     deferred;
+
+                //console.log("files"+JSON.stringify(files));
                 if (data.context) {
                     data.context.each(function (index) {
                         var file = files[index] ||
@@ -325,9 +332,13 @@
             },
             // Callback for file deletion:
             destroy: function (e, data) {
+
+                //console.log("data:"+JSON.stringify(data));
+
                 var that = $(this).data('blueimp-fileupload') ||
                         $(this).data('fileupload');
                 if (data.url) {
+                    console.log("data:"+data);
                     $.ajax(data);
                     that._adjustMaxNumberOfFiles(1);
                 }
@@ -357,9 +368,11 @@
         },
 
         _getFilesFromResponse: function (data) {
-            if (data.result && $.isArray(data.result.files)) {
-                return data.result.files;
+
+            if (data.result && $.isArray(data.result)) {
+                return data.result;
             }
+            //return data.files;
             return [];
         },
 

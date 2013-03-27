@@ -130,6 +130,7 @@ action(function destroy() {
 });
 
 action(function upload(){
+    this.title = '上传';
     render();
 })
 

@@ -3,8 +3,14 @@ exports.routes = function (map) {
     //map.get('root', 'home#index');
     map.get('/', 'home#index',{as:"root"});
 
-    map.get('/posts/upload', 'posts#upload');
-    map.resources('posts');
+    //map.get('posts/upload', 'posts#upload');
+    //map.resources('posts');
+
+    map.resource('posts', function (post) {
+        post.get('upload', 'posts#upload');               // /users/:user_id/avatar
+        //user.get('top', 'users#top', {collection: true}); // /users/top
+    });
+
     map.resources('users');
 
 

@@ -138,6 +138,14 @@ require(["underscore","backbone","require","jquery","jquery.ui.widget","jquery.i
                 $('<p/>').text(file.name).appendTo($("#upload-result"));
             });
         },
+        progress: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#percent').text(progress+'%')
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        },
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#percent').text(progress+'%')
