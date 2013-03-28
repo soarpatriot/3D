@@ -64,12 +64,24 @@ module.exports = function (mongoose, compound) {
 
     var Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
 
+    //Post's comments
+    var FileInfoSchema  = new Schema({
+        title: {type: String, index: true,default: '无标题'},
+        replyDate:  { type: Date, default: Date.now },
+        content: String,
+        rank:{type: Number, default: 0},
+        creator: {type: Schema.ObjectId, ref: 'User'}
+    },schemaOptions);
+
+
     var PostSchema = new Schema({
         author    : ObjectId
         , title     : String
         , content    : String
         , published : { type: Boolean, default: false }
         , publishDate: { type: Date, default: Date.now }
+        , files: [FileInfoSchema]
+
     },schemaOptions);
 
     var Post = mongoose.model('PostSchema', PostSchema);

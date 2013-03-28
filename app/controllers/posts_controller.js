@@ -131,7 +131,7 @@ action(function destroy() {
 
 action(function upload(){
     this.title = '上传';
-    render();
+    render('_upload');
 })
 
 function loadPost() {
