@@ -65,13 +65,16 @@ module.exports = function (mongoose, compound) {
     var Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
 
     //Post's comments
-    var FileInfoSchema  = new Schema({
-        title: {type: String, index: true,default: '无标题'},
-        replyDate:  { type: Date, default: Date.now },
-        content: String,
-        rank:{type: Number, default: 0},
-        creator: {type: Schema.ObjectId, ref: 'User'}
+    var FileSchema  = new Schema({
+        size: {type: Number},
+        path:'String',
+        type:  'String',
+        name: 'String'
+
     },schemaOptions);
+    var File = mongoose.model('FileSchema', FileSchema);
+    File.modelName = 'File';
+    compound.models.File = File;
 
 
     var PostSchema = new Schema({
@@ -79,8 +82,12 @@ module.exports = function (mongoose, compound) {
         , title     : String
         , content    : String
         , published : { type: Boolean, default: false }
-        , publishDate: { type: Date, default: Date.now }
-        , files: [FileInfoSchema]
+        , publishDate: { type: Date, default: Date.now },
+
+        size: {type: Number},
+        path:'String',
+        type:  'String',
+        name: 'String'
 
     },schemaOptions);
 

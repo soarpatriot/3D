@@ -1,6 +1,6 @@
 load('application');
 
-before(loadPost,applicationLayout, {
+before(loadPost,{
     only: ['show', 'edit', 'update', 'destroy']
     });
 
@@ -11,7 +11,6 @@ action('new', function () {
 });
 
 action(function create() {
-
 
     var post = new Post({
         title: req.body.Post.title,
@@ -45,8 +44,24 @@ action(function create() {
     });
 });
 
+
+action(function upload() {
+    req.form.on("progress",function(bytesReceived,bytesExpected){
+        console.log("bytesReceived:"+bytesReceived);
+        console.log("bytesExpected:"+bytesExpected);
+    });
+    req.form.on("end",function(){
+        console.log(req.files);
+        //res.send("done");
+    });
+
+    res.redirect("/");
+});
+
+
 action(function index() {
     this.title = 'Posts index';
+
     Post.find({},function (err, posts) {
         switch (params.format) {
             case "json":
@@ -62,6 +77,7 @@ action(function index() {
 
 action(function show() {
     this.title = 'Post show';
+    console.log(JSON.stringify(this.post));
     switch(params.format) {
         case "json":
             send({code: 200, data: this.post});
@@ -128,13 +144,15 @@ action(function destroy() {
         });
     });
 });
-
+/*
 action(function upload(){
     this.title = '上传';
     render('_upload');
-})
+})**/
 
 function loadPost() {
+
+    console.log("load Post:");
     Post.findOne({'_id': params.id}, function(err, post){
         if (err || !post) {
             if (!err && !post && params.format === 'json') {
@@ -143,6 +161,8 @@ function loadPost() {
             redirect(path_to.posts);
         } else {
             this.post = post;
+
+            console.log("load:"+JSON.stringify(this.post));
             next();
 
         }

@@ -141,7 +141,7 @@
             // Callback for successful uploads:
             done: function (e, data) {
 
-                console.log("data"+JSON.stringify(data.result));
+                console.log("data"+JSON.stringify(data));
 
                 var that = $(this).data('blueimp-fileupload') ||
                         $(this).data('fileupload'),
@@ -372,6 +372,7 @@
             if (data.result && $.isArray(data.result)) {
                 return data.result;
             }
+
             //return data.files;
             return [];
         },

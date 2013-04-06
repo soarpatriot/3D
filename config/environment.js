@@ -4,19 +4,6 @@ module.exports = function (compound) {
     var app = compound.app;
     require('./mongoose').init(compound);
 
-    var upload = require('jquery-file-upload-middleware');
-
-
-    upload.configure({
-        uploadDir: app.root + '/public/upload',
-        uploadUrl: '/upload',
-        imageVersions: {
-            thumbnail: {
-                width: 80,
-                height: 80
-            }
-        }
-    });
 
     app.configure(function(){
         app.use(compound.assetsCompiler.init());
@@ -27,15 +14,85 @@ module.exports = function (compound) {
         // make sure you run `npm install browserify uglify-js`
 
         // app.enable('clientside');
-        app.use('/upload',  function (req, res, next) {
-            // imageVersions are taken from upload.configure()
-            upload.fileHandler({})(req, res, next);
 
+        //app.use('/upload', upload.fileHandler());
 
-        });
 
         /**
-        app.use('/upload', function(req, res) {
+         *
+         * upload.on('end', function (fileInfo) {
+            fileInfo.id ="ff";
+        });
+        app.use('/upload', function (req, res, next) {
+            // imageVersions are taken from upload.configure()
+            upload.fileHandler()(req, res, next);
+        });**/
+
+
+        //app.use(express.bodyParser());
+
+
+
+
+        app.use(express.bodyParser({
+            uploadDir: app.root + '/public/upload',
+            tempDir: app.root + '/public/temp',
+            tmpDir: app.root + '/public/temp',
+            keepExtensions:true,
+            limit:100000000,// 100M limit
+            defer:true//enable event
+        }));
+
+
+
+        app.use(express.cookieParser('secret'));
+        app.use(express.session({secret: 'secret'}));
+        app.use(express.methodOverride());
+        app.use(app.router);
+    });
+
+    /**
+    app.post("/upload",function(req,res){//bind event handler
+
+        req.form.on("progress",function(bytesReceived,bytesExpected){
+            console.log("bytesReceived:"+bytesReceived);
+            console.log("bytesExpected:"+bytesExpected);
+        });
+        req.form.on("end",function(){
+            console.log(req.files);
+            //res.send("done");
+        });
+        res.redirect("/");
+
+
+
+    });**/
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *
+ *
+ app.use('/upload', function(req, res) {
             //console.log("files:"+JSON.stringify(req.files.files[].name));
 
             console.log(req.body);
@@ -55,15 +112,3 @@ module.exports = function (compound) {
                 });
             })
         });**/
-        app.use(express.bodyParser({
-            uploadDir: app.root + '/tmp'
-        }));
-        app.use(express.cookieParser('secret'));
-        app.use(express.session({secret: 'secret'}));
-        app.use(express.methodOverride());
-        app.use(app.router);
-    });
-
-
-
-};

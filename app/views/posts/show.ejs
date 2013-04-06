@@ -1,26 +1,36 @@
-<ul class="breadcrumb">
-    <li><a href="/">Home</a> <span class="divider">/</span></li>
-    <li><a href="<%- pathTo.posts() %>">posts</a> <span class="divider">/</span></li>
-    <li class="active"><a href="#">Details of post</a></li>
-</ul>
+<div class="container-fluid">
+    <ul class="breadcrumb">
 
-<div class="page-header">
-    <h1>Details of post</h1>
-</div>
+        <li><a href="<%- pathTo.posts() %>">模型列表</a> <span class="divider">/</span></li>
+        <li class="active"><a href="#">模型信息</a></li>
+    </ul>
 
-<table class="table table-bordered">
-    <tbody>
-        <tr><th>title</th><td><%= post.title %></td></tr>
+    <div class="page-header">
+        <h3>模型详细信息</h3>
+    </div>
 
-        <tr><th>content</th><td><%= post.content %></td></tr>
+    <table class="table table-bordered">
+        <tbody>
+            <tr><th>标题</th><td><%= post.title %></td></tr>
 
-        <tr><th>published</th><td><%= post.published %></td></tr>
-    </tbody>
-</table>
+            <tr><th>描述</th><td><%= post.content %></td></tr>
 
-<div class="well">
-    <%- link_to('<i class="icon-edit icon-white"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-primary'}) %>
-    <%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.post(post), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
-    or
-    <%- link_to('Back to index', pathTo.posts()) %>
+            <tr><th>发布日期</th><td><%= post.published %></td></tr>
+
+            <tr><th>文件名</th><td><%= post.name %></td></tr>
+
+            <tr><th>文件路径</th><td><%= post.path %></td></tr>
+
+            <tr><th>文件大小</th><td><%= post.size %></td></tr>
+
+            <tr><th>文件格式</th><td><%= post.type %></td></tr>
+        </tbody>
+    </table>
+
+    <div class="well">
+        <%- link_to('<i class="icon-edit icon-white"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-primary'}) %>
+        <%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.post(post), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+        or
+        <%- link_to('Back to index', pathTo.posts()) %>
+    </div>
 </div>

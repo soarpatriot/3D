@@ -20,6 +20,7 @@ $(function () {
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
         url: '/upload'
+
     });
 
     // Enable iframe cross-domain access via redirect option:
@@ -35,6 +36,7 @@ $(function () {
     // Demo settings:
     $('#fileupload').fileupload('option', {
         url: '/upload',
+
         maxFileSize: 5000000,
         //acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         process: [
