@@ -1,36 +1,102 @@
 <div class="container-fluid">
-    <ul class="breadcrumb">
+    <!--<ul class="breadcrumb">-->
 
-        <li><a href="<%- pathTo.posts() %>">模型列表</a> <span class="divider">/</span></li>
-        <li class="active"><a href="#">模型信息</a></li>
-    </ul>
+        <!--<li><a href="<%- pathTo.posts() %>">模型列表</a> <span class="divider">/</span></li>-->
+        <!--<li class="active"><a href="#">模型信息</a></li>-->
+    <!--</ul>-->
 
-    <div class="page-header">
-        <h3>模型详细信息</h3>
-    </div>
+    <!--<div class="page-header">-->
+        <!--<h3>模型详细信息</h3>-->
+    <!--</div>-->
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="position:absolute;">
         <tbody>
-            <tr><th>标题</th><td><%= post.title %></td></tr>
+            <tr hidden><th>标题</th><td id="title"><%= post.title %></td></tr>
 
-            <tr><th>描述</th><td><%= post.content %></td></tr>
+            <!--<tr><th>描述</th><td><%= post.content %></td></tr>-->
 
-            <tr><th>发布日期</th><td><%= post.published %></td></tr>
+            <!--<tr><th>发布日期</th><td><%= post.published %></td></tr>-->
 
-            <tr><th>文件名</th><td><%= post.name %></td></tr>
+            <tr><th>文件名</th><td id="file-name"><%= post.name %></td></tr>
 
-            <tr><th>文件路径</th><td><%= post.path %></td></tr>
+            <tr hidden><th>文件路径</th><td id="file-path"><%= post.path %></td></tr>
 
-            <tr><th>文件大小</th><td><%= post.size %></td></tr>
+            <tr hidden><th>文件大小</th><td><%= post.size %></td></tr>
 
-            <tr><th>文件格式</th><td><%= post.type %></td></tr>
+            <tr hidden><th>文件格式</th><td><%= post.type %></td></tr>
         </tbody>
     </table>
+    <!--<div  width="50" height="50">-->
+        <!--<img id="pictureCapture">模型详细信息</img>-->
+    <!--</div>-->
+    <!--<div class="well">-->
+        <!--<%- link_to('<i class="icon-edit icon-white"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-primary'}) %>-->
+        <!--<%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.post(post), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>-->
+        <!--or-->
+        <!--<%- link_to('Back to index', pathTo.posts()) %>-->
+    <!--</div>-->
 
-    <div class="well">
-        <%- link_to('<i class="icon-edit icon-white"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-primary'}) %>
-        <%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.post(post), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
-        or
-        <%- link_to('Back to index', pathTo.posts()) %>
+    <div id="postShowContainer">
+        <!--<input id="pictureTaking" type="button" value="PictureTaking"></div>-->
+        <!--<img id="picture" src="data:image/png;base64,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-->
+        <!--caZemogCzVXbA3HF1Ksnnk6xfNUYyaVurfVlKjqeRoe1CO3qCRozcrctTqMP3n1KXycWGpdxDK7TO9K7kgdcWoIkcdQequ7Dvdp07q1Bam6gr/1Y94AtXUixoUqQklqix+2Eq8LnpQZOEDSFUAAADYMsi+7h/d01gdParphWr6HtUtR6iWLZXax+VpIsGaMbWapA5g85h5srF1jqxpKHgHrHxi1XS8KkG/arOXFErbK2eSq8+O6pGnR3bJyrpOWT6iQ54Y3o5gBQCoIEXJUt/3jIAsdV+rea/DNhilaDIxqlunT5oaDcrR9xQ5+v8CcvT3Bjn6544b5IPONOlRe71+2h0i0/MQpEFJ+qDSaxonSdWjUYokdUWpaQKiNGpcifpIpESVBT+w/jzzvy8y73tIVQAAAOj7FCdUdYepqr9HtdRCNalUzU2oVnsqdSsQqMXIVe/fZbIjVk4dwOYx82RT2xxZ01iQFXUdicXqWoNYDferJjnYEX6MWnJ1Vuio1drGgjw7qsetLlhR1yFPjpjS+3hte4F6AACAfDDJ0pUpZOm6hLI0KEU3+6qRzGI0WWq0CDk6WZWjUb2jUenR25T0qGa9fsbdiiC9N0aQKuv1uhRpEkkaEqU/8q/k5zG6X1/9/R1Ruvhh62Nc9JAnTRc9ZP05Fj7o/bkCElXm3md9bmZ/R2TWvUhVAAAA6Ls4MjVbf6peqPaFHtVwQqJvC9WqlKlbuURNJlfzSa2+NmaebGqbKy80TZeVuYhVc7+q+piNO/bh/ncBufpC0zRZ01CQ1Q1TZZUrWDtlBfUAAACR6GTp8rqOwsqRnb3PjOzqLUaWvhIhSzcrr1uc/9S9LgmmRr3XAYv0cnRiUjkaOMoUWq2/UT7s8g4zadOjpvV6X//o3Up6NCBI5+j6R00pUmXV3pGOjiTViVKTLNWOQXyG5ofh3yMoRBerQvRBL02qCtEFP7D+fK4Y/b4niec6ktQWpY4stYWpNfdY0nnmPd7neMbd1ud8+p1IVQAAAOibJBaqEf2pwQ7VNGv/1dej2leEan7r/rnL1CqQln1hwp2rxR+xes1Osa5rnlFcYjVBv2qStKr12AzI1dGqXJ0hzzdOk7WNBVnTMFVWj+qRVaO65en6Llnp9K9SDwAAWxG9w9prlg1rr8ksS5XKliyy9PWQGLW/b2lSo1bfqHqpXpWjV4fkqPFivSJH9av14fSoepwper0+oyDVpkgf8IvHYJrUFaUaWepK0yhx+kODBFVkqE+IGqTowjgpqhOj93np0TnftT5HOjE6KyhG7/LSus5fT79L/qX+e7DFqUy3Jfa02+Vfhdvl48JS+efUpfJRz21IVQAAAOhbPK3I1DQHqeLSqbmv">模型详细信息</img>-->
     </div>
+
+    <input id="pictureTaking" type="button" value="拍个照吧" style="position:absolute;left:80px;top:80px;"/>
+
+    <img id="picture" hidden="true" style="position:absolute;left:80px;top:110px;border:1;border-color: black;">
+
+    <div style="position:absolute;left:200px;top:80px;">
+        背景:
+        <input type="radio" checked="checked" name="changeBackground" value="room" onclick="getRadio(event)"/>
+        房间
+        <input type="radio" name="changeBackground" value="lawn" onclick="getRadio(event)"/>
+        草地
+        <input type="radio" name="changeBackground" value="coast" onclick="getRadio(event)"/>
+        海边
+        <input type="radio" name="changeBackground" value="hotel" onclick="getRadio(event)"/>
+        酒店
+        <input type="radio" name="changeBackground" value="town" onclick="getRadio(event)"/>
+        小镇
+        <input type="radio" name="changeBackground" value="mosque" onclick="getRadio(event)"/>
+        清真寺
+    </div>
+    <!--<select id="changeBackground" style="position:absolute;left:240px;top:80px;">-->
+        <!--<option value ="room">房间</option>-->
+        <!--<option value ="lawn">草地</option>-->
+        <!--<option value="coast">海边</option>-->
+        <!--<option value="hotel">酒店</option>-->
+        <!--<option value="mosque">清真寺</option>-->
+        <!--<option value="town">小镇</option>-->
+    <!--</select>-->
+    <!--<input id="changeBackground" type="button" value="ChangeBG"  style="position:absolute;left:240px;top:80px;"/>-->
+
+
+   <!-- <select id="changeBackground" -->>
+       <!-- <option value ="room">房间</option-->>
+       <!-- <option value ="lawn">草地</option-->>
+       <!-- <option value="coast">海边</option-->>
+       <!-- <option value="hotel">酒店</option-->>
+       <!-- <option value="mosque">清真寺</option-->>
+       <!-- <option value="town">小镇</option-->>
+   <!-- </select-->>
 </div>
+<link href="/stylesheets/show.css" rel="stylesheet">
+
+<script type="text/javascript" src="/javascripts/THREEx.FullScreen.js"></script>
+<script type="text/javascript" src="/javascripts/THREEx.screenshot.js"></script>
+<script type="text/javascript" src="/javascripts/OrbitControls.js"></script>
+
+<script src="/javascripts/loaders/ctm/lzma.js"></script>
+<script src="/javascripts/loaders/ctm/ctm.js"></script>
+<script src="/javascripts/loaders/ctm/CTMLoader.js"></script>
+
+<script src="/javascripts/loaders/BinaryLoader.js"></script>
+<script src="/javascripts/loaders/OBJLoader.js"></script>
+<script src="/javascripts/loaders/VTKLoader.js"></script>
+<script src="/javascripts/loaders/STLLoader.js"></script>
+<script src="/javascripts/loaders/ColladaLoader.js"></script>
+<script src="/javascripts/loaders/UTF8Loader.js"></script>
+<script src="/javascripts/loaders/MTLLoader.js"></script>
+
+<script type="text/javascript" src="/javascripts/app/show.js"></script>

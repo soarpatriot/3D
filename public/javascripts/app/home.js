@@ -27,7 +27,8 @@ $(function(){
 
         //container = $("#canvas-element-id");
 
-
+        console.log("post.name              ******************************************* ");
+        alert("ddd");
 
         camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
         camera.position.y = 150;
