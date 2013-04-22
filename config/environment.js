@@ -4,6 +4,19 @@ module.exports = function (compound) {
     var app = compound.app;
     require('./mongoose').init(compound);
 
+    var upload = require('jquery-file-upload-middleware');
+
+    // configure upload middleware
+    upload.configure({
+        uploadDir: app.root + '/public/upload',
+        uploadUrl: '/upload',
+        imageVersions: {
+            thumbnail: {
+                width: 80,
+                height: 80
+            }
+        }
+    });
 
     app.configure(function(){
         app.use(compound.assetsCompiler.init());
@@ -14,26 +27,26 @@ module.exports = function (compound) {
         // make sure you run `npm install browserify uglify-js`
 
         // app.enable('clientside');
-
-        //app.use('/upload', upload.fileHandler());
-
-
         /**
-         *
-         * upload.on('end', function (fileInfo) {
+        app.use('/upload', upload.fileHandler());
+
+
+        upload.on('end', function (fileInfo) {
             fileInfo.id ="ff";
-        });
-        app.use('/upload', function (req, res, next) {
-            // imageVersions are taken from upload.configure()
-            upload.fileHandler()(req, res, next);
         });**/
 
 
-        //app.use(express.bodyParser());
+        app.use('/upload', function (req, res, next) {
+            // imageVersions are taken from upload.configure()
+            upload.fileHandler()(req, res, next);
+        });
+
+
+        app.use(express.bodyParser());
 
 
 
-
+        /**
         app.use(express.bodyParser({
             uploadDir: app.root + '/public/upload',
             tempDir: app.root + '/public/temp',
@@ -42,7 +55,7 @@ module.exports = function (compound) {
             limit:100000000,// 100M limit
             defer:true//enable event
         }));
-
+        **/
 
 
         app.use(express.cookieParser('secret'));

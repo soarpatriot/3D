@@ -31,6 +31,7 @@
     <div class="modal-body">
         <div class="container-fluid">
             <form id="fileupload" enctype="multipart/form-data" method="POST" action="/upload" mutiple>
+                <input type="hidden" name="redirect" value="/">
                 <div class="row-fluid fileupload-buttonbar">
                        <div class="offset1 span6">
                            <span class="btn btn-success fileinput-button">
@@ -49,6 +50,8 @@
 
                 </div>
             </form>
+
+
             <div class="row-fluid">
                 <div class="offset1 span5">
                     <!-- The global progress information -->
@@ -69,10 +72,5 @@
 
     </div>
 </div>
-<script>
-    $(function(){
-        progress:function(data){
-            alert(data);
-        }
-    })
-</script>
+<script data-main="/javascripts/app/post.js" src="/javascripts/require-jquery.js"></script>
+<script src="/javascripts/app/requirejs-config.js"></script>

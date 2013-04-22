@@ -6,7 +6,7 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
 
 
 
-    /**
+
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
@@ -15,11 +15,11 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
     $('#fileupload').fileupload('option', {
 
         maxFileSize: 5000000,
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|js)$/i,
         process: [
             {
                 action: 'load',
-                fileTypes: /^image\/(gif|jpeg|png)$/,
+                fileTypes: /^image\/(gif|jpeg|png|js)$/,
                 maxFileSize: 20000000 // 20MB
             },
             {
@@ -41,11 +41,11 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
             /\/[^\/]*$/,
             '/cors/result.html?%s'
         )
-    );**/
+    );
 
     $('#fileupload').fileupload({
 
-
+        dataType: 'json',
         add: function (e, data) {
             $.each(data.files, function (index, file) {
                 alert('files: ' + file.name);
@@ -68,11 +68,14 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
 
         done: function (e, data) {
 
-            //alert("href:"+window.location.href);
+            console.log("data: "+data);
             $.each(data.files, function (index, file) {
                 $('<p/>').text(file.name).appendTo($("#upload-result"));
-            });
 
+
+                console.log("index: "+index);
+            });
+            //window.location.href="/"
         },
 
         /**

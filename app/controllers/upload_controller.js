@@ -33,8 +33,10 @@ upload.configure({
 action('create',function(){
 
 
+    console.log("id******************************:");
+    res.redirect("/posts");
 
-
+    /**
     req.form.on("progress",function(bytesReceived,bytesExpected){
         //res.send(bytesReceived);
         //var progress = ((bytesReceived / bytesExpected)*100)+"％";
@@ -57,16 +59,6 @@ action('create',function(){
             console.log("id:"+_id);
             res.redirect("/posts/"+_id);
         });
-    });
+    });**/
 
 });
-
-function sendProcess() {
-
-    req.form.on("progress",function(bytesReceived,bytesExpected){
-        //res.send(bytesReceived);
-
-        res.send("bytesReceived");
-    });
-    next();
-}

@@ -27,7 +27,7 @@ var clock = new THREE.Clock();
 init();
 
 function init() {
-   // var title = <%= post.title %>;
+    // var title = <%= post.title %>;
     var title = $("#title").text();
     var fileName = $("#file-name").text();
     var filePath = $("#file-path").text();
@@ -35,7 +35,7 @@ function init() {
     var filePathName = filePath.substr(filePath.lastIndexOf('\\')+1);
 
     //alert(this.post.name);
-   // console.log("post.name              ******************************************* "+post.name);
+    // console.log("post.name              ******************************************* "+post.name);
 
     container = document.getElementById("postShowContainer");
 
@@ -103,7 +103,7 @@ function init() {
 
     json1.geometries[filePathName] = {
         "type":"ascii",
-        "url":"http://localhost:3000/upload/flamingo.js"
+        "url":"http://localhost:3000/upload/flamingo(1).js"
     };
 
     json1.materials["flamingo"] = {
@@ -315,10 +315,10 @@ function getRadio(event)
 {
 //    alert(event.target.value);
     if(scene!==null && mesh !== null) {
-    scene.remove( mesh );
+        scene.remove( mesh );
 
-    mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ event.target.value +'.jpg' ) } ) );
-    mesh.scale.x = -1;
-    scene.add( mesh );
-}
+        mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ event.target.value +'.jpg' ) } ) );
+        mesh.scale.x = -1;
+        scene.add( mesh );
+    }
 }
