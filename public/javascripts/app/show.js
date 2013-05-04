@@ -27,15 +27,10 @@ var clock = new THREE.Clock();
 init();
 
 function init() {
-    // var title = <%= post.title %>;
-    var title = $("#title").text();
-    var fileName = $("#file-name").text();
-    var filePath = $("#file-path").text();
-    filePath.lastIndexOf('\\');
-    var filePathName = filePath.substr(filePath.lastIndexOf('\\')+1);
 
-    //alert(this.post.name);
-    // console.log("post.name              ******************************************* "+post.name);
+    //model URL
+    var postUrl = $("#post-url").val();
+    var filePathName = $("#post-name").val();
 
     container = document.getElementById("postShowContainer");
 
@@ -103,7 +98,7 @@ function init() {
 
     json1.geometries[filePathName] = {
         "type":"ascii",
-        "url":"http://localhost:3000/upload/flamingo(1).js"
+        "url":postUrl
     };
 
     json1.materials["flamingo"] = {

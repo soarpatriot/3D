@@ -76,7 +76,13 @@ module.exports = function (mongoose, compound) {
     File.modelName = 'File';
     compound.models.File = File;
 
-
+    /**
+     *  {"name":"flamingo (13).js","originalName":"flamingo.js",
+        *  "size":79998,"type":"application/javascript","delete_type":"DELETE",
+        *  "url":"http://localhost:3000/upload/flamingo%20(13).js",
+        *  "delete_url":"http://localhost:3000/upload/flamingo%20(13).js"}
+     * @type {mongoose.Schema}
+     */
     var PostSchema = new Schema({
         author    : ObjectId
         , title     : String
@@ -87,8 +93,11 @@ module.exports = function (mongoose, compound) {
         size: {type: Number},
         path:'String',
         type:  'String',
-        name: 'String'
-
+        name: 'String',
+        delete_type:'String',
+        url: 'String',
+        delete_url:'String',
+        originalName: 'String'
     },schemaOptions);
 
     var Post = mongoose.model('PostSchema', PostSchema);

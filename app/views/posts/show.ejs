@@ -1,40 +1,8 @@
 <div class="container-fluid">
-    <!--<ul class="breadcrumb">-->
 
-        <!--<li><a href="<%- pathTo.posts() %>">模型列表</a> <span class="divider">/</span></li>-->
-        <!--<li class="active"><a href="#">模型信息</a></li>-->
-    <!--</ul>-->
+    <input type="hidden" id="post-url" name="post-url" value="<%= post.url %>">
+    <input type="hidden" id="post-name" name="post-url" value="<%= post.name %>">
 
-    <!--<div class="page-header">-->
-        <!--<h3>模型详细信息</h3>-->
-    <!--</div>-->
-
-    <table class="table table-bordered" style="position:absolute;">
-        <tbody>
-            <tr hidden><th>标题</th><td id="title"><%= post.title %></td></tr>
-
-            <!--<tr><th>描述</th><td><%= post.content %></td></tr>-->
-
-            <!--<tr><th>发布日期</th><td><%= post.published %></td></tr>-->
-
-            <tr><th>文件名</th><td id="file-name"><%= post.name %></td></tr>
-
-            <tr hidden><th>文件路径</th><td id="file-path"><%= post.path %></td></tr>
-
-            <tr hidden><th>文件大小</th><td><%= post.size %></td></tr>
-
-            <tr hidden><th>文件格式</th><td><%= post.type %></td></tr>
-        </tbody>
-    </table>
-    <!--<div  width="50" height="50">-->
-        <!--<img id="pictureCapture">模型详细信息</img>-->
-    <!--</div>-->
-    <!--<div class="well">-->
-        <!--<%- link_to('<i class="icon-edit icon-white"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-primary'}) %>-->
-        <!--<%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.post(post), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>-->
-        <!--or-->
-        <!--<%- link_to('Back to index', pathTo.posts()) %>-->
-    <!--</div>-->
 
     <div id="postShowContainer">
         <!--<input id="pictureTaking" type="button" value="PictureTaking"></div>-->
@@ -61,25 +29,7 @@
         <input type="radio" name="changeBackground" value="mosque" onclick="getRadio(event)"/>
         清真寺
     </div>
-    <!--<select id="changeBackground" style="position:absolute;left:240px;top:80px;">-->
-        <!--<option value ="room">房间</option>-->
-        <!--<option value ="lawn">草地</option>-->
-        <!--<option value="coast">海边</option>-->
-        <!--<option value="hotel">酒店</option>-->
-        <!--<option value="mosque">清真寺</option>-->
-        <!--<option value="town">小镇</option>-->
-    <!--</select>-->
-    <!--<input id="changeBackground" type="button" value="ChangeBG"  style="position:absolute;left:240px;top:80px;"/>-->
 
-
-   <!-- <select id="changeBackground" -->>
-       <!-- <option value ="room">房间</option-->>
-       <!-- <option value ="lawn">草地</option-->>
-       <!-- <option value="coast">海边</option-->>
-       <!-- <option value="hotel">酒店</option-->>
-       <!-- <option value="mosque">清真寺</option-->>
-       <!-- <option value="town">小镇</option-->>
-   <!-- </select-->>
 </div>
 <link href="/stylesheets/show.css" rel="stylesheet">
 

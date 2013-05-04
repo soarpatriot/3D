@@ -15,6 +15,16 @@
                     <a href="#myModal" role="button" class="btn" data-toggle="modal">添加模型</a>
             </div>
         </div>
+
+        <% var form = formFor(post, {action: pathTo.posts, method: 'POST', id: "post-form", class: 'form-horizontal'}) %>
+        <%- form.begin() %>
+            <input id="file-name" type="hidden" name="Post[name]" value="">
+            <input id="file-original" type="hidden" name="Post[originalName]" value="">
+            <input id="file-size" type="hidden" name="Post[size]" value="">
+            <input id="file-delete_type" type="hidden" name="Post[delete_type]" value="">
+            <input id="file-url" type="hidden" name="Post[url]" value="">
+            <input id="file-delete_url" type="hidden" name="Post[delete_url]" value="">
+        <%- form.end() %>
     </div>
 
 </div>
@@ -30,8 +40,9 @@
     </div>
     <div class="modal-body">
         <div class="container-fluid">
+
             <form id="fileupload" enctype="multipart/form-data" method="POST" action="/upload" mutiple>
-                <input type="hidden" name="redirect" value="/">
+                <input type="hidden" name="authenticity_token">
                 <div class="row-fluid fileupload-buttonbar">
                        <div class="offset1 span6">
                            <span class="btn btn-success fileinput-button">

@@ -11,10 +11,38 @@ action('new', function () {
 });
 
 action(function create() {
+    /**
+    author    : ObjectId
+        , title     : String
+        , content    : String
+        , published : { type: Boolean, default: false }
+    , publishDate: { type: Date, default: Date.now },
+
+    size: {type: Number},
+    path:'String',
+        type:  'String',
+        name: 'String'
+     size: {type: Number},
+     path:'String',
+     type:  'String',
+     name: 'String',
+     delete_type:'String',
+     url: 'String',
+     delete_url:'String',
+     originalName: 'String'
+    **/
+    console.log("fileInfo: "+req.body.Post.name);
+
 
     var post = new Post({
-        title: req.body.Post.title,
-        content: req.body.Post.content,
+        title: req.body.Post.originalName,
+        content: req.body.Post.originalName,
+        name: req.body.Post.name,
+        type: req.body.Post.type,
+        delete_type:req.body.Post.delete_type,
+        url: req.body.Post.url,
+        delete_url: req.body.Post.delete_url,
+        size: req.body.Post.size,
         published:req.body.Post.published
     });
     this.post = post;
@@ -31,13 +59,15 @@ action(function create() {
             format.html(function () {
                 if (err) {
                     flash('error', 'Post can not be created');
+                    console.log("fail");
                     render('new', {
                         post: post,
                         title: 'New post'
                     });
                 } else {
+                    console.log("fsuccess");
                     flash('info', 'Post created');
-                    redirect(path_to.posts);
+                    redirect(path_to.post(post));
                 }
             });
         });
