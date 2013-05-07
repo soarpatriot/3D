@@ -4,6 +4,7 @@ module.exports = function (compound) {
     var app = compound.app;
     require('./mongoose').init(compound);
 
+    var uuid = require('node-uuid');
     var upload = require('jquery-file-upload-middleware');
 
     // configure upload middleware
@@ -29,11 +30,7 @@ module.exports = function (compound) {
         // app.enable('clientside');
         /**
         app.use('/upload', upload.fileHandler());
-
-
-        upload.on('end', function (fileInfo) {
-            fileInfo.id ="ff";
-        });**/
+        **/
 
 
         app.use('/upload', function (req, res, next) {
@@ -41,10 +38,30 @@ module.exports = function (compound) {
             upload.fileHandler()(req, res, next);
         });
 
+        /**
+         * change originName to uuid name;
+         * at the begining of upload
+         * **/
+        upload.on('begin', function (fileInfo) {
+            var originName= fileInfo.originalName;
+            var extPosi = originName.lastIndexOf(".");
+            var extName = originName.substr(extPosi);
+            var newName = uuid.v1();
+            fileInfo.name = newName+extName;
+            // fileInfo structure is the same as returned to browser
+            // {
+            //     name: '3 (3).jpg',
+            //     originalName: '3.jpg',
+            //     size: 79262,
+            //     type: 'image/jpeg',
+            //     delete_type: 'DELETE',
+            //     delete_url: 'http://yourhost/upload/3%20(3).jpg',
+            //     url: 'http://yourhost/uploads/3%20(3).jpg',
+            //     thumbnail_url: 'http://youhost/uploads/thumbnail/3%20(3).jpg'
+            // }
+        });
 
         app.use(express.bodyParser());
-
-
 
         /**
         app.use(express.bodyParser({
@@ -56,32 +73,11 @@ module.exports = function (compound) {
             defer:true//enable event
         }));
         **/
-
-
         app.use(express.cookieParser('secret'));
         app.use(express.session({secret: 'secret'}));
         app.use(express.methodOverride());
         app.use(app.router);
     });
-
-    /**
-    app.post("/upload",function(req,res){//bind event handler
-
-        req.form.on("progress",function(bytesReceived,bytesExpected){
-            console.log("bytesReceived:"+bytesReceived);
-            console.log("bytesExpected:"+bytesExpected);
-        });
-        req.form.on("end",function(){
-            console.log(req.files);
-            //res.send("done");
-        });
-        res.redirect("/");
-
-
-
-    });**/
-
-
 };
 
 

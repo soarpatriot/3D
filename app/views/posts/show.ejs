@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= title %></title>
+
+        <%- stylesheet_link_tag('show','jquery-toolbars','bootstrap-icons') %>
+
+    </head>
+    <body>
+
 <div class="container-fluid">
 
     <input type="hidden" id="post-url" name="post-url" value="<%= post.url %>">
@@ -14,25 +24,81 @@
 
     <img id="picture" hidden="true" style="position:absolute;left:80px;top:110px;border:1;border-color: black;">
 
-    <div style="position:absolute;left:200px;top:80px;">
+    <div id="change-back" style="position:absolute;left:200px;top:80px;">
         背景:
-        <input type="radio" checked="checked" name="changeBackground" value="room" onclick="getRadio(event)"/>
+        <input type="radio" checked="checked" name="changeBackground" value="room" />
         房间
-        <input type="radio" name="changeBackground" value="lawn" onclick="getRadio(event)"/>
+        <input type="radio" name="changeBackground" value="lawn"/>
         草地
-        <input type="radio" name="changeBackground" value="coast" onclick="getRadio(event)"/>
+        <input type="radio" name="changeBackground" value="coast" />
         海边
-        <input type="radio" name="changeBackground" value="hotel" onclick="getRadio(event)"/>
+        <input type="radio" name="changeBackground" value="hotel" />
         酒店
-        <input type="radio" name="changeBackground" value="town" onclick="getRadio(event)"/>
+        <input type="radio" name="changeBackground" value="town" />
         小镇
-        <input type="radio" name="changeBackground" value="mosque" onclick="getRadio(event)"/>
+        <input type="radio" name="changeBackground" value="mosque"/>
         清真寺
     </div>
 
-</div>
-<link href="/stylesheets/show.css" rel="stylesheet">
 
+</div>
+<div class="btn-group span12 btn-group-float">
+    <a id="share-toolbar" href="#share-model" role="button" class="btn btn-large" data-toggle="modal"><i class="icon-share"></i></a>
+    <button class="btn btn-large"><i class="icon-share"></i></button>
+    <button class="btn btn-large"><i class="icon-heart"></i></button>
+    <button class="btn btn-large"><i class="icon-fullscreen"></i></button>
+</div>
+
+<div id="user-toolbar-options">
+    <a href="#"><i class="icon-user"></i></a>
+    <a href="#"><i class="icon-star"></i></a>
+    <a href="#"><i class="icon-edit"></i></a>
+    <a href="#"><i class="icon-delete"></i></a>
+    <a href="#"><i class="icon-ban"></i></a>
+    <button class="btn btn-large">分享</button>
+    <button class="btn btn-large">嵌入</button>
+
+</div>
+
+<div class="modal fade" id="share-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h5 id="myModalLabel">嵌入模型</h5>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    拷贝如下代码到你想要发表的网站或论坛中，即可分享你的3D模型
+                </div>
+            </div>
+            <div class="row-fluid">
+                <h6>1. 简单html链接分享</h6>
+                <div class="span12">
+                    <textArea class="span10 pre-scrollable"><h3>iPhone 5 (<a href="http://sketchfab.com/show/1NSI65tlF11NJvcySaAV8AGbfkw" title="View this on Sketchfab" target="_blank">click to view in 3D</a>)</h3>;<a href="http://sketchfab.com/show/1NSI65tlF11NJvcySaAV8AGbfkw" title="iPhone 5" target="_blank"><div style="position: absolute; top: 140px; left: 183px; height: 82px; width: 82px; cursor: pointer; background: url(http://sketchfab.com/img/sketchfab-play.png) no-repeat;background-size: cover;"></div><a href="http://sketchfab.com/show/1NSI65tlF11NJvcySaAV8AGbfkw" title="iPhone 5" target="_blank"><img src="http://sketchfab.com/urls/1NSI65tlF11NJvcySaAV8AGbfkw/thumbnail_448.png?v=1367263995" alt="iPhone 5"/></a>
+                    </textArea>
+                    <code class="pre-scrollable">
+                            http://localhost:3000/posts/fsdjadfad
+                    </code>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <h6>2. iframe 嵌入网页中</h6>
+                <div class="span12">
+                    <textArea class="span10 pre-scrollable">&ltiframe frameborder="0" height="480" width="854" allowFullScreen webkitallowfullscreen="true" mozallowfullscreen="true" src="http://skfb.ly/l4g2e1a?autostart=0&transparent=0&autospin=0&controls=1"&gt&lt/iframe&gt
+                    </textArea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/javascripts/jquery.toolbar.min.js"></script>
 <script type="text/javascript" src="/javascripts/THREEx.FullScreen.js"></script>
 <script type="text/javascript" src="/javascripts/THREEx.screenshot.js"></script>
 <script type="text/javascript" src="/javascripts/OrbitControls.js"></script>
@@ -50,3 +116,5 @@
 <script src="/javascripts/loaders/MTLLoader.js"></script>
 
 <script type="text/javascript" src="/javascripts/app/show.js"></script>
+</body>
+</html>

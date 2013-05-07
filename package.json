@@ -1,27 +1,29 @@
 { "name": "blog"
-, "version": "0.0.1"
-, "engines": ["node >= 0.8.0"]
-, "main": "server.js"
-, "dependencies":
-  { "ejs":              "*"
-  , "ejs-ext":          "latest"
-  , "express":          "~3.x"
-  , "compound":       ">= 1.1.0"
-  , "jugglingdb":       ">= 0.1.0"
-  , "coffee-script":    ">= 1.1.1"
-  , "stylus":           "latest"
-  , "seedjs": "latest"
-  , "mongoose":"3.4.0"
-  , "supervisor":"0.5.2"
-  , "blueimp-file-upload-node": ">=2.0.0"
-  , "jquery-file-upload-middleware":"0.0.8"
-  },
-  "devDependencies":
-  { "nodeunit":         "*"
-  , "sinon":            "*"
-  , "semicov":          "*"
-  }
+    , "version": "0.0.1"
+    , "engines": ["node >= 0.8.0"]
+    , "main": "server.js"
+    , "dependencies":
+{ "ejs":              "*"
+    , "ejs-ext":          "latest"
+    , "express":          "~3.x"
+    , "compound":       ">= 1.1.0"
+    , "jugglingdb":       ">= 0.1.0"
+    , "coffee-script":    ">= 1.1.1"
+    , "stylus":           "latest"
+    , "seedjs": "latest"
+    , "mongoose":"3.4.0"
+    , "supervisor":"0.5.2"
+    , "blueimp-file-upload-node": ">=2.0.0"
+    , "jquery-file-upload-middleware":"0.0.8"
+    , "underscore":">=1.4.4"
+    , "node-uuid":"1.4.0"
+},
+"devDependencies":
+{ "nodeunit":         "*"
+, "sinon":            "*"
+, "semicov":          "*"
+}
 , "scripts":
-  { "test": "nodeunit test/*/*"
-  }
+{ "test": "nodeunit test/*/*"
+}
 }
