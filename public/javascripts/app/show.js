@@ -8,12 +8,6 @@
 
 $(function(){
 
-    /**
-    $('#share-toolbar').toolbar({
-        content: '#user-toolbar-options',
-        position: 'top'
-    });**/
-
 
     var fov = 70;
 
@@ -31,6 +25,12 @@ $(function(){
     var rotatingObjects = [];
     var morphAnimatedObjects = [];
 
+    var simpleText = _.escape($("#simple-html-template").html());
+    $("#simple-embed-div").html(_.template(simpleText));
+
+    var iframeText = _.escape($("#iframe-template").html());
+    $("#iframe-embed-div").html(_.template(iframeText));
+
     var clock = new THREE.Clock();
 
     init();
@@ -46,7 +46,7 @@ $(function(){
         renderer = new THREE.WebGLRenderer( {
             antialias: true,
             preserveDrawingBuffer: true  // required to support .toDataURL()
-        } );
+        });
 
 
 //    renderer.setSize(container.clientWidth, container.clientHeight);
@@ -159,8 +159,6 @@ $(function(){
             document.getElementById("picture").src = url;
             document.getElementById("picture").hidden = false;
             setTimeout("document.getElementById('picture').hidden=true",2000);
-
-//Todo: Posts.update({"_id" : selectedObject._id}, {"$set" : {"picture" : url}});
 
         };
 
@@ -314,6 +312,7 @@ $(function(){
     }
 
     loadBack("room");
+
     $("#change-back input[type='radio']").click(function(){
         var backVal = $(this).val();
         loadBack(backVal);
@@ -321,7 +320,7 @@ $(function(){
     });
 
     function loadBack(backVal){
-        if(scene!==null) {
+        if(!_.isUndefined(scene)===true && !_.isNull(scene)===true) {
             scene.remove( mesh );
 
             mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+backVal+'.jpg' ) } ) );
@@ -329,16 +328,5 @@ $(function(){
             scene.add( mesh );
         }
     };
-    /**
-    function getRadio(event)
-    {
 
-        if(scene!==null && mesh !== null) {
-            scene.remove( mesh );
-
-            mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/grid.jpg' ) } ) );
-            mesh.scale.x = -1;
-            scene.add( mesh );
-        }
-    }**/
 });

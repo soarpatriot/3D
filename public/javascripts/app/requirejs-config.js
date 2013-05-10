@@ -22,6 +22,10 @@ require.config({
         "underscore": "underscore-min",
         "backbone": "backbone-1.0.0.min",
 
+        //three
+        "three": "three.js",
+
+
         "jquery.ui.widget": "fileupload/vendor/jquery.ui.widget",
         "jquery.iframe-transport":"fileupload/jquery.iframe-transport",
         "jquery.fileupload":"fileupload/jquery.fileupload"
