@@ -12,7 +12,8 @@
 
     <input type="hidden" id="post-url" name="post-url" value="<%= post.url %>">
     <input type="hidden" id="post-name" name="post-url" value="<%= post.name %>">
-
+    <input type="hidden" id="post-title" name="post-url" value="<%= post.title %>">
+    <input type="hidden" id="post-content" name="post-url" value="<%= post.content %>">
 
     <div id="postShowContainer">
         <!--<input id="pictureTaking" type="button" value="PictureTaking"></div>-->
@@ -76,17 +77,13 @@
                 <h6>1. 简单html链接分享</h6>
                 <div class="span12">
                     <div id="simple-embed-div" class="span10 share-link">
-
-
                     </div>
-
                 </div>
             </div>
             <div class="row-fluid">
                 <h6>2. iframe 嵌入网页中</h6>
                 <div class="span12">
                     <div id="iframe-embed-div" class="span10 share-link">
-
                     </div>
                 </div>
             </div>
@@ -99,12 +96,12 @@
 </div>
 
 <script type="text/template" id="simple-html-template">
-    <h3>iPhone 5 (<a href="http://sketchfab.com/show/1NSI65tlF11NJvcySaAV8AGbfkw" title="View this on Sketchfab" target="_blank">click to view in 3D</a>)</h3>
-    <a href="http://sketchfab.com/show/1NSI65tlF11NJvcySaAV8AGbfkw" title="iPhone 5" target="_blank">
-    <div style="position: absolute; top: 140px; left: 183px; height: 82px; width: 82px; cursor: pointer; background: url(http://sketchfab.com/img/sketchfab-play.png) no-repeat;background-size: cover;">
+    <h3><%=title%> (<a href="<%=url%>" title="查看模型在 3D " target="_blank">3D模型</a>)</h3>
+    <a href="<%=url%>" title="iPhone 5" target="_blank">
+    <div style="position: absolute; top: 140px; left: 183px; height: 82px; width: 82px; cursor: pointer; background: url(<%=url%>) no-repeat;background-size: cover;">
     </div>
-    <a href="http://sketchfab.com/show/1NSI65tlF11NJvcySaAV8AGbfkw" title="iPhone 5" target="_blank">
-        <img src="http://sketchfab.com/urls/1NSI65tlF11NJvcySaAV8AGbfkw/thumbnail_448.png?v=1367263995" alt="iPhone 5"/>
+    <a href="<%=url%>" title="iPhone 5" target="_blank">
+        <img src="<%=image-url%>" alt="iPhone 5"/>
     </a>
 
 </script>
