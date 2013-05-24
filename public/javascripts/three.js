@@ -10470,7 +10470,7 @@ THREE.SceneLoader.prototype.parse = function ( json, callbackFinished, url ) {
 							geometry.computeTangents();
 
 						}
-
+//                      three original
 //						if ( objJSON.skin ) {
 //
 //							object = new THREE.SkinnedMesh( geometry, material );
@@ -10490,8 +10490,13 @@ THREE.SceneLoader.prototype.parse = function ( json, callbackFinished, url ) {
 //								object.time = objJSON.time;
 //
 //							}
+//							if ( objJSON.mirroredLoop !== undefined ) {
+//
+//								object.mirroredLoop = objJSON.mirroredLoop;
+//
+//							}
 
-                        //vincent add
+//                        //vincent add
                         if ( geometry.animation !== undefined ) {
 
                             material.skinning = true;
@@ -10513,11 +10518,10 @@ THREE.SceneLoader.prototype.parse = function ( json, callbackFinished, url ) {
 
                             }
 
-//							if ( objJSON.mirroredLoop !== undefined ) {
-//
-//								object.mirroredLoop = objJSON.mirroredLoop;
-//
-//							}
+
+
+
+
 
 							if ( material.morphNormals ) {
 

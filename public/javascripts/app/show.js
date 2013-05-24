@@ -23,6 +23,7 @@ var rotatingObjects = [];
 var morphAnimatedObjects = [];
 
 var clock = new THREE.Clock();
+var theObject, theBackground = "room";
 //$(function(){
 init();
 
@@ -127,18 +128,33 @@ function init() {
 
 
 
-    loader.parse(json1, callbackFinished, "http://localhost:3000/upload/monster.dae");
+    loader.parse(json1, callbackFinished, postUrl);
 
 
 }
 
 function callbackFinished( result ) {
+    var cameraX = $("#cameraX").val();
+    var cameraY = $("#cameraY").val();
+    var cameraZ = $("#cameraZ").val();
+    var background = $("#background").val();
+
 //    $( "message" ).style.display = "none";
 //    $( "progressbar" ).style.display = "none";
-//    alert("callbackFinished");
+
 
     camera = result.currentCamera;
 //    camera.aspect = container.clientWidth/container.clientHeight;
+    if (cameraX == "undefined" ||
+        cameraY == "undefined" ||
+        cameraZ == "undefined") {
+//        alert(camera.position.x+" "+camera.position.y+" "+camera.position.z);
+    } else {
+        camera.position.x = cameraX;
+        camera.position.y = cameraY;
+        camera.position.z = cameraZ;
+    }
+
     camera.updateProjectionMatrix();
 
     scene = result.scene;
@@ -150,13 +166,34 @@ function callbackFinished( result ) {
         document.getElementById("picture").src = url;
         document.getElementById("picture").hidden = false;
         setTimeout("document.getElementById('picture').hidden=true",2000);
+        var id = $("#post-id").val();
+        var authenticity_token = $("input[name='authenticity_token']").val();
 
-//Todo: Posts.update({"_id" : selectedObject._id}, {"$set" : {"picture" : url}});
+        var params = {
+            authenticity_token:authenticity_token,
+            id:id,
+            url:url,
+            radius:theObject.geometry.boundingSphere.radius,
+            cameraX: camera.position.x,
+            cameraY: camera.position.y,
+            cameraZ: camera.position.z,
+            background: theBackground
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/posts/snapshot',
+            data: params,
+            success: function(){
+                 console.log("fdsafasfd");
+            },
+            dataType: 'json'
+        });
 
-    };
 
-    opts.width = 150;
-    opts.height = 150;
+    }
+
+    opts.width = 320;
+    opts.height = 180;
 
     THREEx.Screenshot.bindKey(renderer, opts);
 
@@ -167,10 +204,6 @@ function callbackFinished( result ) {
         THREEx.FullScreen.bindKey(opts1);
     }
 
-    mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/room.jpg' ) } ) );
-    mesh.scale.x = -1;
-    scene.add( mesh );
-
     scene.traverse( function ( object ) {
 
         if (object.geometry) {
@@ -179,7 +212,9 @@ function callbackFinished( result ) {
             object.geometry.computeMorphNormals();
 
             if (object.geometry.boundingSphere) {
+                theObject = object;
                 var radius = object.geometry.boundingSphere.radius;
+
 //                Posts.update({"name" : object.name}, {"$set" :{"scale" : 60/radius}});
             }
         }
@@ -213,6 +248,10 @@ function callbackFinished( result ) {
         }
 
     } );
+    if (background == "undefined") background= "room";
+    mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
+    mesh.scale.x = -1;
+    scene.add( mesh );
 
 
 
@@ -220,7 +259,7 @@ function callbackFinished( result ) {
     controls.addEventListener( 'change', render );
 
 //    document.getElementById("changeBackground").addEventListener('click', function(event) {
-//        alert("changebg");
+
 //        if(scene!==null && mesh !== null) {
 //            scene.remove( mesh );
 //
@@ -306,14 +345,22 @@ function render() {
 }
 //});
 
-function getRadio(event)
-{
-//    alert(event.target.value);
+function getRadio(event) {
+    theBackground = event.target.value;
     if(scene!==null && mesh !== null) {
         scene.remove( mesh );
 
-        mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ event.target.value +'.jpg' ) } ) );
+        mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ theBackground +'.jpg' ) } ) );
         mesh.scale.x = -1;
         scene.add( mesh );
     }
+}
+
+function getRotation() {
+    alert(" fov "+camera.fov
+        +"  near "+camera.near
+        +" far "+camera.far
+        +" position "+camera.position.x+","+camera.position.y+","+camera.position.z
+        +" target "+camera.target);
+
 }

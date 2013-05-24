@@ -4,11 +4,14 @@ exports.routes = function (map) {
 
 
     map.post('upload','upload#create');
+//    map.post('snapshot','posts#snapshot');
     map.resources('upload');
 
     map.resources('posts');
     map.resource('posts', function (post) {
-        //post.post('upload', 'posts#upload');               // /users/:user_id/avatar
+
+    //vincent521
+    post.post('snapshot','posts#snapshot');               // /users/:user_id/avatar
         //user.get('top', 'users#top', {collection: true}); // /users/top
     });
 

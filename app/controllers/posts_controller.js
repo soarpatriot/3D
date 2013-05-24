@@ -128,6 +128,54 @@ action(function edit() {
     }
 });
 
+action(function snapshot() {
+    console.log("snapshot action");
+//    loadPost();
+    console.log(this.post);
+    console.log(req.body.id);
+    console.log("snapshot"+req.body.url);
+//    Post.findOneAndUpdate() { $set: { url: req.body.url }},
+    Post.findOneAndUpdate({'_id': req.body.id}, { $set: {  thumbnail: req.body.url, radius: req.body.radius, cameraX : req.body.cameraX, cameraY : req.body.cameraY, cameraZ : req.body.cameraZ, background: req.body.background  }},  function(err, post){
+        if (err || post) {
+
+                return send({code: 404, error: 'Not found'});
+
+            //redirect(path_to.posts);
+        } else {
+            this.post = post;
+
+            console.log("load:"+JSON.stringify(this.post));
+            next();
+
+        }
+        console.log("zhong"+this.post);
+    }.bind(this));
+
+    console.log("hou"+this.post);
+
+
+
+    /**
+    this.post.update(req.body.Post, function (err,numberAffected, post) {
+        respondTo(function (format) {
+            format.json(function () {
+                if (err) {
+                    send({code: 500, error: post && post.errors || err});
+                } else {
+                    send({code: 200, data: post});
+                }
+            });
+            format.html(function () {
+                if (!err) {
+                    flash('info', 'Post updated');
+                } else {
+                    flash('error', 'Post can not be updated');
+                }
+            });
+        });
+    });***/
+});
+
 action(function update() {
 
     this.title = '编辑';
@@ -191,10 +239,8 @@ function loadPost() {
             redirect(path_to.posts);
         } else {
             this.post = post;
-
             console.log("load:"+JSON.stringify(this.post));
             next();
-
         }
     }.bind(this));
 }
