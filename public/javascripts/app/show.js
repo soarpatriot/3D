@@ -8,8 +8,8 @@
 
 var fov = 70;
 
-var SCREEN_WIDTH = window.innerWidth;
-var SCREEN_HEIGHT = window.innerHeight;
+var SCREEN_WIDTH = document.body.clientWidth ;
+var SCREEN_HEIGHT = document.body.clientHeight;
 
 var container;
 

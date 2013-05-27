@@ -113,7 +113,9 @@ action(function show() {
             send({code: 200, data: this.post});
             break;
         default:
-            render();
+            render({
+                layout:"show"
+            });
     }
 });
 
