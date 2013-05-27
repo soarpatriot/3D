@@ -54,8 +54,8 @@ var THREEx	= THREEx 		|| {};
 			var ctx		= canvas.getContext('2d');
 
 			// TODO is this needed
-			ctx.fillStyle	= "blue";
-			ctx.fillRect(0, 0, canvas.width, canvas.height);
+//			ctx.fillStyle	= "black";
+//			ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 			// scale the image while preserving the aspect
 			var scaled	= cpuScaleAspect(canvas.width, canvas.height, image.width, image.height);
@@ -89,8 +89,8 @@ var THREEx	= THREEx 		|| {};
 		// handle parameters
 		opts		= opts		|| {};
 		var charCode	= opts.charCode	|| 'p'.charCodeAt(0);
-		var width	= opts.width;
-		var height	= opts.height;
+		var width	= opts.width || 640;
+		var height	= opts.height || 480;
 		var callback	= opts.callback	|| function(url){
 			window.open(url, "name-"+Math.random());
 		};

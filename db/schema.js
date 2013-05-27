@@ -96,8 +96,14 @@ module.exports = function (mongoose, compound) {
         name: 'String',
         delete_type:'String',
         url: 'String',
+        radius: 'Number',
         delete_url:'String',
-        originalName: 'String'
+        originalName: 'String',
+        thumbnail: 'String',
+        cameraX: 'Number',
+        cameraY: 'Number',
+        cameraZ: 'Number',
+        background: 'String'
     },schemaOptions);
 
     var Post = mongoose.model('PostSchema', PostSchema);

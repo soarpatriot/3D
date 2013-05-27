@@ -128,6 +128,19 @@ action(function edit() {
     }
 });
 
+action(function snapshot() {
+
+    Post.findOneAndUpdate({'_id': req.body.id}, { $set: {  thumbnail: req.body.url, radius: req.body.radius, cameraX : req.body.cameraX, cameraY : req.body.cameraY, cameraZ : req.body.cameraZ, background: req.body.background  }},  function(err, post){
+        if (err || post) {
+            return send({code: 404, error: 'Not found'});
+        } else {
+            this.post = post;
+            next();
+
+        }
+    }.bind(this));
+});
+
 action(function update() {
 
     this.title = '编辑';
@@ -191,10 +204,8 @@ function loadPost() {
             redirect(path_to.posts);
         } else {
             this.post = post;
-
             console.log("load:"+JSON.stringify(this.post));
             next();
-
         }
     }.bind(this));
 }

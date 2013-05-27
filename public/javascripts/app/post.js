@@ -68,9 +68,9 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
                     $("#file-url").val(result[0].url);
                     $("#file-delete_url").val(result[0].delete_url);
 
-                    $("#post-form").submit();
+
                     /**
-                    var Post = {
+                    var post1 = {
                         name:result[0].name,
                         originalName:result[0].originalName,
                         size:result[0].size,
@@ -81,9 +81,10 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
                     var authenticity_token = $("input[name='authenticity_token']").val();
                     var params = {
                         authenticity_token:authenticity_token,
-                        Post:Post
-                    }**/
-                    //alert(authenticity_token);
+                        Post:post1
+                    }
+                    **/
+//                    alert(authenticity_token);
                     /**
                     $.ajax({
                         type: 'post',
@@ -93,7 +94,9 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
 
                         },
                         dataType: 'json'
-                    });**/
+                    });
+                    **/
+                    $("#post-form").submit();
 
 
                 })
@@ -265,30 +268,5 @@ change: function (e, data) {
     });
 
  var uploadView = new UploadView();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  **/
