@@ -25,11 +25,27 @@ $(function(){
     var rotatingObjects = [];
     var morphAnimatedObjects = [];
 
+
+    var title = $("#post-title").val();
+    var url = window.location.href;
+
+    var Post = {
+        url:url,
+        name:title,
+        title: title
+    };
+
+    _.templateSettings = {
+        interpolate : /\{\{(.+?)\}\}/g
+    };
+
     var simpleText = _.escape($("#simple-html-template").html());
-    $("#simple-embed-div").html(_.template(simpleText));
+    var simpTemp = _.template(simpleText)
+    $("#simple-embed-div").html(simpTemp(Post));
 
     var iframeText = _.escape($("#iframe-template").html());
-    $("#iframe-embed-div").html(_.template(iframeText));
+    var iframTemp = _.template(iframeText);
+    $("#iframe-embed-div").html(iframTemp(Post));
 
     var clock = new THREE.Clock();
 
