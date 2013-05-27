@@ -216,17 +216,26 @@ function callbackFinished( result ) {
 
     }
 
+    //full screen f code
     opts.width = 320;
     opts.height = 180;
-
     THREEx.Screenshot.bindKey(renderer, opts);
-
     var opts1 = {};
     opts1.element = document.getElementById("postShowContainer");
-
     if( THREEx.FullScreen.available() ) {
         THREEx.FullScreen.bindKey(opts1);
     }
+    //full screen button click
+    $("#full-btn").click(function(){
+        if( THREEx.FullScreen.available() ) {
+
+            if( THREEx.FullScreen.activated() ){
+                THREEx.FullScreen.cancel();
+            }else{
+                THREEx.FullScreen.request(opts1.element);
+            }
+        }
+    })
 
     scene.traverse( function ( object ) {
 
