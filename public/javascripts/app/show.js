@@ -23,7 +23,7 @@ var rotatingObjects = [];
 var morphAnimatedObjects = [];
 
 var clock = new THREE.Clock();
-var theObject, theBackground = "room";
+var theObject, theBackground;
 //$(function(){
 init();
 
@@ -248,10 +248,17 @@ function callbackFinished( result ) {
         }
 
     } );
-    if (background == "undefined") background= "room";
-    mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
-    mesh.scale.x = -1;
-    scene.add( mesh );
+    if (background == "undefined") {
+//        background= "room";
+    } else {
+        $("#"+background).attr('checked','checked');
+        theBackground = background;
+        mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
+        mesh.scale.x = -1;
+        scene.add( mesh );
+    }
+
+
 
 
 
