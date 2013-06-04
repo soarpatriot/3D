@@ -9,7 +9,7 @@
 var fov = 70;
 
 var SCREEN_WIDTH = document.body.clientWidth ;
-var SCREEN_HEIGHT = document.body.clientHeight;
+var SCREEN_HEIGHT = document.body.clientHeight ;
 
 var container;
 
@@ -58,7 +58,14 @@ function init() {
     var filePathName = $("#post-name").val();
 
     container = document.getElementById("postShowContainer");
+    //alert(SCREEN_HEIGHT);
+    var $modelContainer = $("#postShowContainer");
+    var conWidth = $("#postShowContainer").css('width');
+    var conHeight = $("#postShowContainer").css('height');
+    var widthNum = conWidth.replace("px","");
+    var heightNum = conHeight.replace("px","");
 
+    //var
     renderer = new THREE.WebGLRenderer( {
         antialias: true,
         preserveDrawingBuffer: true  // required to support .toDataURL()
@@ -66,8 +73,8 @@ function init() {
 
 
 //    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-    renderer.domElement.style.position = "relative";
+    renderer.setSize( widthNum,heightNum);
+    //renderer.domElement.style.position = "relative";
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
     renderer.physicallyBasedShading = true;
@@ -332,17 +339,18 @@ function morphColorsToFaceColors( geometry ) {
 
 function onWindowResize() {
 
-//    camera.aspect = container.clientWidth/container.clientHeight;
-//    camera.updateProjectionMatrix();
-//
-//    renderer.setSize( container.clientWidth, container.clientHeight);
+    var conWidth = $("#postShowContainer").css('width');
+    var conHeight = $("#postShowContainer").css('height');
+    var widthNum = conWidth.replace("px","");
+    var heightNum = conHeight.replace("px","");
+
     windowHalfX = window.innerWidth / 2;
     windowHalfY = window.innerHeight / 2;
 
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize(widthNum,heightNum );
 
     render();
 

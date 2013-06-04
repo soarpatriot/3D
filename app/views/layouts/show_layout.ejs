@@ -4,7 +4,7 @@
 
         <title><%= title %></title>
         <%- stylesheet_link_tag('bootstrap','bootstrap-responsive','application','jquery.fileupload-ui') %>
-        <link rel="stylesheet/less" type="text/css" href="/stylesheets/application.less">
+
         <!-- Force latest IE rendering engine or ChromeFrame if installed -->
         <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
 
@@ -29,7 +29,7 @@
 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container-fluid">
+                <div class="container">
                     <a class="brand" href="#">3D</a>
                     <div class="nav-collapse.collapse">
                         <ul class="nav">
@@ -40,7 +40,7 @@
                                 <a href="/posts">发布</a>
                             </li>
                         </ul>
-                        <ul class="nav pull-right">
+                        <ul class="nav pull-right login-bar">
                             <% var user = request.session.user; if (user) { %>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle"  href="#" data-toggle="dropdown">
@@ -60,16 +60,12 @@
                                     </a>
                                 </li>
                             <% }else{ %>
-                                <li class="vertical-align li-padding">
-
+                                 <li >
                                     <span class="height-auto">
-
-
-
-                                            <a href="/enter"> [登录] </a>
-                                             &nbsp / &nbsp;
-                                            <a href="/signup"> [注册] </a>
+                                        <a href="/enter"> [登录] </a>&nbsp / &nbsp;<a href="/signup"> [注册] </a>
                                     </span>
+
+
                                 </li>
                             <% }; %>
 

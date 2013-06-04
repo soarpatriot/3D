@@ -4,6 +4,7 @@
     left:0px;
     top:0px;
     z-index:0;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    width: 99.5%;
+    height: 99.5%;
+
 }

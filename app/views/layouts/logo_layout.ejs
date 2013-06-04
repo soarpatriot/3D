@@ -3,31 +3,27 @@
     <head>
         <title><%= title %></title>
         <%- stylesheet_link_tag('bootstrap','bootstrap-responsive','application') %>
-        <link rel="stylesheet/less" type="text/css" href="stylesheets/application.less">
+
         <%- javascript_include_tag('jquery-1.8.0.min.js', 'bootstrap', 'rails', 'application','less-1.3.3.min') %>
         <%- csrfMetaTag() %>
     </head>
-    <body class="body-grey">
+    <body class="main-body">
         <div class="navbar navbar-inverse">
             <div class="navbar-inner">
-                <div class="container-fluid">
+                <div class="container">
                     <a class="brand" href="/">3D</a>
 
 
                 </div>
             </div>
         </div>
-        <div class="image-back">
-            <div class="container">
+        <div class="container main-content image-back">
 
-                <div class="min-container">
                     <%- body %>
-                </div>
 
-            </div>
         </div>
         <hr />
-        <div class="container-fluid">
+        <div class="container">
            <footer>
                 <p>&copy; Company 2012</p>
             </footer>

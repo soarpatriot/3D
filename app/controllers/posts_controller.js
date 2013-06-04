@@ -4,6 +4,7 @@ before(loadPost,{
     only: ['show', 'edit', 'update', 'destroy']
     });
 before(userLogined,{only:['new','create']});
+before(applicationLayout,{all:[]});
 
 action('new', function () {
     this.title = 'New post';

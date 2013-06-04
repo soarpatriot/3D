@@ -7,8 +7,9 @@
 
     </head>
     <body>
-
-<div class="container-fluid">
+    <div id="postShowContainer">
+    </div>
+<div class="container">
 
     <input type="hidden" id="post-url" name="post-url" value="<%= post.url %>">
     <input type="hidden" id="post-name" name="post-name" value="<%= post.name %>">
@@ -26,8 +27,7 @@
     <%- form.begin() %>
        <input type="hidden" id="post-id" name="post-id" value="<%= post._id %>">
     <%- form.end() %>
-    <div id="postShowContainer">
-    </div>
+
 
     <input id="pictureTaking" type="button" value="拍个照吧" style="position:absolute;left:80px;top:80px;"/>
 
