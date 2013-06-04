@@ -3,10 +3,12 @@ load('application');
 before(loadPost,{
     only: ['show', 'edit', 'update', 'destroy']
     });
+before(userLogined,{only:['new','create']});
 
 action('new', function () {
     this.title = 'New post';
     this.post = new Post;
+
     render();
 });
 
@@ -107,7 +109,6 @@ action(function index() {
 
 action(function show() {
     this.title = 'Post show';
-    console.log(JSON.stringify(this.post));
     switch(params.format) {
         case "json":
             send({code: 200, data: this.post});
@@ -197,7 +198,7 @@ action(function upload(){
 
 function loadPost() {
 
-    console.log("load Post:");
+    console.log("load Post :");
     Post.findOne({'_id': params.id}, function(err, post){
         if (err || !post) {
             if (!err && !post && params.format === 'json') {
@@ -206,13 +207,25 @@ function loadPost() {
             redirect(path_to.posts);
         } else {
             this.post = post;
-            console.log("load:"+JSON.stringify(this.post));
             next();
         }
     }.bind(this));
 }
 
 function applicationLayout() {
+    console.log('filter applicationLayout');
     layout('application');
     next();
+}
+
+
+function userLogined(){
+
+    if(!req.session.user){
+        flash('error', '请登陆后再发表模型，谢谢！');
+        redirect(path_to.posts);
+    }else{
+        next();
+    }
+
 }

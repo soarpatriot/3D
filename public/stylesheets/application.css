@@ -1,109 +1,171 @@
-
-body{
-
-
-    font-size: 13px;
+@charset "utf-8";
+/**global settings**/
+.global-font {
+  font-family: "Microsoft YaHei", "微软雅黑", Tahoma, Arial, "Helvetica Neue", Helvetica, sans-serif, "宋体";
+  font-size: 14px;
 }
-
-.content{
-    background-color: #E0E0E0;
-    border-top: 1px white solid;
-    min-height: 700px;
+.page-padding {
+  padding-top: 60px;
+  padding-bottom: 40px;
 }
-
-.navbar{
-    margin-bottom: 0px;
+.main-content {
+  margin-bottom: 50px;
+  padding-top: 60px;
+  padding-bottom: 40px;
 }
-.introduce{
-    margin-top: 100px;
+/**home page**/
+.login-bar {
+  vertical-align: baseline;
+  position: relative;
+  padding: 10px 20px;
 }
-.site-slogan{
-    text-align: center;
+.height-auto {
+  height: auto !important;
+  line-height: 20px;
 }
-.site-slogan h1{
-    padding-top: 38px;
-    text-align: center;
-    color: white;
-    font-family: "Museo500";
-    font-size: 38px;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.46);
+.main-body {
+  background-color: #e0e0e0;
 }
-
-.publish{
-    margin-top: 300px;
+.model {
+  height: 394px;
+  width: 701px;
+  background-color: #282828;
+  border: 6px white solid;
+  background-image: url("../images/grid.png");
 }
-
-.model{
-    margin: 10px;
-    margin-top: 70px;
-    background-color: #282828;
-    border: 6px solid white;
-    height: 390px;
-    position: absolute;
-    top: 100px;
-    width: 675px;
-    z-index: 9;
-    background: -webkit-radial-gradient(center center,transparent 60%,rgba(0, 0, 0, 0.05)),url("/images/grid.png");
-    background: radial-gradient(at center center , transparent 60%, rgba(0, 0, 0, 0.05)) repeat scroll 0 0%, url("/images/grid.png") repeat scroll 0 0 transparent;
+/**utilies css for other**/
+.text-center {
+  text-align: center;
 }
-
-
-
-.landscape{
-    background-color: #1CAAD9;
-    border-bottom: 1px solid #6C6C6C;
-    box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.3) inset;
-
-    width: 100%;
+.text-left {
+  text-align: left;
 }
-.display-region{
-    margin-top: 30px;
+.auto-center-layout {
+  margin: 0 auto;
 }
-#canvas-element-id {
-    margin: 10px;
-    margin-top: 70px;
-    background-color: #282828;
-    border: 6px solid white;
-    height: 390px;
-    position: absolute;
-    top: 100px;
-    width: 675px;
-    z-index: 9;
+/**login page cess**/
+.body-grey {
+  background: #e0e0e0;
 }
-
-.footer{
-    height: 30px;
-    text-align: center;
-
-    background-image: -webkit-linear-gradient(#111,#222);
-    background-image: -moz-linear-gradient(#111,#222);
-    background-image: -o-linear-gradient(#111,#222);
-    background-image: linear-gradient(#111,#222);
-    zoom: 1;
-    border-top: 4px solid #1BA9D8;
-    color: #AAA;
-    padding-top: 10px;
-    -webkit-box-shadow: #555 0 0 10px;
-    -moz-box-shadow: #555 0 0 10px;
-    box-shadow: #555 0 0 10px;
-
+.min-container {
+  min-height: 500px;
 }
-
-#signin-li{
-    margin-top: 10px;
+.image-back {
+  background: #e0e0e0 repeat-x url("/images/laoluo.jpg");
+  width: 100%;
+  height: 100%;
 }
-
-/** login sign in nav bar**/
-.vertical-align{
-    vertical-align: baseline;
-    position: relative;
+.dialog-section {
+  margin-top: 140px;
+  text-align: center;
+  width: 100%;
+  z-index: 10000;
 }
-.height-auto{
-    height: auto !important;
-    line-height: 20px;
+.padding-20 {
+  padding: 20px 40px 5px 40px;
 }
-
-.li-padding{
-    padding: 10px 20px;
-
+.login-common {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  width: 343px;
+  margin: 0 auto;
+  text-align: center;
+}
+.dialog {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  width: 343px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px 40px 5px 40px;
+  color: #BFB8E5;
+  border: 1px solid #373553;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e0e0e0), color-stop(100%, rgba(44, 38, 63, 0.1)));
+  background-image: -moz-linear-gradient(top, #e0e0e0 0%, rgba(44, 38, 63, 0.1) 100%);
+  background-image: linear-gradient(top, #e0e0e0 0%, rgba(44, 38, 63, 0.1) 100%);
+}
+.dialog form {
+  text-align: left;
+  color: #0A0A0A;
+}
+.dialog form input[type=text] {
+  width: 328px;
+}
+.dialog form input[type=password] {
+  width: 328px;
+}
+.tip {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  width: 343px;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 20px;
+  height: 30px;
+  width: 425px;
+  display: block;
+}
+.dialog-footer {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  width: 343px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px 40px 1px 40px;
+  margin-top: 10px;
+  height: 30px;
+  color: #0A0A0A;
+  border: 1px solid #373553;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e0e0e0), color-stop(100%, rgba(44, 38, 63, 0.1)));
+  background-image: -moz-linear-gradient(top, #e0e0e0 0%, rgba(44, 38, 63, 0.1) 100%);
+  background-image: linear-gradient(top, #e0e0e0 0%, rgba(44, 38, 63, 0.1) 100%);
+}
+.dialog-footer a {
+  color: #04C;
+}
+/**process bar**/
+.upload-area {
+  padding-top: 10px;
+  margin-top: 10px;
+  color: #000000;
+  border: 1px dashed #373553;
+  height: 50px;
+  text-align: center;
+  display: block;
+}
+/**process bar**/
+.upload-zone {
+  color: #000000;
+  border: 1px dashed #373553;
+  text-align: center;
+}
+.upload-zone .upload-tip {
+  color: #cc0000;
+}
+.bar {
+  width: 0%;
+  height: 18px;
+  background: green;
+}
+/** show one post page css**/
+.btn-group-float {
+  position: absolute;
+  z-index: 1000000000;
+  text-align: center;
+  bottom: 0px;
+}
+.share-link {
+  background: #f5f5f5;
+  height: 100px;
+  overflow: scroll;
+  padding: 10px;
+  border: 1px solid #c4c4c4;
+  word-break: break-all;
+  white-space: nowrap;
+  margin: 10px 0;
+  display: block;
 }

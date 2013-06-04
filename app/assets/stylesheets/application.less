@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 @nice-blue: #5B83AD;
 @light-blue: @nice-blue + #111;
 @grey:#E0E0E0;
@@ -8,6 +10,45 @@
 @dialog-width:343px;
 @width-full:100%;
 @tip-height:60px;
+
+@global-font-family:"Microsoft YaHei","微软雅黑",Tahoma, Arial,"Helvetica Neue", Helvetica,sans-serif,"宋体",;
+@global-font-size: 14px;
+
+/**global settings**/
+.global-font{
+  font-family: @global-font-family;
+  font-size: @global-font-size;
+}
+.page-padding{
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+.main-content{
+  margin-bottom: 50px;
+  .page-padding
+}
+
+/**home page**/
+.login-bar{
+  vertical-align: baseline;
+  position: relative;
+  padding: 10px 20px;
+}
+.height-auto{
+  height: auto !important;
+  line-height: 20px;
+}
+.main-body{
+  background-color: @grey;
+}
+.model{
+  height: 394px;
+  width: 701px;
+  background-color: #282828;
+  border: 6px white solid;
+  background-image: url("../images/grid.png");
+
+}
 
 /**utilies css for other**/
 .text-center{
