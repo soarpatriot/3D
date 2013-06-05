@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= title %></title>
+
+        <%- stylesheet_link_tag('show','jquery-toolbars','bootstrap-icons') %>
+
+    </head>
+<body>
+    <div id="postShowContainer">
+    </div>
+    <div class="container">
+
+        <input type="hidden" id="post-url" name="post-url" value="<%= post.url %>">
+        <input type="hidden" id="post-name" name="post-name" value="<%= post.name %>">
+        <input type="hidden" id="post-title" name="post-title" value="<%= post.title %>">
+        <input type="hidden" id="post-content" name="post-content" value="<%= post.content %>">
+
+        <input type="hidden" id="cameraX" name="cameraX" value="<%= post.cameraX %>">
+        <input type="hidden" id="cameraY" name="cameraY" value="<%= post.cameraY %>">
+        <input type="hidden" id="cameraZ" name="cameraZ" value="<%= post.cameraZ %>">
+        <input type="hidden" id="background" name="background" value="<%= post.background %>">
+
+
+
+        <% var form = formFor(post, {action: pathTo.posts, method: 'POST', id: "post-form", class: 'form-horizontal'}) %>
+        <%- form.begin() %>
+           <input type="hidden" id="post-id" name="post-id" value="<%= post._id %>">
+        <%- form.end() %>
+    </div>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="btn-group span12 btn-group-float">
+
+                <button id="full-btn" class="btn btn-mini"><i class="icon-fullscreen"></i></button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<script type="text/javascript" src="/javascripts/THREEx.FullScreen.js"></script>
+<script type="text/javascript" src="/javascripts/THREEx.screenshot.js"></script>
+<script type="text/javascript" src="/javascripts/OrbitControls.js"></script>
+
+<script src="/javascripts/loaders/ctm/lzma.js"></script>
+<script src="/javascripts/loaders/ctm/ctm.js"></script>
+<script src="/javascripts/loaders/ctm/CTMLoader.js"></script>
+
+<script src="/javascripts/loaders/BinaryLoader.js"></script>
+<script src="/javascripts/loaders/OBJLoader.js"></script>
+<script src="/javascripts/loaders/VTKLoader.js"></script>
+<script src="/javascripts/loaders/STLLoader.js"></script>
+<script src="/javascripts/loaders/ColladaLoader.js"></script>
+<script src="/javascripts/loaders/UTF8Loader.js"></script>
+<script src="/javascripts/loaders/MTLLoader.js"></script>
+
+<script src="/javascripts/underscore-min.js"></script>
+<script type="text/javascript" src="/javascripts/app/embeded.js"></script>
+</body>
+</html>

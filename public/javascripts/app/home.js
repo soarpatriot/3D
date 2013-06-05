@@ -5,23 +5,37 @@
  * Time: 下午8:35
  * To change this template use File | Settings | File Templates.
  */
+
+
+//mustn't be put in $ scope
 var container, stats;
-
 var camera, scene, renderer;
-
 var cube, plane;
-
 var targetRotation = 0;
 var targetRotationOnMouseDown = 0;
-
 var mouseX = 0;
 var mouseXOnMouseDown = 0;
-
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
+
+
 $(function(){
-    init();
-    animate();
+
+    _.templateSettings = {
+        interpolate : /\{\{(.+?)\}\}/g
+    };
+    var postId = $.trim($("#postId").val());
+    if(!_.isUndefined(postId) && !_.isNull(postId) && ""!==postId){
+
+        var iframeEmbededTmpl = _.template($("#iframe-embeded-tmpl").html())
+        $("#contents").html(iframeEmbededTmpl({id:postId}));
+
+    }else{
+        init();
+        animate();
+
+    }
+
 
     function init() {
 
@@ -154,7 +168,7 @@ $(function(){
 
     }
 
-    //
+
 
     function animate() {
 
@@ -166,10 +180,8 @@ $(function(){
     }
 
     function render() {
-
         plane.rotation.y = cube.rotation.y += ( targetRotation - cube.rotation.y ) * 0.05;
         renderer.render( scene, camera );
-
     }
 
 });

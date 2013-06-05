@@ -27,12 +27,17 @@
 .main-body {
   background-color: #e0e0e0;
 }
-.model {
+.embeded-container {
   height: 394px;
-  width: 701px;
   background-color: #282828;
-  border: 6px white solid;
   background-image: url("../images/grid.png");
+  border: 6px white solid;
+}
+.embeded-iframe {
+  border: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 /**utilies css for other**/
 .text-center {

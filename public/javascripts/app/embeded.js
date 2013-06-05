@@ -212,31 +212,7 @@ function callbackFinished( result ) {
 
     opts.callback = function(url) {
 
-        document.getElementById("picture").src = url;
-        document.getElementById("picture").hidden = false;
-        setTimeout("document.getElementById('picture').hidden=true",2000);
-        var id = $("#post-id").val();
-        var authenticity_token = $("input[name='authenticity_token']").val();
 
-        var params = {
-            authenticity_token:authenticity_token,
-            id:id,
-            url:url,
-            radius:theObject.geometry.boundingSphere.radius,
-            cameraX: camera.position.x,
-            cameraY: camera.position.y,
-            cameraZ: camera.position.z,
-            background: theBackground
-        };
-        $.ajax({
-            type: 'POST',
-            url: '/posts/snapshot',
-            data: params,
-            success: function(){
-                console.log("fdsafasfd");
-            },
-            dataType: 'json'
-        });
 
 
     }
@@ -309,11 +285,7 @@ function callbackFinished( result ) {
     if (background == "undefined") {
 //        background= "room";
     } else {
-        $("#"+background).attr('checked','checked');
-        theBackground = background;
-        mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
-        mesh.scale.x = -1;
-        scene.add( mesh );
+
     }
 
 

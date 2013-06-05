@@ -1,7 +1,7 @@
 load('application');
 
 before(loadPost,{
-    only: ['show', 'edit', 'update', 'destroy']
+    only: ['show','embeded', 'edit', 'update', 'destroy']
     });
 before(userLogined,{only:['new','create']});
 before(applicationLayout,{all:[]});
@@ -121,6 +121,20 @@ action(function show() {
     }
 });
 
+
+action(function embeded() {
+    this.title = 'Post show';
+    switch(params.format) {
+        case "json":
+            send({code: 200, data: this.post});
+            break;
+        default:
+            render('embeded',{
+                layout:"empty"
+            });
+    }
+});
+
 action(function edit() {
     this.title = 'Post edit';
     switch(params.format) {
@@ -191,11 +205,7 @@ action(function destroy() {
         });
     });
 });
-/*
-action(function upload(){
-    this.title = '上传';
-    render('_upload');
-})**/
+
 
 function loadPost() {
 

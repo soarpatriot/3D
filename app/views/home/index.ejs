@@ -2,9 +2,11 @@
 <html lang="en">
     <head>
         <title><%= title %></title>
-        <script type="text/javascript" src="/javascripts/three.js"></script>
-        <script type="text/javascript" src="/libs/stats.min.js"></script>
-        <script type="text/javascript" src="/javascripts/app/home.js"></script>
+
+         <script type="text/javascript" src="/javascripts/three.js"></script>
+         <script type="text/javascript" src="/libs/stats.min.js"></script>
+         <script type="text/javascript" src="/javascripts/app/home.js"></script>
+
     </head>
     <body>
 
@@ -13,20 +15,14 @@
                 <h2>发布你的3D模型</h2>
             </div>
         </div>
-
+        <input id="postId" type="hidden" value="<%= post._id %>">
         <div class="row-fluid">
-            <div class="span8">
-            <!--
-                <iframe frameborder="0" height="394" width="701" allowFullScreen webkitallowfullscreen="true" mozallowfullscreen="true" src="http://localhost:3000/posts/51a3626de4ed585a14000002"> </iframe>
-                <iframe frameborder="0" height="480" width="854" allowFullScreen webkitallowfullscreen="true" mozallowfullscreen="true" src="http://skfb.ly/k4j3hg2fa?autostart=0&transparent=0&autospin=0&controls=1&watermark=1"></iframe>-->
-                <div id='contents' class="model">
-
-
-                </div>
+            <div id='contents' class="span6 embeded-container">
             </div>
-            <div class="span4">
+            <div class="offset1 span4">
                 <ul class="introduce">
                     <li>
+
                         Create an account in 1 click
                     </li>
                     <li>
@@ -38,6 +34,11 @@
                 </ul>
             </div>
         </div>
+        <script type="text/template" id="iframe-embeded-tmpl">
+            <iframe class="embeded-iframe" frameborder="0" height="394" allowFullScreen webkitallowfullscreen="true" mozallowfullscreen="true"
+            src="http://localhost:3000/posts/embeded/{{ id }}">
+            </iframe>
+        </script>
 
     </body>
 </html>
