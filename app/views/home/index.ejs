@@ -15,7 +15,11 @@
                 <h2>发布你的3D模型</h2>
             </div>
         </div>
-        <input id="postId" type="hidden" value="<%= post._id %>">
+        <% if(post) {%>
+            <input id="postId" type="hidden" value="<%= post._id %>">
+        <% }else {%>
+            <input id="postId" type="hidden" value="">
+        <% }%>
         <div class="row-fluid">
             <div id='contents' class="span6 embeded-container">
             </div>

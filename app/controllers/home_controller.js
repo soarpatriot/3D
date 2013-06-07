@@ -10,7 +10,8 @@ action('index', function () {
             if(err){
                 console.log('load post for home page error');
             }else{
-                console.log('post url:'+post.url); //{post:post}
+
+                //console.log('post url:'+this.post.url); //{post:post}
                 render({post:post});
             }
         })
