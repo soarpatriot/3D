@@ -41,14 +41,17 @@
   margin: 0 auto;
 }
 /**login page cess**/
-.body-grey {
-  background: #e0e0e0;
+.login-body {
+  background: #FFE4B5;
 }
-.min-container {
-  min-height: 600px;
+.login-container {
+  width: 100%;
+  height: 100%;
 }
 .image-back {
-  background: #e0e0e0 repeat-x url("/images/laoluo.jpg");
+  /**repeat-x url("/images/laoluo.jpg");**/
+
+  background-color: #7B7B7B;
   width: 100%;
   height: 100%;
 }
