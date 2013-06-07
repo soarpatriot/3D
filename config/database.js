@@ -13,6 +13,9 @@ module.exports =
     }
   , "production":
     { "driver":   "mongoose"
-        , "url":      "mongodb://localhost:27017/wayne"
+        , "url":      "mongodb://vicent:22143521@ds029658.mongolab.com:29658/amazing3d"
     }
   };
+
+
+//mongolab  username: vicent pwd:kouren123   soarpatriot@gmail.com
