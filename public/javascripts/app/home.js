@@ -24,11 +24,21 @@ $(function(){
     _.templateSettings = {
         interpolate : /\{\{(.+?)\}\}/g
     };
+    var url = window.location.href;
+    var posi = url.indexOf('/');
+    var siteUrl = "";
+    
+    if(posi < 0){
+        siteUrl = url;
+    }else{
+        siteUrl = url.substr(0, posi);
+    }
+
     var postId = $.trim($("#postId").val());
     if(!_.isUndefined(postId) && !_.isNull(postId) && ""!==postId){
 
         var iframeEmbededTmpl = _.template($("#iframe-embeded-tmpl").html())
-        $("#contents").html(iframeEmbededTmpl({id:postId}));
+        $("#contents").html(iframeEmbededTmpl({siteUrl:siteUrl,id:postId}));
 
     }else{
         init();
