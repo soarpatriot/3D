@@ -1,7 +1,19 @@
 
 <section class="dialog-section">
         <div class="tip">
+                <% var flash = request.flash('info').pop(); if (flash) { %>
+                    <div class="alert alert-info">
+                        <a class="close" data-dismiss="alert">×</a>
+                        <%- flash %>
+                    </div>
+                <% } %>
 
+                <% flash = request.flash('error').pop(); if (flash) { %>
+                    <div class="alert alert-error">
+                        <a class="close" data-dismiss="alert">×</a>
+                        <%- flash %>
+                    </div>
+                <% }; %>
         </div>
         <div class="dialog">
             <% var form = formFor(user, {action: pathTo.login(), method: 'POST', id: "login-form", class: 'form-vertical form-inline'}) %>

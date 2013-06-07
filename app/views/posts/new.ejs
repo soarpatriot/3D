@@ -40,7 +40,7 @@
         <div class="container-fluid">
 
             <form id="fileupload" enctype="multipart/form-data" method="POST" action="/upload" mutiple>
-                <input name="authenticity_token">
+                <input name="authenticity_token" type="hidden">
                 <div class="row-fluid fileupload-buttonbar">
                        <div class="offset1 span6">
                            <span class="btn btn-success fileinput-button">
@@ -48,12 +48,7 @@
                                <span>添加文件...</span>
                                <input type="file" name="files" mutiple>
                            </span>
-
-
                        </div>
-
-
-
                 </div>
             </form>
 

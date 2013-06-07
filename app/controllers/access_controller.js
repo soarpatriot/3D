@@ -20,11 +20,15 @@ action(function login() {
     var user = req.body.User;
     User.findOne({'name': user.name,'password':user.password}, function(err, user){
 
-        if (err || !user) {
-            if (!err && !user && params.format === 'json') {
+        if (err) {
+            if (!err && params.format === 'json') {
                 return send({code: 404, error: 'Not found'});
             }
-            flash('info', 'login failure');
+            flash('info', 'Sorry,系统发生错误，请稍后在试。');
+            flash('user', user);
+            redirect(path_to.enter);
+        }else if(!user){
+            flash('info', '用户名或密码错误！');
             flash('user', user);
             redirect(path_to.enter);
         } else {

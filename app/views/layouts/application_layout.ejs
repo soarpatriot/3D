@@ -27,7 +27,7 @@
                                 <a href="/posts">发布</a>
                             </li>
                         </ul>
-                        <ul class="nav pull-right login-bar">
+                        <ul class="nav pull-right">
                             <% var user = request.session.user; if (user) { %>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle"  href="#" data-toggle="dropdown">
@@ -48,11 +48,10 @@
                                 </li>
                             <% }else{ %>
                                 <li >
-                                    <span class="height-auto">
-                                        <a href="/enter"> [登录] </a>&nbsp / &nbsp;<a href="/signup"> [注册] </a>
-                                    </span>
-
-
+                                        <a href="/enter"> [登录] </a>
+                                </li>
+                                <li >
+                                        <a href="/signup"> [注册] </a>
                                 </li>
                             <% }; %>
 
