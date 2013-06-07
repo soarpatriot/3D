@@ -20,7 +20,7 @@ module.exports = function (compound) {
     });
 
     app.configure(function(){
-        app.use(compound.assetsCompiler.init());
+        //app.use(compound.assetsCompiler.init());
         app.use(express.static(app.root + '/public', { maxAge: 86400000 }));
         app.set('jsDirectory', '/javascripts/');
         app.set('cssDirectory', '/stylesheets/');
