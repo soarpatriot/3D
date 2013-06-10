@@ -27,7 +27,7 @@ $(function(){
     var url = window.location.href;
     var posi = url.indexOf('/');
     var siteUrl = "";
-    
+
     if(posi < 0){
         siteUrl = url;
     }else{
