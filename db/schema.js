@@ -95,6 +95,7 @@ module.exports = function (mongoose, compound) {
         type:  'String',
         name: 'String',
         delete_type:'String',
+        snapshotUrl:'String',
         url: 'String',
         radius: 'Number',
         delete_url:'String',

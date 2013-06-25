@@ -175,9 +175,32 @@ function init() {
     };
     window.addEventListener( 'resize', onWindowResize, false );
 
+    var callbackProgress = function( progress, result ) {
 
+        console.log(progress );
 
+        console.log(result);
+        console.log(progress.loaded_models );
+        var bar = 250,
+            total = progress.total_models + progress.total_textures,
+            loaded = progress.loaded_models + progress.loaded_textures;
+
+        /**
+        if (total){
+            bar = Math.floor( bar * loaded / total );
+        }**/
+        //$("bar").style.width = bar + "px";
+        console.log(Math.floor( loaded / total ));
+        //count = 0;
+        //for ( var m in result.materials ) count++;
+        //handle_update( result, Math.floor( count/total ) );
+
+    }
+
+    console.log("postUrl: "+postUrl);
+    //loader.callbackProgress = callbackProgress;
     loader.parse(json1, callbackFinished, postUrl);
+    //loader.load("http://localhost:3000/upload/scene.js", callbackFinished);
 
 
 }
@@ -210,9 +233,9 @@ function callbackFinished( result ) {
 
     var opts = {};
 
-    opts.callback = function(url) {
+    opts.callback = function(snapshotUrl) {
 
-        document.getElementById("picture").src = url;
+        document.getElementById("picture").src = snapshotUrl;
         document.getElementById("picture").hidden = false;
         setTimeout("document.getElementById('picture').hidden=true",2000);
         var id = $("#post-id").val();
@@ -221,7 +244,7 @@ function callbackFinished( result ) {
         var params = {
             authenticity_token:authenticity_token,
             id:id,
-            url:url,
+            snapshotUrl:snapshotUrl,
             radius:theObject.geometry.boundingSphere.radius,
             cameraX: camera.position.x,
             cameraY: camera.position.y,

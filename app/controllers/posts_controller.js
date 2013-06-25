@@ -148,7 +148,7 @@ action(function edit() {
 
 action(function snapshot() {
 
-    Post.findOneAndUpdate({'_id': req.body.id}, { $set: {  thumbnail: req.body.url, radius: req.body.radius, cameraX : req.body.cameraX, cameraY : req.body.cameraY, cameraZ : req.body.cameraZ, background: req.body.background  }},  function(err, post){
+    Post.findOneAndUpdate({'_id': req.body.id}, { $set: {  thumbnail: req.body.snapshotUrl, radius: req.body.radius, cameraX : req.body.cameraX, cameraY : req.body.cameraY, cameraZ : req.body.cameraZ, background: req.body.background  }},  function(err, post){
         if (err || post) {
             return send({code: 404, error: 'Not found'});
         } else {
