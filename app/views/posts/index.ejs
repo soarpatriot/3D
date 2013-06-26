@@ -26,8 +26,9 @@
                     <tr>
                         <td><strong><%- link_to(post.name, pathTo.post(post)) %></strong></td>
                         <td>
-                            <img src="<%=post.snapshotUrl %>">
-
+                            <% if(post.snapshotUrl) { %>
+                                <img src="<%=post.snapshotUrl %>">
+                            <% } %>
                         </td>
                         <td>
                             <%- link_to('<i class="icon-edit"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-mini'}) %>

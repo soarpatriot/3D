@@ -62,17 +62,6 @@ module.exports = function (compound) {
         });
 
         app.use(express.bodyParser());
-
-        /**
-        app.use(express.bodyParser({
-            uploadDir: app.root + '/public/upload',
-            tempDir: app.root + '/public/temp',
-            tmpDir: app.root + '/public/temp',
-            keepExtensions:true,
-            limit:100000000,// 100M limit
-            defer:true//enable event
-        }));
-        **/
         app.use(express.cookieParser('secret'));
         app.use(express.session({secret: 'secret'}));
         app.use(express.methodOverride());

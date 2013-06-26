@@ -47,25 +47,7 @@ var iframeText = _.escape($("#iframe-template").html());
 var iframTemp = _.template(iframeText);
 $("#iframe-embed-div").html(iframTemp(Post));
 
-/**
-$("#simple-copy-btn").click(function(){
-    copyContent(document.all.simple-embed-div);
-});
-$("#iframe-copy-btn").click(function(){
-    copyContent(document.all.iframeEmbedDiv);
-});
-var copyContent = function(obj){
 
-    var rng = obj.createTextRange();
-    rng.moveToElementText(obj);
-    rng.scrollIntoView();
-    rng.select();
-    rng.execCommand("Copy");
-    rng.collapse(false);
-    alert("复制成功!");
-
-
-}**/
 //$(function(){
 init();
 
@@ -87,12 +69,9 @@ function init() {
     renderer = new THREE.WebGLRenderer( {
         antialias: true,
         preserveDrawingBuffer: true  // required to support .toDataURL()
-    } );
+    });
 
-
-//    renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setSize( widthNum,heightNum);
-    //renderer.domElement.style.position = "relative";
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
     renderer.physicallyBasedShading = true;
@@ -104,12 +83,12 @@ function init() {
     loader.addGeometryHandler( "ctm", THREE.CTMLoader );
     loader.addGeometryHandler( "vtk", THREE.VTKLoader );
     loader.addGeometryHandler( "stl", THREE.STLLoader );
-
     loader.addHierarchyHandler( "obj", THREE.OBJLoader );
     loader.addHierarchyHandler( "dae", THREE.ColladaLoader );
     loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );
 
-//    var geometry = Posts.findOne(Session.get("post"));
+
+
 
     var json1 = new Object();
     json1.urlBaseType = "relativeToHTML";
@@ -136,6 +115,8 @@ function init() {
         "color":16777215,
         "intensity":1
     };
+
+
     json1.objects["camera1"] = {
         "type":"PerspectiveCamera",
         "fov":70,
@@ -164,9 +145,7 @@ function init() {
         }
     };
 
-    json1.materials["flamingo1"] = {
-        "type": "MeshLambertMaterial",
-        "parameters": { color: 0xffffff, morphTargets: true, morphNormals: true, vertexColors: THREE.FaceColors, shading: THREE.FlatShading }};
+
 
     json1.defaults = {
         "bgcolor":[255, 255, 255],
