@@ -52,13 +52,11 @@ $("#iframe-embed-div").html(iframTemp(Post));
 init();
 
 function init() {
-
     //model URL
     var postUrl = $("#post-url").val();
     var filePathName = $("#post-name").val();
 
     container = document.getElementById("postShowContainer");
-    //alert(SCREEN_HEIGHT);
     var $modelContainer = $("#postShowContainer");
     var conWidth = $("#postShowContainer").css('width');
     var conHeight = $("#postShowContainer").css('height');
@@ -87,9 +85,20 @@ function init() {
     loader.addHierarchyHandler( "dae", THREE.ColladaLoader );
     loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );
 
+    window.addEventListener( 'resize', onWindowResize, false );
 
+    console.log("postUrl: "+postUrl);
+    loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished, postUrl);
+    //loader.load("http://localhost:3000/upload/scene.js", callbackFinished);
+}
 
-
+/**
+ * create object wrapper camral and light
+ * @param filePathName
+ * @param postUrl
+ * @returns {Object}
+ */
+function createWrapperJson(filePathName,postUrl){
     var json1 = new Object();
     json1.urlBaseType = "relativeToHTML";
     json1.objects = {};
@@ -152,37 +161,10 @@ function init() {
         "bgalpha":0.5,
         "camera":"camera1"
     };
-    window.addEventListener( 'resize', onWindowResize, false );
 
-    var callbackProgress = function( progress, result ) {
-
-        console.log(progress );
-
-        console.log(result);
-        console.log(progress.loaded_models );
-        var bar = 250,
-            total = progress.total_models + progress.total_textures,
-            loaded = progress.loaded_models + progress.loaded_textures;
-
-        /**
-        if (total){
-            bar = Math.floor( bar * loaded / total );
-        }**/
-        //$("bar").style.width = bar + "px";
-        console.log(Math.floor( loaded / total ));
-        //count = 0;
-        //for ( var m in result.materials ) count++;
-        //handle_update( result, Math.floor( count/total ) );
-
-    }
-
-    console.log("postUrl: "+postUrl);
-    //loader.callbackProgress = callbackProgress;
-    loader.parse(json1, callbackFinished, postUrl);
-    //loader.load("http://localhost:3000/upload/scene.js", callbackFinished);
-
-
+    return json1;
 }
+
 
 function callbackFinished( result ) {
     var cameraX = $("#cameraX").val();
