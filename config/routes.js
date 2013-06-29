@@ -2,11 +2,6 @@ exports.routes = function (map) {
 
     map.get('/', 'home#index',{as:"root"});
 
-
-    map.post('upload','upload#create');
-//    map.post('snapshot','posts#snapshot');
-    map.resources('upload');
-
     map.resources('posts');
     map.resource('posts', function (post) {
 

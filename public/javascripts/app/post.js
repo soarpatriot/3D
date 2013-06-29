@@ -65,34 +65,6 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
                     $("#file-url").val(result[0].url);
                     $("#file-delete_url").val(result[0].delete_url);
 
-
-                    /**
-                    var post1 = {
-                        name:result[0].name,
-                        originalName:result[0].originalName,
-                        size:result[0].size,
-                        delete_type:result[0].delete_type,
-                        url:result[0].url,
-                        delete_url:result[0].delete_url
-                    };
-                    var authenticity_token = $("input[name='authenticity_token']").val();
-                    var params = {
-                        authenticity_token:authenticity_token,
-                        Post:post1
-                    }
-                    **/
-//                    alert(authenticity_token);
-                    /**
-                    $.ajax({
-                        type: 'post',
-                        url: '/posts',
-                        data: params,
-                        success: function(){
-
-                        },
-                        dataType: 'json'
-                    });
-                    **/
                     $("#post-form").submit();
 
 
@@ -103,10 +75,6 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
                 .complete(function (result, textStatus, jqXHR) {
                     console.log("result complete: "+JSON.stringify(result));
                 });
-
-
-
-
             //data.submit();
         },
         change: function (e, data) {
@@ -125,45 +93,7 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
             var fileInfo;
             $.each(data.files, function (index, file) {
 
-
-
-                /**
-                "name": "flamingo (39).js",
-                    "originalName": "flamingo.js",
-                    "size": 79998,
-                    "type": "application/javascript",
-                    "delete_type": "DELETE",
-                    "url": "http://localhost:3000/upload/flamingo%20(39).js",
-                    "delete_url": "http://localhost:3000/upload/flamingo%20(39).js"**/
-
-                var fileInfo = {
-                    name: file.name,
-                    originalName:file.originalName,
-                    size:file.size,
-                    type:file.type,
-                    delete_type:file.delete_type,
-                    url:file.url,
-                    delete_url:file.delete_url
-                };
-
-
-                console.log("fileInfo: "+JSON.stringify(fileInfo));
-
-
-                /**
-                $.ajax({
-                    type: 'POST',
-                    url: '/post',
-                    data: fileInfo,
-                    success: success,
-                    dataType: dataType
-                });**/
             });
-
-
-
-
-
         },
 
         /**

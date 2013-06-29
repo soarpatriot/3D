@@ -61,11 +61,15 @@ module.exports = function (compound) {
             // }
         });
 
+
         app.use(express.bodyParser());
         app.use(express.cookieParser('secret'));
         app.use(express.session({secret: 'secret'}));
         app.use(express.methodOverride());
+
         app.use(app.router);
+
+
     });
 };
 
