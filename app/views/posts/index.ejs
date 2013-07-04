@@ -11,38 +11,51 @@
     </div>
 
     <div class="row">
-        <div class="span12">
-            <% if (posts.length > 0) { %>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>3D Model</th>
-                        <th>Thumbnail</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div class="span8">
+
+            <div id="masonry-container" class="js-masonry"
+                 data-masonry-options='{ "columnWidth": 50, "itemSelector": ".item" }'>
+                <% if (posts.length > 0) { %>
                     <% posts.forEach(function (post) { %>
-                    <tr>
-                        <td><strong><%- link_to(post.name, pathTo.post(post)) %></strong></td>
-                        <td>
-                            <% if(post.snapshotUrl) { %>
-                                <img src="<%=post.snapshotUrl %>">
-                            <% } %>
-                        </td>
-                        <td>
-                            <%- link_to('<i class="icon-edit"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-mini'}) %>
-                            <%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.post(post), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>
-                        </td>
-                    </tr>
-                    <% }); %>
-                </tbody>
-            </table>
+                        <% if(post.thumbnail) { %>
+
+                                <a href="/posts/<%=post.id %>"><img src="<%=post.thumbnail %>" class="item"></a>
+
+                        <% } %>
+                <% }); %>
+            </div>
+
+            <!--<table class="table table-striped">-->
+                <!--<thead>-->
+                    <!--<tr>-->
+                        <!--&lt;!&ndash;<th>3D Model</th>&ndash;&gt;-->
+                        <!--<th>Thumbnail</th>-->
+                        <!--&lt;!&ndash;<th>Actions</th>&ndash;&gt;-->
+                    <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                    <!--<% posts.forEach(function (post) { %>-->
+                    <!--<tr>-->
+                        <!--<td><strong><%- link_to(post.name, pathTo.post(post)) %></strong></td>-->
+                        <!--<td>-->
+                            <!--<% if(post.thumbnail) { %>-->
+                                <!--<img src="<%=post.thumbnail %>">-->
+                            <!--<% } %>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<%- link_to('<i class="icon-edit"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-mini'}) %>-->
+                            <!--<%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.post(post), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<% }); %>-->
+                <!--</tbody>-->
+            <!--</table>-->
             <% } else { %>
             <p class="alert alert-block alert-info">
                 <strong>No posts were found.</strong>
             </p>
             <% } %>
         </div>
+        <div class="span4"></div>
     </div>
 </div>

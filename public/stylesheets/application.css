@@ -169,3 +169,7 @@
   margin: 10px 0;
   display: block;
 }
+
+.item { width: 29%;
+    color: #000000;
+    border: 1px dashed #373553;}

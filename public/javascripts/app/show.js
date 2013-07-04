@@ -295,6 +295,12 @@ $(function(){
         controls = new THREE.OrbitControls( camera);
         controls.addEventListener( 'change', render );
         animate();
+        var thumbnail = $("#thumbnail").val();
+        if(thumbnail == "undefined") {
+            var target =document.getElementById("pictureTaking");
+            target.click();
+        }
+
     }
 
     function morphColorsToFaceColors( geometry ) {
