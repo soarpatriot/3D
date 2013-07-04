@@ -15,7 +15,7 @@
     <input type="hidden" id="post-name" name="post-name" value="<%= post.name %>">
     <input type="hidden" id="post-title" name="post-title" value="<%= post.title %>">
     <input type="hidden" id="post-content" name="post-content" value="<%= post.content %>">
-
+    <input type="hidden" id="thumbnail" name="thumbnail" value="<%= post.thumbnail %>">
     <input type="hidden" id="cameraX" name="cameraX" value="<%= post.cameraX %>">
     <input type="hidden" id="cameraY" name="cameraY" value="<%= post.cameraY %>">
     <input type="hidden" id="cameraZ" name="cameraZ" value="<%= post.cameraZ %>">
@@ -38,7 +38,7 @@
 
     <div style="position:absolute;left:200px;top:80px;">
         背景 :
-        <input type="radio" name="changeBackground" id="room" value="room" onclick="getRadio(event)"/>
+        <input type="radio" name="changeBackground" id="room" value="room" onclick="$.getRadio(event)"/>
         房间
         <input type="radio" name="changeBackground" id="lawn" value="lawn" onclick="getRadio(event)"/>
         草地
