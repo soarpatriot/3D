@@ -169,7 +169,20 @@
   margin: 10px 0;
   display: block;
 }
-
-.item { width: 29%;
-    color: #000000;
-    border: 1px dashed #373553;}
+.item {
+  width: 29%;
+  color: #000000;
+  border: 1px dashed #373553;
+}
+/**post pages**/
+#postShowContainer {
+  background: white;
+  background-image: url("../images/grid.png");
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
