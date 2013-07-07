@@ -3,6 +3,8 @@
 @nice-blue: #5B83AD;
 @light-blue: @nice-blue + #111;
 @grey:#E0E0E0;
+@grey-blue:#418ecf;
+@light-grey:#f5f5f5;
 
 @min-height:600px;
 @z-index:10000;
@@ -20,21 +22,45 @@
   font-size: @global-font-size;
 }
 .page-padding{
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 .main-content{
+
   margin-bottom: 50px;
   .page-padding;
   min-height:@min-height;
 }
 
 /**home page**/
+.nav-3d{
+  li{
+    border-left: 2px solid;
+  }
+  a{
+    line-height: 30px;
+    font-size: 15px;
+  }
+  .nav-user{
 
+    li{
+      border-left: 0px;
+      a{
+        font-size:14px;
+      }
+
+    }
+  }
+}
 .main-body{
+  /**  background-color: f5f5f5;**/
   background-color: @grey;
 }
-
+.display-container{
+  padding-top: 20px;
+  background-color: @grey-blue;
+  border-bottom: 2px solid silver;
+}
 .embeded-container{
   height: 394px;
   background-color: #282828;
@@ -48,7 +74,55 @@
   width: 100%;
 
 }
+.public-header{
+  text-align: center;
+  color:#ffffff;
+}
+.site-simple-intro{
 
+  .introduce-3d{
+
+    margin-top:50px;
+    font-size:16px;
+    li{
+      list-style: none;
+      padding-top: 30px;
+    }
+  }
+}
+.function-intro{
+
+  li{
+    height: 216px;
+    margin-top: 15px;
+    background-color:#F0F0F0;
+    text-align: center;
+    .image-div{
+      height: 92px;
+      overflow: hidden;
+    }
+    img{
+      background-color:#b2b2b2;
+    }
+
+    :hover .img-share{
+      width:105px;
+      height: 90px;
+      background-color:#59a04b;
+    }
+    :hover .img-html5{
+      width:105px;
+      height: 90px;
+      background-color:#e54b26;
+    }
+    :hover .img-upload{
+      width:105px;
+      height: 90px;
+      background-color:#0092be;
+    }
+  }
+
+}
 /**utilies css for other**/
 .text-center{
     text-align:center;

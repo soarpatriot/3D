@@ -19,11 +19,16 @@ require.config({
         "post":"app/post",
 
         //js framework
+        "jquery": "jquery-1.8.0.min",
         "underscore": "underscore-min",
         "backbone": "backbone-1.0.0.min",
 
         //three
-        "three": "three.js",
+        "three": "three.min.js",
+        "three-fullscreen":"THREEx.FullScreen",
+        "three-screnshot":"THREEx.screenshot",
+        //three laoders
+
 
 
         "jquery.ui.widget": "fileupload/vendor/jquery.ui.widget",

@@ -5,18 +5,38 @@
   font-size: 14px;
 }
 .page-padding {
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 .main-content {
   margin-bottom: 50px;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 40px;
   min-height: 600px;
 }
 /**home page**/
+.nav-3d li {
+  border-left: 2px solid;
+}
+.nav-3d a {
+  line-height: 30px;
+  font-size: 15px;
+}
+.nav-3d .nav-user li {
+  border-left: 0px;
+}
+.nav-3d .nav-user li a {
+  font-size: 14px;
+}
 .main-body {
+  /**  background-color: f5f5f5;**/
+
   background-color: #e0e0e0;
+}
+.display-container {
+  padding-top: 20px;
+  background-color: #418ecf;
+  border-bottom: 2px solid silver;
 }
 .embeded-container {
   height: 394px;
@@ -29,6 +49,46 @@
   overflow: hidden;
   height: 100%;
   width: 100%;
+}
+.public-header {
+  text-align: center;
+  color: #ffffff;
+}
+.site-simple-intro .introduce-3d {
+  margin-top: 50px;
+  font-size: 16px;
+}
+.site-simple-intro .introduce-3d li {
+  list-style: none;
+  padding-top: 30px;
+}
+.function-intro li {
+  height: 216px;
+  margin-top: 15px;
+  background-color: #F0F0F0;
+  text-align: center;
+}
+.function-intro li .image-div {
+  height: 92px;
+  overflow: hidden;
+}
+.function-intro li img {
+  background-color: #b2b2b2;
+}
+.function-intro li :hover .img-share {
+  width: 105px;
+  height: 90px;
+  background-color: #59a04b;
+}
+.function-intro li :hover .img-html5 {
+  width: 105px;
+  height: 90px;
+  background-color: #e54b26;
+}
+.function-intro li :hover .img-upload {
+  width: 105px;
+  height: 90px;
+  background-color: #0092be;
 }
 /**utilies css for other**/
 .text-center {
