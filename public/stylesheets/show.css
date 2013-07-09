@@ -10,3 +10,219 @@
     overflow: hidden;
 
 }
+
+html.home, body.home {
+    height: 100%;
+    overflow: hidden;
+}
+
+html.viewer, .viewer body {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hud-top {
+    font-family: 'Museo500','Trebuchet MS',sans-serif;
+    padding: 4px 10px;
+    position: absolute;
+    top: 44px;
+    transition: opacity 0.5s linear 0s;
+}
+
+.hud-edit-button {
+    background: none repeat scroll 0 0 #F2F2F2;
+    border: 1px solid #C6C0B6;
+    cursor: pointer;
+    font-size: 1.077em;
+    margin-right: 30px;
+    margin-top: 30px;
+    opacity: 0.6;
+    padding: 5.9px 10px;
+    position: absolute;
+    right: 0;
+    text-transform: uppercase;
+}
+
+.edit {
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8);
+    border-left: 10px solid rgba(0, 0, 0, 0.04);
+    height: 100%;
+    padding: 30px 30px 0;
+    pointer-events: auto;
+    right: 0px;
+    transition: right 0.4s ease 0s;
+    width: 350px;
+}
+
+.edit .close {
+    background: none repeat scroll 0 0 #F2F2F2;
+    border: 1px solid #C6C0B6;
+    cursor: pointer;
+    font-size: 1.077em;
+    margin-right: 30px;
+    padding: 6px 10px;
+    position: absolute;
+    right: 0;
+    text-transform: uppercase;
+}
+
+.edit-button-hide {
+    display: none;
+}
+
+.edit .close:hover, .hud-edit-button:hover {
+    background: none repeat scroll 0 0 #A2A2A2;
+}
+
+#edit-save {
+    border-top: 1px solid #C6C0B6;
+    overflow: hidden;
+    padding-top: 15px;
+}
+#edit-save div {
+    -moz-box-sizing: border-box;
+    border: 1px solid #C6C0B6;
+    cursor: pointer;
+    float: left;
+    padding: 15px;
+    text-align: center;
+}
+#cancel-meta {
+    font-size: 1.077em;
+    width: 40%;
+}
+#edit-save div#save-meta {
+    background-color: #1CAAD9;
+    border: 3px solid #1D9CC5;
+    color: #FFFFFF;
+    font-family: 'CodeBold';
+    font-size: 1.769em;
+    height: 48px;
+    letter-spacing: 2px;
+    line-height: 18px;
+    margin-left: 5%;
+    text-shadow: 0 1px 0 #1D9CC5;
+    text-transform: uppercase;
+    width: 55%;
+}
+#edit-save div#save-meta:hover {
+    background: none repeat scroll 0 0 #2FB8E5;
+}
+#edit-save div#save-meta.wait:hover {
+    background: none repeat scroll 0 0 #1CAAD9;
+    cursor: default;
+}
+#save-meta.wait span {
+    display: none;
+}
+#save-meta img {
+    display: none;
+    margin: -5px auto 0;
+}
+#save-meta.wait img {
+    display: block;
+}
+#cancel-meta:hover {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.1);
+}
+#edit-scroll {
+    height: 100%;
+    max-height: 480px;
+    overflow-y: visible;
+    overflow-x: hidden;
+}
+#edit-scroll:focus {
+    outline: 0 none;
+}
+
+.edit #model-meta {
+    margin-top: 15px;
+}
+
+.museo {
+    font-family: 'Museo500','Lucida Grande','Lucida Sans','Helvetica Neue',Helvetica,sans-serif;
+}
+
+.edit-environment input[name="activate-environment"] {
+    display: inline-block;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+.edit-option-category {
+    margin-top: 13px;
+}
+
+.form-box {
+    border: 1px solid #C5BFB5;
+    opacity: 1;
+    /*overflow: auto;*/
+    padding: 8px;
+    transition: height 0.4s ease-in-out 0s, opacity 0.37s ease-in-out 0.03s, padding 0.01s ease-in-out 0s, margin 0.01s ease-in-out 0s;
+    width: 262px;
+}
+
+.color-box div {
+    border-radius: 3px 3px 3px 3px;
+    display: inline-block;
+    height: 12px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+    width: 12px;
+}
+.color-box {
+    display: inline-block;
+    left: 155px;
+    position: absolute;
+    vertical-align: middle;
+}
+.color-box div:hover {
+    outline: 1px solid;
+}
+
+#viewport {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+#viewport iframe {
+    border: 0 none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#viewport {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+#view-frame {
+    height: 100%;
+    width: 100%;
+}
+
+#viewport iframe {
+    border: 0 none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}

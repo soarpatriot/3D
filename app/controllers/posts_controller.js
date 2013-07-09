@@ -161,6 +161,26 @@ action(function snapshot() {
     }.bind(this));
 });
 
+action(function save() {
+    //, background: req.body.background
+    console.log(req.body.id);
+    console.log(req.body.wireframe);
+    var result = false;
+    if(req.body.wireframe==="true")
+        result = true;
+    Post.findOneAndUpdate({'_id': req.body.id}, { $set: {  wireframe: result}},  function(err, post){
+        if (err || post) {
+            console.log(post);
+            return send({code: 404, error: 'Not found'});
+        } else {
+            console.log("success");
+            this.post = post;
+            next();
+
+        }
+    }.bind(this));
+});
+
 action(function update() {
 
     this.title = '编辑';
