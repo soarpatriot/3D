@@ -6,9 +6,15 @@
         <%- stylesheet_link_tag('show','jquery-toolbars','bootstrap-icons') %>
 
     </head>
-    <body>
-    <div id="postShowContainer">
-    </div>
+    <body scroll="no">
+    <!--<div id="viewport">-->
+        <!--<div id="view-frame">-->
+
+            <div id="postShowContainer">
+                <!--<canvas id="3DView" oncontextmenu="return false">-->
+            </div>
+        <!--</div>-->
+    <!--</div>-->
 <div class="container">
 
     <input type="hidden" id="post-url" name="post-url" value="<%= post.url %>">
@@ -20,8 +26,7 @@
     <input type="hidden" id="cameraY" name="cameraY" value="<%= post.cameraY %>">
     <input type="hidden" id="cameraZ" name="cameraZ" value="<%= post.cameraZ %>">
     <input type="hidden" id="background" name="background" value="<%= post.background %>">
-
-
+    <input type="hidden" id="wireframe" name="wireframe" value="<%= post.wireframe %>">
 
     <% var form = formFor(post, {action: pathTo.posts, method: 'POST', id: "post-form", class: 'form-horizontal'}) %>
     <%- form.begin() %>
@@ -38,7 +43,7 @@
 
     <div style="position:absolute;left:200px;top:80px;">
         背景 :
-        <input type="radio" name="changeBackground" id="room" value="room" onclick="$.getRadio(event)"/>
+        <input type="radio" name="changeBackground" id="room" value="room" onclick="getRadio(event)"/>
         房间
         <input type="radio" name="changeBackground" id="lawn" value="lawn" onclick="getRadio(event)"/>
         草地
@@ -49,7 +54,6 @@
         <input type="radio" name="changeBackground" id="town" value="town" onclick="getRadio(event)"/>
         小镇
         <input type="radio" name="changeBackground" id="mosque" value="mosque" onclick="getRadio(event)"/>
-
         清真寺
         <input type="button" onclick="getRotation(event)" />
 
@@ -75,6 +79,95 @@
 
 </div>
 -->
+<div class="hud-top hud-edit-button">
+    Edit
+    <span></span>
+</div>
+
+<div class="edit hud-top" hidden="true">
+    <div class="close">
+        Close
+    </div>
+    <h2>Edit model</h2>
+    <div id="edit-scroll">
+        <form class="edit-panel-form" action="" method="" accept-charset="utf-8">
+            <fieldset id="model-meta">
+                <input name="model-id" type="text" value="<%= post.title %>" class="museo" id="model-urlid"/>
+                <label for="model-name">Model name</label>
+                <input name="model-name" type="text" maxlength="48" value="<%= post.name %>" class="museo" id="model-name"/>
+                <label for="model-tags">Tags <span>(separated by spaces)</span></label>
+                <input name="model-tags" type="text" maxlength="128" value="" class="museo" id="model-tags"/>
+                <label for="model-desc">Model description <span>(html supported)</span></label>
+                <textarea placeholder="Enter a short description" maxlength="256" value="<%= post.content %>" class="museo" id="model-desc" name="model-desc"></textarea>
+            </fieldset>
+
+            <fieldset class="js-edit-environment edit-environment edit-option-category">
+                <div class="js-bind-edit-environment">
+                    <div class="js-triangle-arrow triangle-arrow right"></div>
+                    <input type="checkbox" name="activate-environment" />
+                    <legend>Environment</legend>
+                    <a alt="watch how to configure it" class="js-help" href="http://blog.sketchfab.com/post/47822357146/hdr-environments-new-backgrounds" target="_blank">help</a>
+                </div>
+
+                <div class="form-box">
+                    <div>
+                        <select class="js-edit-environment-list" type="checkbox" name="activate-environment">
+                        </select>
+                        <fieldset class='environment-background'>
+                            <input type="checkbox"/>
+                            <label>show bg</label>
+                        </fieldset>
+
+                        <fieldset id="environment-exposure">
+                            <label>Exposure</label>
+                            <div class="noUiSlider js-environment-slider-exposure"></div>
+                        </fieldset>
+                        <fieldset id="environment-light">
+                            <label>Light intensity</label>
+                            <div class="noUiSlider js-environment-slider-light"></div>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset id="rendering" class="edit-option-category">
+                <legend>Rendering options</legend>
+                <div class="form-box">
+                    <div>
+                        <label>
+                            <input type="radio" id="check_shadeless" name="shading" value="no-shading" />
+                            Shadeless
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input type="radio" id="check_fileshading" name="shading" value="default-shading" />
+                            Original
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input type="checkbox" id="check_wireframe" name="enableWireframe" value="<%= post.wireframe %>"/>
+                            Wireframe
+                        </label>
+                        <div class="color-box">
+                            <div data-color="#EEEEEE"></div>
+                            <div data-color="#888888"></div>
+                            <div data-color="#000000"></div>
+                            <div data-color="#1CAAD9"></div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div id="edit-save">
+        <div id="cancel-meta" class="js-cancel-meta">cancel</div>
+        <div id="save-meta"><span>Save</span></div>
+    </div>
+</div>
 
 
 <div class="modal fade" id="share-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
