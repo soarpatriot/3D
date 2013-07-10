@@ -25,7 +25,7 @@ $(function(){
     var morphAnimatedObjects = [];
 
     var clock = new THREE.Clock();
-    var theObject, theBackground;
+    var theObject, theBackground, mesh;
 
     //embed model by other web site
     var title = $("#post-title").val();
@@ -51,6 +51,49 @@ $(function(){
 
     init();
     function init() {
+        $(".hud-edit-button").click(function() {
+                $(".edit").show();
+                $(".hud-edit-button").hide();
+            }
+
+        )
+
+        $(".close").click(function() {
+                $(".edit").hide();
+                $(".hud-edit-button").show();
+            }
+
+        )
+
+        $("#check_wireframe").change(function() {
+
+            if(document.getElementById("check_wireframe").checked) {
+                theObject.material.wireframe = true;
+            } else {
+                theObject.material.wireframe = false;
+            }
+        });
+
+        $("#save-meta").click(function() {
+            alert("save");
+            var id = $("#post-id").val();
+            var authenticity_token = $("input[name='authenticity_token']").val();
+
+            var params = {
+                authenticity_token: authenticity_token,
+                id: id,
+                wireframe: document.getElementById("check_wireframe").checked
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/posts/save',
+                data: params,
+                success: function(){
+                    console.log("fdsafasfd");
+                },
+                dataType: 'json'
+            });
+        });
         //model URL
         var postUrl = $("#post-url").val();
         var filePathName = $("#post-name").val();
@@ -148,7 +191,8 @@ $(function(){
                 morphTargets: true,
                 morphNormals: true,
                 vertexColors: THREE.FaceColors,
-                shading: THREE.SmoothShading
+                shading: THREE.SmoothShading,
+                wireframe: false
             }
         };
 
@@ -165,6 +209,13 @@ $(function(){
 
 
     function callbackFinished( result ) {
+
+//        var resultwireframe = false;
+//        alert($("#wireframe").value);
+//        if($("#wireframe").value ==="true")
+//            resultwireframe = true;
+//        $("#check_wireframe").attr("checked",resultwireframe);
+
         var cameraX = $("#cameraX").val();
         var cameraY = $("#cameraY").val();
         var cameraZ = $("#cameraZ").val();
@@ -187,6 +238,7 @@ $(function(){
         var opts = {};
 
         opts.callback = function(snapshotUrl) {
+//            theObject.material.shininess=theObject.material.shininess+50;
 
             document.getElementById("picture").src = snapshotUrl;
             document.getElementById("picture").hidden = false;
@@ -294,7 +346,14 @@ $(function(){
 
         controls = new THREE.OrbitControls( camera);
         controls.addEventListener( 'change', render );
+
+        var radius = theObject.geometry.boundingSphere.radius;
+        theObject.scale.x = 60/radius;
+        theObject.scale.y = 60/radius;
+        theObject.scale.z = 60/radius;
+        theObject.material.wireframe = document.getElementById("check_wireframe").checked;
         animate();
+
         var thumbnail = $("#thumbnail").val();
         if(thumbnail == "undefined") {
             var target =document.getElementById("pictureTaking");
@@ -375,6 +434,12 @@ $(function(){
     }
 
 
+
+    function enableW(event) {
+        var result = event.target;
+        alert(result);
+    }
+
     function getRadio(event) {
         theBackground = event.target.value;
         if(scene!==null && mesh !== null) {
@@ -394,6 +459,8 @@ $(function(){
             +" target "+camera.target);
 
     }
+
+
 
 
     /**

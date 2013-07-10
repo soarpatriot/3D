@@ -89,6 +89,7 @@ module.exports = function (mongoose, compound) {
         , content    : String
         , published : { type: Boolean, default: false }
         , publishDate: { type: Date, default: Date.now },
+        wireframe:  { type: Boolean, default: false},
 
         size: {type: Number},
         path:'String',
