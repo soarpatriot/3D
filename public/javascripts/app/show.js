@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-//$(function(){
+$(function(){
 
     var fov = 70;
 
@@ -51,6 +51,19 @@
 
     init();
     function init() {
+        $(".hud-edit-button").click(function() {
+                $(".edit").show();
+                $(".hud-edit-button").hide();
+            }
+
+        )
+
+        $(".close").click(function() {
+                $(".edit").hide();
+                $(".hud-edit-button").show();
+            }
+
+        )
 
         $("#check_wireframe").change(function() {
 
@@ -225,7 +238,7 @@
         var opts = {};
 
         opts.callback = function(snapshotUrl) {
-            theObject.material.shininess=theObject.material.shininess+50;
+//            theObject.material.shininess=theObject.material.shininess+50;
 
             document.getElementById("picture").src = snapshotUrl;
             document.getElementById("picture").hidden = false;
@@ -502,4 +515,4 @@
         return result;
 
     }
-//});
+});
