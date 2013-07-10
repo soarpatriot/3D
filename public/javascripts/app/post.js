@@ -7,7 +7,7 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],funct
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url:'/upload'
+        url:'http://106.186.22.114:8080/upload'
     });
     $('#fileupload').fileupload('option', {
 

@@ -3,50 +3,32 @@
     <head>
         <meta http-equiv="Access-Control-Allow-Origin" content="*">
         <title><%= title %></title>
-        <%- stylesheet_link_tag('bootstrap','bootstrap-responsive','font-awesome','application','jquery.fileupload-ui') %>
+        <%- stylesheet_link_tag('bootstrap','bootstrap-responsive','font-awesome.min','font-awesome-ie7.min','jquery.fileupload-ui','application') %>
         <%- javascript_include_tag('jquery-1.8.0.min', 'bootstrap', 'rails', 'application','three.min','underscore-min',
             'noty/jquery.noty', 'noty/layouts/top','noty/layouts/topCenter','noty/themes/default', 'masonry.pkgd.min',
             'app/tip'
         )
         %>
         <%- csrf_meta_tag() %>
-        <style type="text/css">
-                /* Customize the navbar links to be fill the entire space of the .navbar */
-            .navbar .navbar-inner {
-                padding: 30;
-            }
-            .navbar .nav {
-                margin: 30;
-                display: table;
-            }
-            .navbar .nav li {
-                display: table-cell;
-            }
-            .navbar .nav li a {
-                font-weight: bold;
-                border-left: 1px solid rgba(255,255,255,.75);
-                border-right: 1px solid rgba(0,0,0,.1);
-            }
 
-        </style>
 
     </head>
     <body class="main-body">
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top nav-3d">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="/"><i class="icon-cloud"></i>3D</a>
+                    <a class="brand" href="/"><i class="icon-cloud"></i>&nbsp;3D</a>
                     <div class="nav-collapse.collapse">
                         <ul class="nav">
                             <li class="active">
-                                <a href="/posts"><i class="icon-th"></i>浏览</a>
+                                <a href="/posts"><i class="icon-th"></i><strong>&nbsp;浏览</strong></a>
                             </li>
                             <li>
-                                <a href="/posts"><i class="icon-cloud-upload"></i>上传</a>
+                                <a href="/posts"><i class="icon-cloud-upload"></i><strong>&nbsp;上传</strong></a>
                             </li>
                         </ul>
-                        <ul class="nav pull-right">
+                        <ul class="nav pull-right nav-user">
                             <% var user = request.session.user; if (user) { %>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle"  href="#" data-toggle="dropdown">
@@ -66,11 +48,18 @@
                                     </a>
                                 </li>
                             <% }else{ %>
-                                <li >
-                                        <a href="/enter"><i class="icon-signin"></i> [登录] </a>
+                                <li>
+
+                                    <a href="/enter">
+                                        <i class="icon-signin"></i>
+                                        登录
+                                    </a>
+
+
+
                                 </li>
                                 <li >
-                                        <a href="/signup"><i class="icon-signout"></i> [注册] </a>
+                                     <a href="/signup">注册</a>
                                 </li>
                             <% }; %>
 
@@ -100,7 +89,7 @@
                 </script>
             <% }; %>
         </div>
-        <div class="container main-content">
+        <div class="main-content">
             <%- body %>
         </div>
         <hr/>
