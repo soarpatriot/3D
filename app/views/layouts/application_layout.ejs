@@ -4,7 +4,7 @@
         <meta http-equiv="Access-Control-Allow-Origin" content="*">
         <title><%= title %></title>
         <%- stylesheet_link_tag('bootstrap','bootstrap-responsive','font-awesome.min','font-awesome-ie7.min','jquery.fileupload-ui','application') %>
-        <%- javascript_include_tag('jquery-1.8.0.min', 'bootstrap', 'rails', 'application','three.min','underscore-min',
+        <%- javascript_include_tag('jquery-1.8.0.min', 'bootstrap', 'rails', 'application','three','underscore-min',
             'noty/jquery.noty', 'noty/layouts/top','noty/layouts/topCenter','noty/themes/default', 'masonry.pkgd.min',
             'app/tip'
         )
@@ -25,7 +25,7 @@
                                 <a href="/posts"><i class="icon-th"></i><strong>&nbsp;浏览</strong></a>
                             </li>
                             <li>
-                                <a href="/posts"><i class="icon-cloud-upload"></i><strong>&nbsp;上传</strong></a>
+                                <a href="/posts/new"><i class="icon-cloud-upload"></i><strong>&nbsp;上传</strong></a>
                             </li>
                         </ul>
                         <ul class="nav pull-right nav-user">
@@ -54,12 +54,12 @@
                                         <i class="icon-signin"></i>
                                         登录
                                     </a>
-
-
-
-                                </li>
+                               </li>
                                 <li >
-                                     <a href="/signup">注册</a>
+                                     <a href="/signup">
+                                         <i class=" icon-user-md"></i>
+                                        注册
+                                     </a>
                                 </li>
                             <% }; %>
 
