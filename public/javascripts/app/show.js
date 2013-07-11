@@ -127,9 +127,14 @@ $(function(){
         loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );
 
         window.addEventListener( 'resize', onWindowResize, false );
+        loader.callbackProgress = function(data){
+            console.log("data:"+JSON.stringify(data));
+        };
 
+        //console.log("laded:"+event.loaded+"  taoal:"+event.total);
         console.log("postUrl: "+postUrl);
         loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
+
         //loader.load(postUrl, callbackFinished);
     }
 

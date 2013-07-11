@@ -27,6 +27,7 @@ THREE.SceneLoader2.prototype = {
 
 		request.addEventListener( 'progress', function ( event ) {
 
+
 			scope.dispatchEvent( { type: 'progress', loaded: event.loaded, total: event.total } );
 
 		}, false );
