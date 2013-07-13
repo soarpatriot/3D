@@ -228,3 +228,160 @@ html.viewer, .viewer body {
     padding: 0;
     width: 100%;
 }
+
+ul.thumbnails li {
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+    float: left;
+    margin-left: 3%;
+    margin-top: 30px;
+    overflow: hidden;
+    position: relative;
+    width: 30%;
+}
+
+.thumbnails {
+    margin-left: 0px;
+}
+
+.thumbnails li:not(.placeholder) div {
+    margin: 2%;
+}
+
+.thumbnails li img, #popularlist li img {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+/*ul.thumbnails li {*/
+    /*margin-left: 3%;*/
+    /*width: 30.3333%;*/
+/*}*/
+
+.athumbnail {
+    height: 100%;
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+
+}
+
+.model-thumbnail {
+    color: #4A4A4A;
+    position: relative;
+}
+
+li a.model-link {
+    background: none repeat scroll 0 0 #EEEEEE;
+    color: #4A4A4A;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    transition: all 0.15s linear 0s;
+}
+
+li:hover a.model-link {
+    transition: all 0.15s linear 0s;
+}
+
+#article_content {
+    overflow: auto;
+    padding-bottom: 30px;
+}
+
+.left-column {
+    float: left;
+    max-width: 70%;
+    width: 100%;
+}
+
+.wrapper {
+
+    background: repeat-y scroll right center / 28% auto white;
+    color: white;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+    margin: 0 0px;
+    overflow: auto;
+    padding: 0 0 0px;
+    z-index: -99;
+}
+
+.model-meta {
+    height: 20px;
+    position: relative;
+}
+
+.model-meta .model-author, .model-meta .model-name {
+    display: inline-block;
+    float: left;
+    line-height: 20px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: left;
+    text-overflow: ellipsis;
+    transition: opacity 0.2s ease-in-out 0s;
+    white-space: nowrap;
+    width: 50%;
+    z-index: 1;
+}
+
+.model-stats .eye {
+    background: url("/img/spritesheet.png") repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    margin-left: 3px;
+    margin-top: 1px;
+    opacity: 0.8;
+    padding: 0;
+    vertical-align: middle;
+    width: 17px;
+}
+
+.model-stats span[class$="icon"] {
+    margin-left: 3px;
+}
+p.model-stats {
+    display: inline-block;
+    float: right;
+    line-height: 21px;
+    min-width: 140px;
+    padding: 0;
+    text-align: right;
+}
+
+.heart-icon {
+    background: url("/img/icon-heart.png") repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 15px;
+    margin-bottom: 2px;
+    vertical-align: middle;
+    width: 15px;
+}
+
+.comment-icon {
+    background: url("/img/icon-comment.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 15px;
+    vertical-align: middle;
+    width: 15px;
+}
+.comment-icon:hover {
+    background: url("/img/icon-comment-active.png") no-repeat scroll 0 0 transparent;
+}
+
+.model-thumbnail .comments-total a {
+    color: #4A4A4A;
+}
+
+.model-meta .model-name-active {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out 0s;
+    z-index: 10;
+}

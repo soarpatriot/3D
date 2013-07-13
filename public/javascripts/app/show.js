@@ -270,8 +270,8 @@ $(function(){
         }
 
         //full screen f code
-        opts.width = 320;
-        opts.height = 180;
+        opts.width = 160;
+        opts.height = 90;
         THREEx.Screenshot.bindKey(renderer, opts);
         var opts1 = {};
         opts1.element = document.getElementById("postShowContainer");

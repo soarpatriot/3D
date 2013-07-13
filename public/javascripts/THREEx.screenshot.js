@@ -89,8 +89,8 @@ var THREEx	= THREEx 		|| {};
 		// handle parameters
 		opts		= opts		|| {};
 		var charCode	= opts.charCode	|| 'p'.charCodeAt(0);
-		var width	= opts.width || 640;
-		var height	= opts.height || 480;
+		var width	= opts.width || 400;
+		var height	= opts.height || 300;
 		var callback	= opts.callback	|| function(url){
 			window.open(url, "name-"+Math.random());
 		};
