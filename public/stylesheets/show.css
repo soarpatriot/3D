@@ -30,7 +30,6 @@ html.viewer, .viewer body {
     padding: 4px 10px;
     position: absolute;
     top: 44px;
-
     transition: opacity 0.5s linear 0s;
 }
 
@@ -45,6 +44,20 @@ html.viewer, .viewer body {
     padding: 5.9px 10px;
     position: absolute;
     right: 0;
+    text-transform: uppercase;
+}
+
+.hud-pic-button {
+    background: none repeat scroll 0 0 #F2F2F2;
+    border: 1px solid #C6C0B6;
+    cursor: pointer;
+    font-size: 1.077em;
+    margin-left: 30px;
+    margin-top: 30px;
+    opacity: 0.6;
+    padding: 5.9px 10px;
+    position: absolute;
+    left: 0;
     text-transform: uppercase;
 }
 
@@ -227,4 +240,225 @@ html.viewer, .viewer body {
     margin: 0;
     padding: 0;
     width: 100%;
+}
+
+ul.thumbnails li {
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+    float: left;
+    margin-left: 3%;
+    margin-top: 30px;
+    overflow: hidden;
+    position: relative;
+    width: 30%;
+}
+
+.thumbnails {
+    margin-left: 0px;
+}
+
+.thumbnails li:not(.placeholder) div {
+    margin: 2%;
+}
+
+.thumbnails li img, #popularlist li img {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+/*ul.thumbnails li {*/
+    /*margin-left: 3%;*/
+    /*width: 30.3333%;*/
+/*}*/
+
+.athumbnail {
+    height: 100%;
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+
+}
+
+.model-thumbnail {
+    color: #4A4A4A;
+    position: relative;
+}
+
+li a.model-link {
+    background: none repeat scroll 0 0 #EEEEEE;
+    color: #4A4A4A;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    transition: all 0.15s linear 0s;
+}
+
+li:hover a.model-link {
+    transition: all 0.15s linear 0s;
+}
+
+#article_content {
+    overflow: auto;
+    padding-bottom: 30px;
+}
+
+.left-column {
+    float: left;
+    max-width: 68%;
+    width: 100%;
+    padding: 30px 2% 0;
+}
+
+.wrapper {
+    background: repeat-y scroll right center / 28% auto white;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+    margin: 0 0px;
+    overflow: auto;
+    padding: 0 0 0px;
+    z-index: -99;
+}
+
+.model-meta {
+    height: 20px;
+    position: relative;
+}
+
+.model-meta .model-author, .model-meta .model-name {
+    display: inline-block;
+    float: left;
+    line-height: 20px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: left;
+    text-overflow: ellipsis;
+    transition: opacity 0.2s ease-in-out 0s;
+    white-space: nowrap;
+    width: 50%;
+    z-index: 1;
+}
+
+.model-stats .eye {
+    background: url("/img/spritesheet.png") repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    margin-left: 3px;
+    margin-top: 1px;
+    opacity: 0.8;
+    padding: 0;
+    vertical-align: middle;
+    width: 17px;
+}
+
+.model-stats span[class$="icon"] {
+    margin-left: 3px;
+}
+p.model-stats {
+    display: inline-block;
+    float: right;
+    line-height: 21px;
+    min-width: 140px;
+    padding: 0;
+    text-align: right;
+}
+
+.heart-icon {
+    background: url("/img/icon-heart.png") repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 15px;
+    margin-bottom: 2px;
+    vertical-align: middle;
+    width: 15px;
+}
+
+.comment-icon {
+    background: url("/img/icon-comment.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 15px;
+    vertical-align: middle;
+    width: 15px;
+}
+.comment-icon:hover {
+    background: url("/img/icon-comment-active.png") no-repeat scroll 0 0 transparent;
+}
+
+.model-thumbnail .comments-total a {
+    color: #4A4A4A;
+}
+
+.model-meta .model-name-active {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out 0s;
+    z-index: 10;
+}
+
+.menu {
+    overflow: hidden;
+    list-style-type: none;
+    margin: 0 0 0px 0px;
+    padding: 0;
+
+}
+.menu li, .menu li a {
+    color: #BBBBBB;
+    cursor: pointer;
+    float: left;
+    height: 1.2em;
+    margin-right: 10px;
+}
+.menu li:hover, .menu li a:hover {
+    color: #888888;
+}
+.menu li.current, .menu li.current a {
+    color: #222222;
+    cursor: default;
+}
+.menu li.current:hover, .menu li.current a:hover {
+    color: inherit;
+}
+.menu .dotme {
+    float: right;
+    margin-right: 0;
+}
+.menu .dotme a {
+    margin-right: 0;
+}
+
+.left-column nav {
+    border-bottom: 3px solid #1CAAD9;
+    font-size: 1.2em;
+    margin-left: 3%;
+    padding-bottom: 10px;
+    padding-top: 30px;
+    text-transform: uppercase;
+}
+
+aside {
+    float: right;
+    min-height: 500px;
+    overflow: auto;
+    padding: 30px 2% 0;
+    width: 24%;
+    overflow: hidden;
+}
+
+aside h2 {
+    border-bottom: 3px solid #80AB00;
+    font-size: 1.2em;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+ul#taglist {
+    color: #666666;
+    max-width: none;
+    width: 100%;
+    list-style-type: none;
+    margin: 0 0 20px 0px;
 }
