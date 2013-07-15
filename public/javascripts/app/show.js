@@ -352,6 +352,8 @@ $(function(){
         theObject.scale.y = 60/radius;
         theObject.scale.z = 60/radius;
         theObject.material.wireframe = document.getElementById("check_wireframe").checked;
+        theObject.geometry.computeBoundingSphere();
+        alert(theObject.geometry.boundingSphere.center.x+" "+theObject.geometry.boundingSphere.center.y+" "+theObject.geometry.boundingSphere.center.z);
         animate();
 
         var thumbnail = $("#thumbnail").val();
