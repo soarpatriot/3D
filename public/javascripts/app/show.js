@@ -275,8 +275,8 @@ $(function(){
         }
 
         //full screen f code
-        opts.width = 320;
-        opts.height = 180;
+        opts.width = 160;
+        opts.height = 90;
         THREEx.Screenshot.bindKey(renderer, opts);
         var opts1 = {};
         opts1.element = document.getElementById("postShowContainer");
@@ -357,6 +357,8 @@ $(function(){
         theObject.scale.y = 60/radius;
         theObject.scale.z = 60/radius;
         theObject.material.wireframe = document.getElementById("check_wireframe").checked;
+        theObject.geometry.computeBoundingSphere();
+        alert(theObject.geometry.boundingSphere.center.x+" "+theObject.geometry.boundingSphere.center.y+" "+theObject.geometry.boundingSphere.center.z);
         animate();
 
         var thumbnail = $("#thumbnail").val();
