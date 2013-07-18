@@ -4,11 +4,6 @@
         <meta http-equiv="Access-Control-Allow-Origin" content="*">
         <title><%= title %></title>
         <%- stylesheet_link_tag('bootstrap','bootstrap-responsive','font-awesome.min','font-awesome-ie7.min','jquery.fileupload-ui','application') %>
-        <%- javascript_include_tag('jquery-1.8.0.min', 'bootstrap', 'rails', 'application','three','underscore-min',
-            'noty/jquery.noty', 'noty/layouts/top','noty/layouts/topCenter','noty/themes/default', 'masonry.pkgd.min',
-            'app/tip'
-        )
-        %>
         <%- csrf_meta_tag() %>
 
 
@@ -70,26 +65,24 @@
             </div>
         </div>
 
-        <div class="container">
-            <% var flash = request.flash('info').pop(); if (flash) { %>
-                <script type="text/javascript">
-                    $(function(){
-                           var message = "<%- flash %>";
-                           success(message);
-                    })
-                </script>
-            <% } %>
 
-            <% flash = request.flash('error').pop(); if (flash) { %>
-                <script type="text/javascript">
-                    $(function(){
-                           var message = "<%- flash %>";
-                           error(message);
-                    })
-                </script>
-            <% }; %>
-        </div>
         <div class="main-content">
+            <div class="container">
+                <% var flash = request.flash('info').pop(); if (flash) { %>
+                    <input id='tip-info' type='hidden' value='<%- flash %>'>
+                    <input id='tip-info-type' type='hidden' value='SUCCESS'>
+                    <script data-main="/javascripts/app/tip-info" src="/javascripts/require.js"></script>
+
+
+                <% } %>
+
+                <% flash = request.flash('error').pop(); if (flash) { %>
+                    <input id='tip-info' type='hidden' value='<%= flash %>'>
+                    <input id='tip-info-type' type='hidden' value='ERROR'>
+                    <script data-main="/javascripts/app/tip-info" src="/javascripts/require.js"></script>
+
+                <% }; %>
+            </div>
             <%- body %>
         </div>
         <hr/>

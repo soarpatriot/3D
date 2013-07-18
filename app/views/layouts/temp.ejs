@@ -11,3 +11,21 @@
         <noscript><link rel="stylesheet" href="/javascripts/fileupload/css/jquery.fileupload-ui-noscript.css"></noscript>
         <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+
+        <script type="text/javascript">
+                            $(function(){
+                                   var message = "<%- flash %>";
+                                   success(message);
+                            })
+                        </script>
+
+
+
+                        <script type="text/javascript">
+                                            $(function(){
+                                                   var message = "<%- flash %>";
+                                                   error(message);
+                                            })
+                                        </script>
