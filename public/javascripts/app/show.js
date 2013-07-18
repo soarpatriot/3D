@@ -25,7 +25,7 @@ $(function(){
     var morphAnimatedObjects = [];
 
     var clock = new THREE.Clock();
-    var theObject, theBackground, mesh;
+    var theObject, theBackground="no", mesh;
 
     //embed model by other web site
     var title = $("#post-title").val();
@@ -74,6 +74,26 @@ $(function(){
             }
         });
 
+
+
+        $(".js-edit-environment-list").change(function(event) {
+
+            theBackground = event.target.value;
+
+            if(scene!==null && mesh !== null) {
+                scene.remove( mesh );
+                if(theBackground != "no") {
+                    mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ theBackground +'.jpg' ) } ) );
+                    mesh.scale.x = -1;
+                    scene.add( mesh );
+                } else {
+
+                }
+            }
+
+
+        });
+
         $("#save-meta").click(function() {
             alert("save");
             var id = $("#post-id").val();
@@ -82,7 +102,8 @@ $(function(){
             var params = {
                 authenticity_token: authenticity_token,
                 id: id,
-                wireframe: document.getElementById("check_wireframe").checked
+                wireframe: document.getElementById("check_wireframe").checked,
+                background:  $(".js-edit-environment-list")[0].value
             };
             $.ajax({
                 type: 'POST',
@@ -219,6 +240,9 @@ $(function(){
         var cameraX = $("#cameraX").val();
         var cameraY = $("#cameraY").val();
         var cameraZ = $("#cameraZ").val();
+        var controlsX = $("#controlsX").val();
+        var controlsY = $("#controlsY").val();
+        var controlsZ = $("#controlsZ").val();
         var background = $("#background").val();
         camera = result.currentCamera;
     //    camera.aspect = container.clientWidth/container.clientHeight;
@@ -230,6 +254,8 @@ $(function(){
             camera.position.y = cameraY;
             camera.position.z = cameraZ;
         }
+
+
 
         camera.updateProjectionMatrix();
 
@@ -254,6 +280,9 @@ $(function(){
                 cameraX: camera.position.x,
                 cameraY: camera.position.y,
                 cameraZ: camera.position.z,
+                controlsX: controls.center.x,
+                controlsY: controls.center.y,
+                controlsZ: controls.center.z,
                 background: theBackground
             };
             $.ajax({
@@ -334,26 +363,35 @@ $(function(){
             }
 
         } );
-        if (background == "undefined") {
+        if (background == "undefined" || background == "no") {
     //        background= "room";
         } else {
-            $("#"+background).attr('checked','checked');
+            $(".js-edit-environment-list")[0].value = background;
             theBackground = background;
             mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
             mesh.scale.x = -1;
             scene.add( mesh );
         }
 
-        controls = new THREE.OrbitControls( camera);
-        controls.addEventListener( 'change', render );
-
+        controls = new THREE.OrbitControls( camera, renderer.domElement);
+//        controls.addEventListener( 'change', render );
+        if (controlsX == "undefined" ||
+            controlsY == "undefined" ||
+            controlsZ == "undefined") {
+        } else {
+            controls.center.x = parseFloat(controlsX);
+            controls.center.y = parseFloat(controlsY);
+            controls.center.z = parseFloat(controlsZ);
+        }
+//        controls.center.x = -0.6275427832484903;
+//        controls.center.y = 42.21773787259461;
+//        controls.center.z = -34.91293222591709;
+//        camera.lookAt({ x:-22, y:46, z:-12});
         var radius = theObject.geometry.boundingSphere.radius;
         theObject.scale.x = 60/radius;
         theObject.scale.y = 60/radius;
         theObject.scale.z = 60/radius;
         theObject.material.wireframe = document.getElementById("check_wireframe").checked;
-        theObject.geometry.computeBoundingSphere();
-        alert(theObject.geometry.boundingSphere.center.x+" "+theObject.geometry.boundingSphere.center.y+" "+theObject.geometry.boundingSphere.center.z);
         animate();
 
         var thumbnail = $("#thumbnail").val();
@@ -434,36 +472,6 @@ $(function(){
 
         renderer.render( scene, camera );
     }
-
-
-
-    function enableW(event) {
-        var result = event.target;
-        alert(result);
-    }
-
-    function getRadio(event) {
-        theBackground = event.target.value;
-        if(scene!==null && mesh !== null) {
-            scene.remove( mesh );
-
-            mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ theBackground +'.jpg' ) } ) );
-            mesh.scale.x = -1;
-            scene.add( mesh );
-        }
-    }
-
-    function getRotation() {
-        alert(" fov "+camera.fov
-            +"  near "+camera.near
-            +" far "+camera.far
-            +" position "+camera.position.x+","+camera.position.y+","+camera.position.z
-            +" target "+camera.target);
-
-    }
-
-
-
 
     /**
      * crete secne

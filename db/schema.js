@@ -105,6 +105,9 @@ module.exports = function (mongoose, compound) {
         cameraX: 'Number',
         cameraY: 'Number',
         cameraZ: 'Number',
+        controlsX: 'Number',
+        controlsY: 'Number',
+        controlsZ: 'Number',
         background: 'String'
     },schemaOptions);
 
