@@ -23,9 +23,6 @@
       },
       'noty-default': {
         deps: ['noty']
-      },
-      'tip': {
-        deps: ['noty']
       }
     },
     paths: {
@@ -37,11 +34,11 @@
       'noty-top': 'noty/layouts/top',
       'noty-topCenter': 'noty/layouts/topCenter',
       'noty-default': 'noty/themes/default',
-      'tip': 'app/tip'
+      'masonry': 'masonry.pkgd.min'
     }
   });
 
-  list = ['jquery', 'underscore', 'bootstrap', 'noty', 'noty-top', 'noty-topCenter', 'noty-default', 'tip'];
+  list = ['jquery', 'underscore', 'bootstrap', 'noty', 'noty-top', 'noty-topCenter', 'noty-default', 'masonry'];
 
   require(list, function($, _) {});
 

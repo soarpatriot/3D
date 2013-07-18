@@ -21,10 +21,8 @@ require.config({
      },
      'noty-default':{
        deps: ['noty']
-     },
-     'tip':{
-       deps: ['noty']
      }
+
 
 
    },
@@ -38,12 +36,13 @@ require.config({
      'noty-top': 'noty/layouts/top',
      'noty-topCenter': 'noty/layouts/topCenter',
      'noty-default': 'noty/themes/default',
-     'tip' : 'app/tip'
+     'masonry':'masonry.pkgd.min'
+
    }
 });
 
 list = ['jquery', 'underscore','bootstrap','noty',
-        'noty-top','noty-topCenter','noty-default','tip',
+        'noty-top','noty-topCenter','noty-default','masonry'
 
 ];
 
