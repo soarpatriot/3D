@@ -183,7 +183,7 @@ $(function(){
         });
 
         $("#save-meta").click(function() {
-            alert("save");
+
             var id = $("#post-id").val();
             var authenticity_token = $("input[name='authenticity_token']").val();
 
@@ -466,7 +466,7 @@ $(function(){
         theObject.scale.z = 60/radius;
         theObject.material.wireframe = document.getElementById("check_wireframe").checked;
         theObject.geometry.computeBoundingSphere();
-        alert(theObject.geometry.boundingSphere.center.x+" "+theObject.geometry.boundingSphere.center.y+" "+theObject.geometry.boundingSphere.center.z);
+        //alert(theObject.geometry.boundingSphere.center.x+" "+theObject.geometry.boundingSphere.center.y+" "+theObject.geometry.boundingSphere.center.z);
         animate();
 
         var thumbnail = $("#thumbnail").val();
@@ -552,7 +552,7 @@ $(function(){
 
     function enableW(event) {
         var result = event.target;
-        alert(result);
+
     }
 
     function getRadio(event) {
@@ -567,11 +567,7 @@ $(function(){
     }
 
     function getRotation() {
-        alert(" fov "+camera.fov
-            +"  near "+camera.near
-            +" far "+camera.far
-            +" position "+camera.position.x+","+camera.position.y+","+camera.position.z
-            +" target "+camera.target);
+
 
     }
 

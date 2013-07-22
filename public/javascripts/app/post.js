@@ -2,7 +2,44 @@
  * post function js
  *
  */
-require(["require","jquery","jquery.iframe-transport","jquery.fileupload"],function(require,$) {
+
+require.config({
+
+    baseUrl: "/javascripts",
+    waitSeconds:100,
+
+    //some special settings. like exports and dep
+    shim: {
+        'bootstrap':{
+            deps: ['jquery']
+        },
+        "underscore": {
+            exports: '_'
+        },
+        'backbone': {
+            deps: ['underscore','jquery'],
+            exports: 'Backbone'
+        }
+    },
+
+    paths: {
+
+        //js framework
+        "jquery": "jquery-1.10.2.min",
+        "underscore": "underscore-min",
+        "backbone": "backbone-1.0.0.min",
+        'bootstrap': 'bootstrap',
+
+
+        "jquery.ui.widget": "fileupload/vendor/jquery.ui.widget",
+        "jquery.iframe-transport":"fileupload/jquery.iframe-transport",
+        "jquery.fileupload":"fileupload/jquery.fileupload"
+
+    }
+
+});
+
+require(["require","jquery","jquery.iframe-transport","jquery.fileupload","bootstrap"],function(require,$) {
 
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:

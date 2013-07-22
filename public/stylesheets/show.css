@@ -1,15 +1,3 @@
-#postShowContainer {
-    background:white;
-    background-image: url("../images/grid.png");
-    position:absolute;
-    left:0px;
-    top:0px;
-    z-index:0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-}
 
 html.home, body.home {
     height: 100%;
@@ -242,7 +230,7 @@ html.viewer, .viewer body {
     width: 100%;
 }
 
-ul.thumbnails li {
+ul.ul-thumbnails li {
     -moz-box-sizing: border-box;
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #DDDDDD;
@@ -256,15 +244,15 @@ ul.thumbnails li {
     width: 30%;
 }
 
-.thumbnails {
+.ul-thumbnails {
     margin-left: 0px;
 }
 
-.thumbnails li:not(.placeholder) div {
+.ul-thumbnails li:not(.placeholder) div {
     margin: 2%;
 }
 
-.thumbnails li img, #popularlist li img {
+.ul-thumbnails li img, #popularlist li img {
     display: block;
     height: auto;
     width: 100%;
