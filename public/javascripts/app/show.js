@@ -51,19 +51,29 @@ $(function(){
 
     init();
     function init() {
+        $("#hsl-a").change(function() {
+                var a = (document.getElementById('hsl-a').value / 100).toFixed(2);
+                document.getElementById('hsl-a-value').textContent = a;
+                if (theObject != undefined) {
+                    theObject.material.opacity = a;
+                }
+            }
+
+        );
+
         $(".hud-edit-button").click(function() {
                 $(".edit").show();
                 $(".hud-edit-button").hide();
             }
 
-        )
+        );
 
         $(".close").click(function() {
                 $(".edit").hide();
                 $(".hud-edit-button").show();
             }
 
-        )
+        );
 
         $("#check_wireframe").change(function() {
 
@@ -213,7 +223,8 @@ $(function(){
                 morphNormals: true,
                 vertexColors: THREE.FaceColors,
                 shading: THREE.SmoothShading,
-                wireframe: false
+                wireframe: false,
+                opacity: 1.0
             }
         };
 
