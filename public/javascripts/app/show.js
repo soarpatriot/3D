@@ -74,8 +74,10 @@ require.config({
         },
         'MTLLoader':{
             deps: ['three']
+        },
+        'OrbitControls-Touch':{
+            deps: ['three']
         }
-
     },
     paths: {
         'bootstrap': 'bootstrap',
@@ -101,7 +103,8 @@ require.config({
         'STLLoader':'loaders/STLLoader',
         'ColladaLoader':'loaders/ColladaLoader',
         'UTF8Loader':'loaders/UTF8Loader',
-        'MTLLoader':'loaders/MTLLoader'
+        'MTLLoader':'loaders/MTLLoader',
+        'OrbitControls-Touch':'OrbitControls-Touch'
     }
 });
 
@@ -114,214 +117,241 @@ list = ['jquery', 'underscore','three','bootstrap','noty',
 ];
 
 require(list, function($,_) {
-$(function(){
+    $(function(){
 
-    var fov = 70;
+        var fov = 70;
 
-    var SCREEN_WIDTH = document.body.clientWidth ;
-    var SCREEN_HEIGHT = document.body.clientHeight ;
+        var SCREEN_WIDTH = document.body.clientWidth ;
+        var SCREEN_HEIGHT = document.body.clientHeight ;
 
-    var container;
+        var container;
 
-    var camera, controls, scene, loaded;
-    var renderer;
+        var camera, controls, scene, loaded;
+        var renderer;
 
-    var windowHalfX = window.innerWidth / 2;
-    var windowHalfY = window.innerHeight / 2;
+        var windowHalfX = window.innerWidth / 2;
+        var windowHalfY = window.innerHeight / 2;
 
-    var rotatingObjects = [];
-    var morphAnimatedObjects = [];
+        var rotatingObjects = [];
+        var morphAnimatedObjects = [];
 
-    var clock = new THREE.Clock();
-    var theObject, theBackground, mesh;
+        var clock = new THREE.Clock();
+        var theObject, theBackground="no", mesh;
 
-    //embed model by other web site
-    var title = $("#post-title").val();
-    var url = window.location.href;
-    var embededUrl = url.replace('posts','posts/embeded');
-    var Post = {
-        url:embededUrl,
-        name:title,
-        title: title
-    };
+        //embed model by other web site
+        var title = $("#post-title").val();
+        var url = window.location.href;
+        var embededUrl = url.replace('posts','posts/embeded');
+        var Post = {
+            url:embededUrl,
+            name:title,
+            title: title
+        };
 
-    _.templateSettings = {
-        interpolate : /\{\{(.+?)\}\}/g
-    };
+        _.templateSettings = {
+            interpolate : /\{\{(.+?)\}\}/g
+        };
 
-    var simpleText = _.escape($("#simple-html-template").html());
-    var simpTemp = _.template(simpleText)
-    $("#simple-embed-div").html(simpTemp(Post));
+        var simpleText = _.escape($("#simple-html-template").html());
+        var simpTemp = _.template(simpleText)
+        $("#simple-embed-div").html(simpTemp(Post));
 
-    var iframeText = _.escape($("#iframe-template").html());
-    var iframTemp = _.template(iframeText);
-    $("#iframe-embed-div").html(iframTemp(Post));
+        var iframeText = _.escape($("#iframe-template").html());
+        var iframTemp = _.template(iframeText);
+        $("#iframe-embed-div").html(iframTemp(Post));
 
-    init();
-    function init() {
-        $(".hud-edit-button").click(function() {
-                $(".edit").show();
-                $(".hud-edit-button").hide();
-            }
+        init();
+        function init() {
+            $("#hsl-a").change(function() {
+                    var a = (document.getElementById('hsl-a').value / 100).toFixed(2);
+                    document.getElementById('hsl-a-value').textContent = a;
+                    if (theObject != undefined) {
+                        theObject.material.opacity = a;
+                    }
+                }
 
-        )
+            );
 
-        $(".close").click(function() {
-                $(".edit").hide();
-                $(".hud-edit-button").show();
-            }
+            $(".hud-edit-button").click(function() {
+                    $(".edit").show();
+                    $(".hud-edit-button").hide();
+                }
 
-        )
+            );
 
-        $("#check_wireframe").change(function() {
+            $(".close").click(function() {
+                    $(".edit").hide();
+                    $(".hud-edit-button").show();
+                }
 
-            if(document.getElementById("check_wireframe").checked) {
-                theObject.material.wireframe = true;
-            } else {
-                theObject.material.wireframe = false;
-            }
-        });
+            );
 
-        $("#save-meta").click(function() {
+            $("#check_wireframe").change(function() {
 
-            var id = $("#post-id").val();
-            var authenticity_token = $("input[name='authenticity_token']").val();
-
-            var params = {
-                authenticity_token: authenticity_token,
-                id: id,
-                wireframe: document.getElementById("check_wireframe").checked
-            };
-            $.ajax({
-                type: 'POST',
-                url: '/posts/save',
-                data: params,
-                success: function(){
-                    console.log("fdsafasfd");
-                },
-                dataType: 'json'
+                if(document.getElementById("check_wireframe").checked) {
+                    theObject.material.wireframe = true;
+                } else {
+                    theObject.material.wireframe = false;
+                }
             });
-        });
-        //model URL
-        var postUrl = $("#post-url").val();
-        var filePathName = $("#post-name").val();
-
-        container = document.getElementById("postShowContainer");
-        var $modelContainer = $("#postShowContainer");
-        var conWidth = $("#postShowContainer").css('width');
-        var conHeight = $("#postShowContainer").css('height');
-        var widthNum = conWidth.replace("px","");
-        var heightNum = conHeight.replace("px","");
-
-        renderer = new THREE.WebGLRenderer( {
-            antialias: true,
-            preserveDrawingBuffer: true  // required to support .toDataURL()
-        });
-
-        renderer.setSize( widthNum,heightNum);
-        renderer.gammaInput = true;
-        renderer.gammaOutput = true;
-        renderer.physicallyBasedShading = true;
-        container.appendChild( renderer.domElement );
-
-        loader = new THREE.SceneLoader();
-
-        loader.addGeometryHandler( "binary", THREE.BinaryLoader );
-        loader.addGeometryHandler( "ctm", THREE.CTMLoader );
-        loader.addGeometryHandler( "vtk", THREE.VTKLoader );
-        loader.addGeometryHandler( "stl", THREE.STLLoader );
-        loader.addHierarchyHandler( "obj", THREE.OBJLoader );
-        loader.addHierarchyHandler( "dae", THREE.ColladaLoader );
-        loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );
-
-        window.addEventListener( 'resize', onWindowResize, false );
-        loader.callbackProgress = function(data){
-            console.log("data:"+JSON.stringify(data));
-        };
-
-        //console.log("laded:"+event.loaded+"  taoal:"+event.total);
-        console.log("postUrl: "+postUrl);
-        loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
-
-        //loader.load(postUrl, callbackFinished);
-    }
-
-    /**
-     * create object wrapper camral and light
-     * @param filePathName
-     * @param postUrl
-     * @returns {Object}
-     */
-    function createWrapperJson(filePathName,postUrl){
-        var json1 = new Object();
-        json1.urlBaseType = "relativeToHTML";
-        json1.objects = {};
-        json1.geometries = {};
-        json1.materials = {};
-
-        json1.objects[filePathName] = {
-            "geometry":filePathName,
-            "material" : "flamingo",
-            "position":[ 0, 0, 0 ],
-            "rotation":[ 0, 0, 0 ],
-            "scale":[ 1, 1, 1 ],
-            "visible":true,
-            "mirroredLoop":true,
-            "properties":{
-                "rotating":true,
-                "rotateY":true
-            }
-        };
-        json1.objects["light1"] = {
-            "type":"DirectionalLight",
-            "direction":[ 0, 1, 1 ],
-            "color":16777215,
-            "intensity":1
-        };
-
-
-        json1.objects["camera1"] = {
-            "type":"PerspectiveCamera",
-            "fov":70,
-            "aspect":window.innerWidth / window.innerHeight,
-            "near":1,
-            "far":1100,
-            "position":[ 0, 0, 100 ],
-            "target":[ 0, 0, 0 ]
-        };
-
-        json1.geometries[filePathName] = {
-            "type":"ascii",
-            "url":postUrl
-        };
-
-        json1.materials["flamingo"] = {
-            "type": "MeshPhongMaterial",
-            "parameters": {
-                color: 0xffffff,
-                specular: 0xffffff,
-                shininess: 20,
-                morphTargets: true,
-                morphNormals: true,
-                vertexColors: THREE.FaceColors,
-                shading: THREE.SmoothShading,
-                wireframe: false
-            }
-        };
 
 
 
-        json1.defaults = {
-            "bgcolor":[255, 255, 255],
-            "bgalpha":0.5,
-            "camera":"camera1"
-        };
+            $(".js-edit-environment-list").change(function(event) {
 
-        return json1;
-    }
+                theBackground = event.target.value;
+
+                if(scene!==null && mesh !== null) {
+                    scene.remove( mesh );
+                    if(theBackground != "no") {
+                        mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ theBackground +'.jpg' ) } ) );
+                        mesh.scale.x = -1;
+                        scene.add( mesh );
+                    } else {
+
+                    }
+                }
 
 
-    function callbackFinished( result ) {
+            });
+
+            $("#save-meta").click(function() {
+                alert("save");
+                var id = $("#post-id").val();
+                var authenticity_token = $("input[name='authenticity_token']").val();
+
+                var params = {
+                    authenticity_token: authenticity_token,
+                    id: id,
+                    wireframe: document.getElementById("check_wireframe").checked,
+                    background:  $(".js-edit-environment-list")[0].value
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '/posts/save',
+                    data: params,
+                    success: function(){
+                        console.log("fdsafasfd");
+                    },
+                    dataType: 'json'
+                });
+            });
+            //model URL
+            var postUrl = $("#post-url").val();
+            var filePathName = $("#post-name").val();
+
+            container = document.getElementById("postShowContainer");
+            var $modelContainer = $("#postShowContainer");
+            var conWidth = $("#postShowContainer").css('width');
+            var conHeight = $("#postShowContainer").css('height');
+            var widthNum = conWidth.replace("px","");
+            var heightNum = conHeight.replace("px","");
+
+            renderer = new THREE.WebGLRenderer( {
+                antialias: true,
+                preserveDrawingBuffer: true  // required to support .toDataURL()
+            });
+
+            renderer.setSize( widthNum,heightNum);
+            renderer.gammaInput = true;
+            renderer.gammaOutput = true;
+            renderer.physicallyBasedShading = true;
+            container.appendChild( renderer.domElement );
+
+            loader = new THREE.SceneLoader();
+
+            loader.addGeometryHandler( "binary", THREE.BinaryLoader );
+            loader.addGeometryHandler( "ctm", THREE.CTMLoader );
+            loader.addGeometryHandler( "vtk", THREE.VTKLoader );
+            loader.addGeometryHandler( "stl", THREE.STLLoader );
+            loader.addHierarchyHandler( "obj", THREE.OBJLoader );
+            loader.addHierarchyHandler( "dae", THREE.ColladaLoader );
+            loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );
+
+            window.addEventListener( 'resize', onWindowResize, false );
+
+            console.log("postUrl: "+postUrl);
+            loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
+            //loader.load(postUrl, callbackFinished);
+        }
+
+        /**
+         * create object wrapper camral and light
+         * @param filePathName
+         * @param postUrl
+         * @returns {Object}
+         */
+        function createWrapperJson(filePathName,postUrl){
+            var json1 = new Object();
+            json1.urlBaseType = "relativeToHTML";
+            json1.objects = {};
+            json1.geometries = {};
+            json1.materials = {};
+
+            json1.objects[filePathName] = {
+                "geometry":filePathName,
+                "material" : "flamingo",
+                "position":[ 0, 0, 0 ],
+                "rotation":[ 0, 0, 0 ],
+                "scale":[ 1, 1, 1 ],
+                "visible":true,
+                "mirroredLoop":true,
+                "properties":{
+                    "rotating":true,
+                    "rotateY":true
+                }
+            };
+            json1.objects["light1"] = {
+                "type":"DirectionalLight",
+                "direction":[ 0, 1, 1 ],
+                "color":16777215,
+                "intensity":1
+            };
+
+
+            json1.objects["camera1"] = {
+                "type":"PerspectiveCamera",
+                "fov":70,
+                "aspect":window.innerWidth / window.innerHeight,
+                "near":1,
+                "far":1100,
+                "position":[ 0, 0, 100 ],
+                "target":[ 0, 0, 0 ]
+            };
+
+            json1.geometries[filePathName] = {
+                "type":"ascii",
+                "url":postUrl
+            };
+
+            json1.materials["flamingo"] = {
+                "type": "MeshPhongMaterial",
+                "parameters": {
+                    color: 0xffffff,
+                    specular: 0xffffff,
+                    shininess: 20,
+                    morphTargets: true,
+                    morphNormals: true,
+                    vertexColors: THREE.FaceColors,
+                    shading: THREE.SmoothShading,
+                    wireframe: false,
+                    opacity: 1.0
+                }
+            };
+
+
+
+            json1.defaults = {
+                "bgcolor":[255, 255, 255],
+                "bgalpha":0.5,
+                "camera":"camera1"
+            };
+
+            return json1;
+        }
+
+
+        function callbackFinished( result ) {
 
 //        var resultwireframe = false;
 //        alert($("#wireframe").value);
@@ -329,302 +359,293 @@ $(function(){
 //            resultwireframe = true;
 //        $("#check_wireframe").attr("checked",resultwireframe);
 
-        var cameraX = $("#cameraX").val();
-        var cameraY = $("#cameraY").val();
-        var cameraZ = $("#cameraZ").val();
-        var background = $("#background").val();
-        camera = result.currentCamera;
-    //    camera.aspect = container.clientWidth/container.clientHeight;
-        if (cameraX == "undefined" ||
-            cameraY == "undefined" ||
-            cameraZ == "undefined") {
-        } else {
-            camera.position.x = cameraX;
-            camera.position.y = cameraY;
-            camera.position.z = cameraZ;
-        }
+            var cameraX = $("#cameraX").val();
+            var cameraY = $("#cameraY").val();
+            var cameraZ = $("#cameraZ").val();
+            var controlsX = $("#controlsX").val();
+            var controlsY = $("#controlsY").val();
+            var controlsZ = $("#controlsZ").val();
+            var background = $("#background").val();
+            camera = result.currentCamera;
+            //    camera.aspect = container.clientWidth/container.clientHeight;
+            if (cameraX == "undefined" ||
+                cameraY == "undefined" ||
+                cameraZ == "undefined") {
+            } else {
+                camera.position.x = cameraX;
+                camera.position.y = cameraY;
+                camera.position.z = cameraZ;
+            }
 
-        camera.updateProjectionMatrix();
 
-        scene = result.scene;
 
-        var opts = {};
+            camera.updateProjectionMatrix();
 
-        opts.callback = function(snapshotUrl) {
+            scene = result.scene;
+
+            var opts = {};
+
+            opts.callback = function(snapshotUrl) {
 //            theObject.material.shininess=theObject.material.shininess+50;
 
-            document.getElementById("picture").src = snapshotUrl;
-            document.getElementById("picture").hidden = false;
-            setTimeout("document.getElementById('picture').hidden=true",2000);
-            var id = $("#post-id").val();
-            var authenticity_token = $("input[name='authenticity_token']").val();
+                document.getElementById("picture").src = snapshotUrl;
+                document.getElementById("picture").hidden = false;
+                setTimeout("document.getElementById('picture').hidden=true",2000);
+                var id = $("#post-id").val();
+                var authenticity_token = $("input[name='authenticity_token']").val();
 
-            var params = {
-                authenticity_token:authenticity_token,
-                id:id,
-                snapshotUrl:snapshotUrl,
-                radius:theObject.geometry.boundingSphere.radius,
-                cameraX: camera.position.x,
-                cameraY: camera.position.y,
-                cameraZ: camera.position.z,
-                background: theBackground
-            };
-            $.ajax({
-                type: 'POST',
-                url: '/posts/snapshot',
-                data: params,
-                success: function(){
-                    console.log("fdsafasfd");
-                },
-                dataType: 'json'
-            });
+                var params = {
+                    authenticity_token:authenticity_token,
+                    id:id,
+                    snapshotUrl:snapshotUrl,
+                    radius:theObject.geometry.boundingSphere.radius,
+                    cameraX: camera.position.x,
+                    cameraY: camera.position.y,
+                    cameraZ: camera.position.z,
+                    controlsX: controls.center.x,
+                    controlsY: controls.center.y,
+                    controlsZ: controls.center.z,
+                    background: theBackground
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '/posts/snapshot',
+                    data: params,
+                    success: function(){
+                        console.log("fdsafasfd");
+                    },
+                    dataType: 'json'
+                });
 
 
-        }
+            }
 
-        //full screen f code
-        opts.width = 160;
-        opts.height = 90;
-        THREEx.Screenshot.bindKey(renderer, opts);
-        var opts1 = {};
-        opts1.element = document.getElementById("postShowContainer");
-        if( THREEx.FullScreen.available() ) {
-            THREEx.FullScreen.bindKey(opts1);
-        }
-        //full screen button click
-        $("#full-btn").click(function(){
+            //full screen f code
+            opts.width = 160;
+            opts.height = 90;
+            THREEx.Screenshot.bindKey(renderer, opts);
+            var opts1 = {};
+            opts1.element = document.getElementById("postShowContainer");
             if( THREEx.FullScreen.available() ) {
+                THREEx.FullScreen.bindKey(opts1);
+            }
+            //full screen button click
+            $("#full-btn").click(function(){
+                if( THREEx.FullScreen.available() ) {
 
-                if( THREEx.FullScreen.activated() ){
-                    THREEx.FullScreen.cancel();
-                }else{
-                    THREEx.FullScreen.request(opts1.element);
+                    if( THREEx.FullScreen.activated() ){
+                        THREEx.FullScreen.cancel();
+                    }else{
+                        THREEx.FullScreen.request(opts1.element);
+                    }
                 }
-            }
-        })
+            })
 
-        scene.traverse( function ( object ) {
+            scene.traverse( function ( object ) {
 
-            if (object.geometry) {
+                if (object.geometry) {
 
-                morphColorsToFaceColors(object.geometry);
-                object.geometry.computeMorphNormals();
+                    morphColorsToFaceColors(object.geometry);
+                    object.geometry.computeMorphNormals();
 
-                if (object.geometry.boundingSphere) {
-                    theObject = object;
-                    var radius = object.geometry.boundingSphere.radius;
+                    if (object.geometry.boundingSphere) {
+                        theObject = object;
+                        var radius = object.geometry.boundingSphere.radius;
 
-    //                Posts.update({"name" : object.name}, {"$set" :{"scale" : 60/radius}});
+                        //                Posts.update({"name" : object.name}, {"$set" :{"scale" : 60/radius}});
+                    }
                 }
-            }
 
-    //        if ( object.properties.rotating === true ) {
-    //
-    //            rotatingObjects.push( object );
-    //
-    //        }
+                //        if ( object.properties.rotating === true ) {
+                //
+                //            rotatingObjects.push( object );
+                //
+                //        }
 
-            if ( object instanceof THREE.MorphAnimMesh ) {
+                if ( object instanceof THREE.MorphAnimMesh ) {
 
-                morphAnimatedObjects.push( object );
-
-            }
-
-            if ( object instanceof THREE.SkinnedMesh ) {
-
-                if ( object.geometry.animation ) {
-
-                    THREE.AnimationHandler.add( object.geometry.animation );
-
-                    var animation = new THREE.Animation( object, object.geometry.animation.name );
-                    animation.JITCompile = false;
-                    animation.interpolationType = THREE.AnimationHandler.LINEAR;
-
-                    animation.play();
+                    morphAnimatedObjects.push( object );
 
                 }
 
+                if ( object instanceof THREE.SkinnedMesh ) {
+
+                    if ( object.geometry.animation ) {
+
+                        THREE.AnimationHandler.add( object.geometry.animation );
+
+                        var animation = new THREE.Animation( object, object.geometry.animation.name );
+                        animation.JITCompile = false;
+                        animation.interpolationType = THREE.AnimationHandler.LINEAR;
+
+                        animation.play();
+
+                    }
+
+                }
+
+            } );
+            if (background == "undefined" || background == "no") {
+                //        background= "room";
+            } else {
+                $(".js-edit-environment-list")[0].value = background;
+                theBackground = background;
+                mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
+                mesh.scale.x = -1;
+                scene.add( mesh );
             }
 
-        } );
-        if (background == "undefined") {
-    //        background= "room";
-        } else {
-            $("#"+background).attr('checked','checked');
-            theBackground = background;
-            mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
-            mesh.scale.x = -1;
-            scene.add( mesh );
+            controls = new THREE.OrbitControls( camera, renderer.domElement);
+//        controls.addEventListener( 'change', render );
+            if (controlsX == "undefined" ||
+                controlsY == "undefined" ||
+                controlsZ == "undefined") {
+            } else {
+                controls.center.x = parseFloat(controlsX);
+                controls.center.y = parseFloat(controlsY);
+                controls.center.z = parseFloat(controlsZ);
+            }
+//        controls.center.x = -0.6275427832484903;
+//        controls.center.y = 42.21773787259461;
+//        controls.center.z = -34.91293222591709;
+//        camera.lookAt({ x:-22, y:46, z:-12});
+            var radius = theObject.geometry.boundingSphere.radius;
+            theObject.scale.x = 60/radius;
+            theObject.scale.y = 60/radius;
+            theObject.scale.z = 60/radius;
+            theObject.material.wireframe = document.getElementById("check_wireframe").checked;
+            animate();
+
+            var thumbnail = $("#thumbnail").val();
+            if(thumbnail == "undefined") {
+                var target =document.getElementById("pictureTaking");
+                target.click();
+            }
+
         }
 
-        controls = new THREE.OrbitControls( camera);
-        controls.addEventListener( 'change', render );
+        function morphColorsToFaceColors( geometry ) {
 
-        var radius = theObject.geometry.boundingSphere.radius;
-        theObject.scale.x = 60/radius;
-        theObject.scale.y = 60/radius;
-        theObject.scale.z = 60/radius;
-        theObject.material.wireframe = document.getElementById("check_wireframe").checked;
-        theObject.geometry.computeBoundingSphere();
-        //alert(theObject.geometry.boundingSphere.center.x+" "+theObject.geometry.boundingSphere.center.y+" "+theObject.geometry.boundingSphere.center.z);
-        animate();
+            if ( geometry.morphColors && geometry.morphColors.length ) {
 
-        var thumbnail = $("#thumbnail").val();
-        if(thumbnail == "undefined") {
-            var target =document.getElementById("pictureTaking");
-            target.click();
-        }
+                var colorMap = geometry.morphColors[ 0 ];
 
-    }
+                for ( var i = 0; i < colorMap.colors.length; i ++ ) {
 
-    function morphColorsToFaceColors( geometry ) {
+                    geometry.faces[ i ].color = colorMap.colors[ i ];
 
-        if ( geometry.morphColors && geometry.morphColors.length ) {
-
-            var colorMap = geometry.morphColors[ 0 ];
-
-            for ( var i = 0; i < colorMap.colors.length; i ++ ) {
-
-                geometry.faces[ i ].color = colorMap.colors[ i ];
+                }
 
             }
 
         }
 
-    }
+        function onWindowResize() {
 
-    function onWindowResize() {
+            var conWidth = $("#postShowContainer").css('width');
+            var conHeight = $("#postShowContainer").css('height');
+            var widthNum = conWidth.replace("px","");
+            var heightNum = conHeight.replace("px","");
 
-        var conWidth = $("#postShowContainer").css('width');
-        var conHeight = $("#postShowContainer").css('height');
-        var widthNum = conWidth.replace("px","");
-        var heightNum = conHeight.replace("px","");
+            windowHalfX = window.innerWidth / 2;
+            windowHalfY = window.innerHeight / 2;
 
-        windowHalfX = window.innerWidth / 2;
-        windowHalfY = window.innerHeight / 2;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
 
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+            renderer.setSize(widthNum,heightNum );
 
-        renderer.setSize(widthNum,heightNum );
-
-        render();
-
-    }
-
-    function animate() {
-
-        requestAnimationFrame( animate );
-
-        controls.update();
-        render();
-    }
-
-    function render() {
-
-        var delta = clock.getDelta();
-
-        // update skinning
-
-        THREE.AnimationHandler.update( delta * 1 );
-
-        for ( var i = 0; i < rotatingObjects.length; i ++ ) {
-
-            var object = rotatingObjects[ i ];
-
-            if ( object.properties.rotateX ) object.rotation.x += 1 * delta;
-            if ( object.properties.rotateY ) object.rotation.y += 0.5 * delta;
+            render();
 
         }
 
-        for ( var i = 0; i < morphAnimatedObjects.length; i ++ ) {
+        function animate() {
 
-            var object = morphAnimatedObjects[ i ];
+            requestAnimationFrame( animate );
 
-            object.updateAnimation( 1000 * delta );
-
+            controls.update();
+            render();
         }
 
-        renderer.render( scene, camera );
-    }
+        function render() {
 
+            var delta = clock.getDelta();
 
+            // update skinning
 
-    function enableW(event) {
-        var result = event.target;
+            THREE.AnimationHandler.update( delta * 1 );
 
-    }
+            for ( var i = 0; i < rotatingObjects.length; i ++ ) {
 
-    function getRadio(event) {
-        theBackground = event.target.value;
-        if(scene!==null && mesh !== null) {
-            scene.remove( mesh );
+                var object = rotatingObjects[ i ];
 
-            mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ theBackground +'.jpg' ) } ) );
-            mesh.scale.x = -1;
-            scene.add( mesh );
-        }
-    }
+                if ( object.properties.rotateX ) object.rotation.x += 1 * delta;
+                if ( object.properties.rotateY ) object.rotation.y += 0.5 * delta;
 
-    function getRotation() {
+            }
 
+            for ( var i = 0; i < morphAnimatedObjects.length; i ++ ) {
 
-    }
+                var object = morphAnimatedObjects[ i ];
 
+                object.updateAnimation( 1000 * delta );
 
+            }
 
-
-    /**
-     * crete secne
-     * @returns {{scene: THREE.Scene, camera: THREE.PerspectiveCamera}}
-     */
-    function createLoadScene() {
-
-        var result = {
-
-            scene:  new THREE.Scene(),
-            camera: new THREE.PerspectiveCamera( 65, window.innerWidth / window.innerHeight, 1, 1000 )
-
-        };
-
-        result.camera.position.z = 100;
-        result.scene.add( result.camera );
-
-        var object, geometry, material, light, count = 500, range = 200;
-
-        material = new THREE.MeshLambertMaterial( { color:0xffffff } );
-        geometry = new THREE.CubeGeometry( 5, 5, 5 );
-
-        for( var i = 0; i < count; i++ ) {
-
-            object = new THREE.Mesh( geometry, material );
-
-            object.position.x = ( Math.random() - 0.5 ) * range;
-            object.position.y = ( Math.random() - 0.5 ) * range;
-            object.position.z = ( Math.random() - 0.5 ) * range;
-
-            object.rotation.x = Math.random() * 6;
-            object.rotation.y = Math.random() * 6;
-            object.rotation.z = Math.random() * 6;
-
-            object.matrixAutoUpdate = false;
-            object.updateMatrix();
-
-            result.scene.add( object );
-
+            renderer.render( scene, camera );
         }
 
-        result.scene.matrixAutoUpdate = false;
+        /**
+         * crete secne
+         * @returns {{scene: THREE.Scene, camera: THREE.PerspectiveCamera}}
+         */
+        function createLoadScene() {
 
-        light = new THREE.PointLight( 0xffffff );
-        result.scene.add( light );
+            var result = {
 
-        light = new THREE.DirectionalLight( 0x111111 );
-        light.position.x = 1;
-        result.scene.add( light );
+                scene:  new THREE.Scene(),
+                camera: new THREE.PerspectiveCamera( 65, window.innerWidth / window.innerHeight, 1, 1000 )
 
-        return result;
+            };
 
-    }
-    })
+            result.camera.position.z = 100;
+            result.scene.add( result.camera );
+
+            var object, geometry, material, light, count = 500, range = 200;
+
+            material = new THREE.MeshLambertMaterial( { color:0xffffff } );
+            geometry = new THREE.CubeGeometry( 5, 5, 5 );
+
+            for( var i = 0; i < count; i++ ) {
+
+                object = new THREE.Mesh( geometry, material );
+
+                object.position.x = ( Math.random() - 0.5 ) * range;
+                object.position.y = ( Math.random() - 0.5 ) * range;
+                object.position.z = ( Math.random() - 0.5 ) * range;
+
+                object.rotation.x = Math.random() * 6;
+                object.rotation.y = Math.random() * 6;
+                object.rotation.z = Math.random() * 6;
+
+                object.matrixAutoUpdate = false;
+                object.updateMatrix();
+
+                result.scene.add( object );
+
+            }
+
+            result.scene.matrixAutoUpdate = false;
+
+            light = new THREE.PointLight( 0xffffff );
+            result.scene.add( light );
+
+            light = new THREE.DirectionalLight( 0x111111 );
+            light.position.x = 1;
+            result.scene.add( light );
+
+            return result;
+
+        }
+    });
 });

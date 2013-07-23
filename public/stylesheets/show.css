@@ -450,3 +450,258 @@ ul#taglist {
     list-style-type: none;
     margin: 0 0 20px 0px;
 }
+
+#material-editor fieldset {
+    display: block;
+    height: 60px;
+    margin-bottom: 10px;
+    margin-top: 3px;
+}
+#material-editor h4 {
+    color: #666666;
+    display: inline-block;
+    font-size: 1.077em;
+    margin: 0 0 2px;
+    width: 240px;
+}
+#material-editor h3 {
+    color: #666666;
+    display: inline-block;
+    font-size: 1.077em;
+    margin-bottom: 5px;
+    margin-top: 13px;
+}
+#material-editor .js-texcoord-unit {
+    display: none;
+}
+#material-editor .with-texcoord .js-material-channel-factor {
+    width: 130px;
+}
+#material-editor .with-texcoord .js-texcoord-unit {
+    display: block;
+}
+#material-editor .noUiSlider {
+    width: 90%;
+}
+#material-editor .js-material-channel-factor {
+    left: 43px;
+    top: 6px;
+    width: 200px;
+}
+#material-editor .js-material-channel-factor.no-preview {
+    left: 0;
+    top: 8px;
+    width: 243px;
+}
+#material-editor .js-texcoord-unit {
+    float: right;
+    margin-right: 9px;
+    margin-top: 7px;
+    position: relative;
+}
+#material-editor .js-reset {
+    background: url("/img/reset.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: right;
+    height: 12px;
+    position: relative;
+    right: 12px;
+    top: 2px;
+    width: 17px;
+}
+#material-editor .js-reset .tooltip {
+    left: -107px;
+    top: -9px;
+    width: 80px;
+}
+#material-editor .js-reset .tooltip:after {
+    border-left-color: #2C2C2C;
+    border-top-color: transparent;
+    left: 105%;
+    top: 28%;
+}
+#material-editor .js-reset:hover {
+    background-position: 0 -12px;
+}
+#material-editor .js-reset:hover .tooltip {
+    display: block;
+    opacity: 1;
+}
+
+#material-editor .help {
+    font-size: 1.077em;
+    margin-left: 3px;
+}
+
+.form-box {
+    border: 1px solid #C5BFB5;
+    opacity: 1;
+    overflow: auto;
+    padding: 8px;
+    transition: height 0.4s ease-in-out 0s, opacity 0.37s ease-in-out 0.03s, padding 0.01s ease-in-out 0s, margin 0.01s ease-in-out 0s;
+    width: 262px;
+}
+
+#material-editor .js-reset {
+    background: url("/img/reset.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: right;
+    height: 12px;
+    position: relative;
+    right: 12px;
+    top: 2px;
+    width: 17px;
+}
+
+.tooltip {
+    background: linear-gradient(#3A3A3A, #2C2C2C) repeat scroll 0 0 transparent;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 0 0 10px #333333;
+    color: #EEEEEE;
+    display: none;
+    font-size: 0.9em;
+    left: -63px;
+    opacity: 0;
+    padding: 8px;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    width: 250px;
+    z-index: 9999;
+}
+
+.js-material-preview {
+    background-size: cover;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 2px #111111;
+    cursor: pointer;
+    float: left;
+    height: 35px;
+    position: relative;
+    width: 35px;
+}
+
+/*#material-editor .js-texcoord-unit {*/
+    /*display: none;*/
+/*}*/
+
+#material-editor .with-texcoord .js-texcoord-unit {
+    display: block;
+}
+
+#material-editor .js-texcoord-unit {
+    float: right;
+    margin-right: 9px;
+    margin-top: 7px;
+    position: relative;
+}
+
+.noUiSlider, .noUiSlider * {
+    -moz-box-sizing: border-box;
+    -moz-user-select: none;
+    cursor: default;
+    display: block;
+}
+.noUiSlider {
+    position: relative;
+}
+.noUiSlider a {
+    position: absolute;
+    z-index: 1;
+}
+.noUiSlider a:nth-child(2) {
+    background: inherit !important;
+}
+.noUiSlider.vertical a {
+    bottom: 0;
+    width: 100%;
+}
+.noUiSlider.horizontal a {
+    height: 100%;
+    right: 0;
+}
+.noUiSlider:before, body.TOUCH, .noUiSlider div {
+}
+.noUiSlider:before {
+    content: "";
+    display: block;
+    height: 400%;
+    left: -25%;
+    position: absolute;
+    top: -150%;
+    width: 150%;
+    z-index: -1;
+}
+.noUiSlider.vertical:before {
+    height: 150%;
+    left: -150%;
+    top: -25%;
+    width: 400%;
+}
+.noUiSlider {
+    border: 1px solid #999999;
+    border-radius: 5px 5px 5px 5px;
+    margin-bottom: 20px;
+    margin-left: 1%;
+    margin-top: 5px;
+}
+.noUiSlider.connect a, .noUiSlider.connect.lower {
+    background: none repeat scroll 0 0 #1CAADE;
+}
+.noUiSlider, .noUiSlider.connect.lower a {
+    background: none repeat scroll 0 0 #EEEEEE;
+}
+.noUiSlider.disabled, .noUiSlider.disabled.connect.lower a {
+    background: none repeat scroll 0 0 #EEEEEE;
+}
+.noUiSlider div {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #999999;
+    border-radius: 9px 9px 9px 9px;
+    height: 18px;
+    width: 18px;
+}
+.noUiSlider div:hover, .noUiSlider div.active {
+    background: none repeat scroll 0 0 #4FDDFF !important;
+    border-color: #007799 !important;
+}
+.noUiSlider.disabled div {
+    background: none repeat scroll 0 0 transparent;
+}
+.noUiSlider.horizontal {
+    height: 10px;
+    width: 95%;
+}
+.noUiSlider.horizontal div {
+    margin: -5px 0 0 -9px;
+}
+.noUiSlider.vertical {
+    height: 300px;
+    width: 10px;
+}
+.noUiSlider.vertical div {
+    margin: -9px 0 0 -5px;
+}
+.noUiSlider span.slider-value {
+    color: #000000;
+}
+.noUiSlider.fov-slide .slider-value {
+    left: -8px;
+    position: relative;
+}
+
+#material-editor .with-texcoord .js-material-channel-factor {
+    width: 130px;
+}
+
+#material-editor .js-material-channel-factor {
+    left: 43px;
+    top: 6px;
+    width: 200px;
+}
+
+#material-editor .js-material-channel-factor.no-preview {
+    left: 0;
+    top: 8px;
+    width: 243px;
+}

@@ -150,7 +150,8 @@ action(function snapshot() {
     //, background: req.body.background
     console.log(req.body.id);
     Post.findOneAndUpdate({'_id': req.body.id}, { $set: {  thumbnail: req.body.snapshotUrl, radius: req.body.radius,
-        cameraX : req.body.cameraX, cameraY : req.body.cameraY, cameraZ : req.body.cameraZ  }},  function(err, post){
+        cameraX : req.body.cameraX, cameraY : req.body.cameraY, cameraZ : req.body.cameraZ,
+        controlsX : req.body.controlsX, controlsY : req.body.controlsY, controlsZ : req.body.controlsZ  }},  function(err, post){
         if (err || post) {
             return send({code: 404, error: 'Not found'});
         } else {
@@ -166,9 +167,10 @@ action(function save() {
     console.log(req.body.id);
     console.log(req.body.wireframe);
     var result = false;
-    if(req.body.wireframe==="true")
-        result = true;
-    Post.findOneAndUpdate({'_id': req.body.id}, { $set: {  wireframe: result}},  function(err, post){
+    result = (req.body.wireframe == "true");
+
+    Post.findOneAndUpdate({'_id': req.body.id}, { $set: {  wireframe: req.body.wireframe == "true", background: req.body.background}},
+        function(err, post){
         if (err || post) {
             console.log(post);
             return send({code: 404, error: 'Not found'});

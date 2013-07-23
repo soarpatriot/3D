@@ -74,6 +74,9 @@ require.config({
         },
         'MTLLoader':{
             deps: ['three']
+        },
+        'OrbitControls-Touch':{
+            deps: ['three']
         }
 
     },
@@ -101,7 +104,8 @@ require.config({
         'STLLoader':'loaders/STLLoader',
         'ColladaLoader':'loaders/ColladaLoader',
         'UTF8Loader':'loaders/UTF8Loader',
-        'MTLLoader':'loaders/MTLLoader'
+        'MTLLoader':'loaders/MTLLoader',
+        'OrbitControls-Touch':'OrbitControls-Touch'
     }
 });
 

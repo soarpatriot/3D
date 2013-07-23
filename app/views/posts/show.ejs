@@ -6,7 +6,7 @@
         <%- stylesheet_link_tag('show','jquery-toolbars','bootstrap-icons') %>
 
     </head>
-    <body scroll="no">
+    <body>
     <!--<div id="viewport">-->
         <!--<div id="view-frame">-->
 
@@ -25,6 +25,9 @@
     <input type="hidden" id="cameraX" name="cameraX" value="<%= post.cameraX %>">
     <input type="hidden" id="cameraY" name="cameraY" value="<%= post.cameraY %>">
     <input type="hidden" id="cameraZ" name="cameraZ" value="<%= post.cameraZ %>">
+    <input type="hidden" id="controlsX" name="controlsX" value="<%= post.controlsX %>">
+    <input type="hidden" id="controlsY" name="controlsY" value="<%= post.controlsY %>">
+    <input type="hidden" id="controlsZ" name="controlsZ" value="<%= post.controlsZ %>">
     <input type="hidden" id="background" name="background" value="<%= post.background %>">
     <input type="hidden" id="wireframe" name="wireframe" value="<%= post.wireframe %>">
 
@@ -39,29 +42,6 @@
     </input>
 
     <img id="picture" hidden="true" style="position:absolute;left:80px;top:110px;border:1;border-color: black;">
-
-
-
-
-    <div style="position:absolute;left:200px;top:80px;">
-        背景 :
-        <input type="radio" name="changeBackground" id="room" value="room" onclick="getRadio(event)"/>
-        房间
-        <input type="radio" name="changeBackground" id="lawn" value="lawn" onclick="getRadio(event)"/>
-        草地
-        <input type="radio" name="changeBackground" id="coast" value="coast" onclick="getRadio(event)"/>
-        海边
-        <input type="radio" name="changeBackground" id="hotel" value="hotel" onclick="getRadio(event)"/>
-        酒店
-        <input type="radio" name="changeBackground" id="town" value="town" onclick="getRadio(event)"/>
-        小镇
-        <input type="radio" name="changeBackground" id="mosque" value="mosque" onclick="getRadio(event)"/>
-        清真寺
-        <input type="button" onclick="getRotation(event)" />
-
-
-    </div>
-
 
 </div>
 <div class="btn-group span12 btn-group-float">
@@ -113,9 +93,16 @@
 
                 <div class="form-box">
                     <div>
-                        <select class="js-edit-environment-list" type="checkbox" name="activate-environment">
-                        </select>
                         <fieldset class='environment-background'>
+                            <select class="js-edit-environment-list" type="checkbox" name="activate-environment">
+                                <option value ="no">no</option>
+                                <option value ="room">room</option>
+                                <option value="lawn">lawn</option>
+                                <option value="coast">coast</option>
+                                <option value ="hotel">hotel</option>
+                                <option value="town">town</option>
+                                <option value="mosque">mosque</option>
+                            </select>
                             <input type="checkbox"/>
                             <label>show bg</label>
                         </fieldset>
@@ -151,7 +138,7 @@
 
                     <div>
                         <label>
-                            <input type="checkbox" id="check_wireframe" name="enableWireframe" value="<%= post.wireframe %>"/>
+                            <input type="checkbox" id="check_wireframe" name="enableWireframe" value="(<%= post.wireframe %>  == 'true'"/>
                             Wireframe
                         </label>
                         <div class="color-box">
@@ -164,6 +151,126 @@
                 </div>
             </fieldset>
         </form>
+        <div id="material-editor">
+            <h3>Materials</h3>
+            <select class="js-material-list"></select>
+            <a href="http://blog.sketchfab.com/post/45409770868/material-editor" class="help js-help" alt="watch how to configure it" target="_blank">help</a>
+            <div class="form-box">
+                <fieldset id="channel-DiffuseColor">
+                    <h4>Diffuse Color</h4>
+                    <a class="js-reset"><span class="tooltip">Reset channel</span></a>
+                    <div class="js-material-preview"></div>
+                    <select class="js-texcoord-unit"></select>
+                    <div class="noUiSlider js-material-channel-factor"
+                         data-min="0"
+                         data-max="1"
+                         data-step="0.01">
+                    </div>
+                </fieldset>
+
+                <fieldset id="channel-DiffuseIntensity">
+                    <h4>Lightmap</h4>
+                    <a class="js-reset"><span class="tooltip">Reset channel</span></a>
+                    <div class="js-material-preview"></div>
+                    <select class="js-texcoord-unit"></select>
+                    <div class="noUiSlider js-material-channel-factor"
+                         data-min="0"
+                         data-max="1"
+                         data-step="0.01">
+                    </div>
+                </fieldset>
+
+                <fieldset id="channel-SpecularColor">
+                    <h4>Specular Color</h4>
+                    <a class="js-reset"><span class="tooltip">Reset channel</span></a>
+                    <div class="js-material-preview"></div>
+                    <select class="js-texcoord-unit"></select>
+                    <div class="noUiSlider js-material-channel-factor"
+                         data-min="0"
+                         data-max="1"
+                         data-step="0.01">
+                    </div>
+                </fieldset>
+
+                <fieldset id="channel-SpecularHardness">
+                    <h4>Shininess</h4>
+                    <a class="js-reset"><span class="tooltip">Reset channel</span></a>
+                    <div class="js-material-preview"></div>
+                    <select class="js-texcoord-unit"></select>
+                    <div class="noUiSlider js-material-channel-factor"
+                         data-min="0"
+                         data-max="400"
+                         data-step="0.1">
+                    </div>
+                </fieldset>
+
+                <fieldset id="channel-Bump">
+                    <h4>Bump Map</h4>
+                    <a class="js-reset"><span class="tooltip">Reset channel</span></a>
+                    <div class="js-material-preview"></div>
+                    <select class="js-texcoord-unit"></select>
+                    <div class="noUiSlider js-material-channel-factor"
+                         data-min="0"
+                         data-max="1"
+                         data-step="0.001">
+                    </div>
+                </fieldset>
+
+                <fieldset id="channel-Normal">
+                    <h4>Normal Map</h4>
+                    <a class="js-reset"><span class="tooltip">Reset channel</span></a>
+                    <div class="js-material-preview"></div>
+                    <select class="js-texcoord-unit"></select>
+                    <div class="noUiSlider js-material-channel-factor"
+                         data-min="0"
+                         data-max="1"
+                         data-step="0.001">
+                    </div>
+                </fieldset>
+
+                <fieldset id="channel-Opacity">
+                    <h4>Opacity</h4>
+                    <div>
+                        <span style="width:20px; height: 20px">
+                          <input id="background-color" type="color" value="#ff0000" width="24px" height="23px" />
+                    </span>
+
+                        <br>
+                        <span class="hsl-value" id="hsl-a-value">1.00</span> <input id="hsl-a" type="range" min="0" max="100" value="100">
+                    </div>
+
+
+                    <!--<div class="noUiSlider js-material-channel-factor"-->
+                         <!--data-min="0"-->
+                         <!--data-max="1"-->
+                         <!--data-step="0.001">-->
+                    <!--</div>-->
+
+                </fieldset>
+
+                <fieldset id="channel-EmitColor">
+                    <h4>Emission</h4>
+                    <a class="js-reset"><span class="tooltip">Reset channel</span></a>
+                    <div class="js-material-preview"></div>
+                    <select class="js-texcoord-unit"></select>
+                    <div class="noUiSlider js-material-channel-factor"
+                         data-min="0"
+                         data-max="1"
+                         data-step="0.01">
+                    </div>
+                </fieldset>
+
+                <fieldset id="channel-Reflection">
+                    <h4>Environment Reflection</h4>
+                    <a class="js-reset"><span class="tooltip">Reset channel</span></a>
+                    <div class="noUiSlider js-material-channel-factor no-preview"
+                         data-min="0"
+                         data-max="1"
+                         data-step="0.01">
+                    </div>
+                </fieldset>
+            </div>
+        </div>
     </div>
     <div id="edit-save">
         <div id="cancel-meta" class="js-cancel-meta">cancel</div>
@@ -172,7 +279,7 @@
 </div>
 
 
-<div class="modal fade" id="share-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="share-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h5 id="myModalLabel">嵌入模型</h5>
@@ -225,5 +332,7 @@
 
 
 <script data-main="/javascripts/app/show" src="/javascripts/require.js"></script>
+
+
 </body>
 </html>
