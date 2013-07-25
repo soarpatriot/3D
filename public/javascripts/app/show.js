@@ -42,9 +42,7 @@ require.config({
         'three-screenshot':{
             deps: ['three']
         },
-        'orbitControls':{
-            deps: ['three']
-        },
+        
         'lzma':{
             deps: ['three']
         },
@@ -110,7 +108,7 @@ require.config({
 
 list = ['jquery', 'underscore','three','bootstrap','noty',
     'noty-top','noty-topCenter','noty-default','tip',
-    'three-fullscreen','three-screenshot','orbitControls',
+    'three-fullscreen','three-screenshot','OrbitControls-Touch',
     'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
     'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
     'MTLLoader'
