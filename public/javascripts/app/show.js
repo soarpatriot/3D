@@ -269,6 +269,7 @@ require(list, function($,_) {
             window.addEventListener( 'resize', onWindowResize, false );
 
             console.log("postUrl: "+postUrl);
+//            container.appendChild(loader.statusDomElement);
             loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
             //loader.load(postUrl, callbackFinished);
         }
