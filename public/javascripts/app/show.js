@@ -110,7 +110,7 @@ require.config({
 
 list = ['jquery', 'underscore','three','bootstrap','noty',
     'noty-top','noty-topCenter','noty-default','tip',
-    'three-fullscreen','three-screenshot','orbitControls',
+    'three-fullscreen','three-screenshot','OrbitControls-Touch',
     'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
     'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
     'MTLLoader'
@@ -271,6 +271,7 @@ require(list, function($,_) {
             window.addEventListener( 'resize', onWindowResize, false );
 
             console.log("postUrl: "+postUrl);
+//            container.appendChild(loader.statusDomElement);
             loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
             //loader.load(postUrl, callbackFinished);
         }
