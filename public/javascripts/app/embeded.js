@@ -42,7 +42,7 @@ require.config({
         'three-screenshot':{
             deps: ['three']
         },
-        
+
         'lzma':{
             deps: ['three']
         },
@@ -76,7 +76,6 @@ require.config({
         'OrbitControls-Touch':{
             deps: ['three']
         }
-
     },
     paths: {
         'bootstrap': 'bootstrap',
@@ -108,16 +107,16 @@ require.config({
 });
 
 list = ['jquery', 'underscore','three','bootstrap','noty',
-         'noty-top','noty-topCenter','noty-default','tip',
-        'three-fullscreen','three-screenshot','OrbitControls-Touch',
-        'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
-        'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
-        'MTLLoader'
-       ];
-
+    'noty-top','noty-topCenter','noty-default','tip',
+    'three-fullscreen','three-screenshot','OrbitControls-Touch',
+    'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
+    'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
+    'MTLLoader'
+];
 require(list, function($,_) {
 
     $(function(){
+
 
         var fov = 70;
 
@@ -136,76 +135,28 @@ require(list, function($,_) {
         var morphAnimatedObjects = [];
 
         var clock = new THREE.Clock();
-        var theObject, theBackground;
+        var theObject, theBackground="no", mesh;
 
-        //embed model by other web site
-        var title = $("#post-title").val();
-        var url = window.location.href;
-        var embededUrl = url.replace('posts','posts/embeded');
-        var Post = {
-            url:embededUrl,
-            name:title,
-            title: title
-        };
-
-        _.templateSettings = {
-            interpolate : /\{\{(.+?)\}\}/g
-        };
-
-        var simpleText = _.escape($("#simple-html-template").html());
-        var simpTemp = _.template(simpleText)
-        $("#simple-embed-div").html(simpTemp(Post));
-
-        var iframeText = _.escape($("#iframe-template").html());
-        var iframTemp = _.template(iframeText);
-        $("#iframe-embed-div").html(iframTemp(Post));
-
-        /**
-        $("#simple-copy-btn").click(function(){
-            copyContent(document.all.simple-embed-div);
-        });
-        $("#iframe-copy-btn").click(function(){
-            copyContent(document.all.iframeEmbedDiv);
-        });
-        var copyContent = function(obj){
-
-            var rng = obj.createTextRange();
-            rng.moveToElementText(obj);
-            rng.scrollIntoView();
-            rng.select();
-            rng.execCommand("Copy");
-            rng.collapse(false);
-            alert("复制成功!");
-
-
-        }**/
-        //$(function(){
         init();
 
         function init() {
 
-            //model URL
             var postUrl = $("#post-url").val();
             var filePathName = $("#post-name").val();
 
             container = document.getElementById("postShowContainer");
-            //alert(SCREEN_HEIGHT);
             var $modelContainer = $("#postShowContainer");
             var conWidth = $("#postShowContainer").css('width');
             var conHeight = $("#postShowContainer").css('height');
             var widthNum = conWidth.replace("px","");
             var heightNum = conHeight.replace("px","");
 
-            //var
             renderer = new THREE.WebGLRenderer( {
                 antialias: true,
                 preserveDrawingBuffer: true  // required to support .toDataURL()
-            } );
+            });
 
-
-        //    renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setSize( widthNum,heightNum);
-            //renderer.domElement.style.position = "relative";
             renderer.gammaInput = true;
             renderer.gammaOutput = true;
             renderer.physicallyBasedShading = true;
@@ -217,13 +168,27 @@ require(list, function($,_) {
             loader.addGeometryHandler( "ctm", THREE.CTMLoader );
             loader.addGeometryHandler( "vtk", THREE.VTKLoader );
             loader.addGeometryHandler( "stl", THREE.STLLoader );
-
             loader.addHierarchyHandler( "obj", THREE.OBJLoader );
             loader.addHierarchyHandler( "dae", THREE.ColladaLoader );
             loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );
 
-        //    var geometry = Posts.findOne(Session.get("post"));
+            window.addEventListener( 'resize', onWindowResize, false );
 
+            console.log("postUrl: "+postUrl);
+//            container.appendChild(loader.statusDomElement);
+            loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
+            loader.updateProgress(function(message){
+                console.log("message:"+message);
+            }); 
+
+        }
+        /**
+         * create object wrapper camral and light
+         * @param filePathName
+         * @param postUrl
+         * @returns {Object}
+         */
+        function createWrapperJson(filePathName,postUrl){
             var json1 = new Object();
             json1.urlBaseType = "relativeToHTML";
             json1.objects = {};
@@ -249,6 +214,8 @@ require(list, function($,_) {
                 "color":16777215,
                 "intensity":1
             };
+
+
             json1.objects["camera1"] = {
                 "type":"PerspectiveCamera",
                 "fov":70,
@@ -273,50 +240,42 @@ require(list, function($,_) {
                     morphTargets: true,
                     morphNormals: true,
                     vertexColors: THREE.FaceColors,
-                    shading: THREE.SmoothShading
+                    shading: THREE.SmoothShading,
+                    wireframe: false,
+                    opacity: 1.0
                 }
             };
 
-            json1.materials["flamingo1"] = {
-                "type": "MeshLambertMaterial",
-                "parameters": { color: 0xffffff, morphTargets: true, morphNormals: true, vertexColors: THREE.FaceColors, shading: THREE.FlatShading }};
+
 
             json1.defaults = {
                 "bgcolor":[255, 255, 255],
                 "bgalpha":0.5,
                 "camera":"camera1"
             };
-            window.addEventListener( 'resize', onWindowResize, false );
 
-
-
-            loader.parse(json1, callbackFinished, postUrl);
-
-
+            return json1;
         }
 
         function callbackFinished( result ) {
             var cameraX = $("#cameraX").val();
             var cameraY = $("#cameraY").val();
             var cameraZ = $("#cameraZ").val();
-            var background = $("#background").val();
+            var controlsX = $("#controlsX").val();
+            var controlsY = $("#controlsY").val();
+            var controlsZ = $("#controlsZ").val();
 
-        //    $( "message" ).style.display = "none";
-        //    $( "progressbar" ).style.display = "none";
+            var background = $("#background").val();
 
 
             camera = result.currentCamera;
-        //    camera.aspect = container.clientWidth/container.clientHeight;
-            if (cameraX == "undefined" ||
-                cameraY == "undefined" ||
-                cameraZ == "undefined") {
-        //        alert(camera.position.x+" "+camera.position.y+" "+camera.position.z);
-            } else {
+            if (cameraX &&
+                cameraY &&
+                cameraZ ) {
                 camera.position.x = cameraX;
                 camera.position.y = cameraY;
                 camera.position.z = cameraZ;
             }
-
             camera.updateProjectionMatrix();
 
             scene = result.scene;
@@ -324,15 +283,11 @@ require(list, function($,_) {
             var opts = {};
 
             opts.callback = function(url) {
-
-
-
-
             }
 
             //full screen f code
-            opts.width = 320;
-            opts.height = 180;
+            opts.width = 160;
+            opts.height = 90;
             THREEx.Screenshot.bindKey(renderer, opts);
             var opts1 = {};
             opts1.element = document.getElementById("postShowContainer");
@@ -362,15 +317,9 @@ require(list, function($,_) {
                         theObject = object;
                         var radius = object.geometry.boundingSphere.radius;
 
-        //                Posts.update({"name" : object.name}, {"$set" :{"scale" : 60/radius}});
                     }
                 }
 
-        //        if ( object.properties.rotating === true ) {
-        //
-        //            rotatingObjects.push( object );
-        //
-        //        }
 
                 if ( object instanceof THREE.MorphAnimMesh ) {
 
@@ -395,31 +344,22 @@ require(list, function($,_) {
                 }
 
             } );
-            if (background == "undefined") {
-        //        background= "room";
-            } else {
 
+            controls = new THREE.OrbitControls( camera, renderer.domElement);
+            if (controlsX &&
+                controlsY &&
+                controlsZ) {
+                controls.center.x = parseFloat(controlsX);
+                controls.center.y = parseFloat(controlsY);
+                controls.center.z = parseFloat(controlsZ);
             }
-
-
-
-
-
-            controls = new THREE.OrbitControls( camera);
-            controls.addEventListener( 'change', render );
-
-        //    document.getElementById("changeBackground").addEventListener('click', function(event) {
-
-        //        if(scene!==null && mesh !== null) {
-        //            scene.remove( mesh );
-        //
-        //            mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ event.target[event.target.selected].value +'.jpg' ) } ) );
-        //            mesh.scale.x = -1;
-        //            scene.add( mesh );
-        //        }
-        //    },false);
-
+            var radius = theObject.geometry.boundingSphere.radius;
+            theObject.scale.x = 60/radius;
+            theObject.scale.y = 60/radius;
+            theObject.scale.z = 60/radius;
             animate();
+
+
         }
 
 
@@ -494,25 +434,57 @@ require(list, function($,_) {
 
             renderer.render( scene, camera );
         }
-        //});
 
-        function getRadio(event) {
-            theBackground = event.target.value;
-            if(scene!==null && mesh !== null) {
-                scene.remove( mesh );
+        /**
+         * crete secne
+         * @returns {{scene: THREE.Scene, camera: THREE.PerspectiveCamera}}
+         */
+        function createLoadScene() {
 
-                mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ theBackground +'.jpg' ) } ) );
-                mesh.scale.x = -1;
-                scene.add( mesh );
+            var result = {
+
+                scene:  new THREE.Scene(),
+                camera: new THREE.PerspectiveCamera( 65, window.innerWidth / window.innerHeight, 1, 1000 )
+
+            };
+
+            result.camera.position.z = 100;
+            result.scene.add( result.camera );
+
+            var object, geometry, material, light, count = 500, range = 200;
+
+            material = new THREE.MeshLambertMaterial( { color:0xffffff } );
+            geometry = new THREE.CubeGeometry( 5, 5, 5 );
+
+            for( var i = 0; i < count; i++ ) {
+
+                object = new THREE.Mesh( geometry, material );
+
+                object.position.x = ( Math.random() - 0.5 ) * range;
+                object.position.y = ( Math.random() - 0.5 ) * range;
+                object.position.z = ( Math.random() - 0.5 ) * range;
+
+                object.rotation.x = Math.random() * 6;
+                object.rotation.y = Math.random() * 6;
+                object.rotation.z = Math.random() * 6;
+
+                object.matrixAutoUpdate = false;
+                object.updateMatrix();
+
+                result.scene.add( object );
+
             }
-        }
 
-        function getRotation() {
-            alert(" fov "+camera.fov
-                +"  near "+camera.near
-                +" far "+camera.far
-                +" position "+camera.position.x+","+camera.position.y+","+camera.position.z
-                +" target "+camera.target);
+            result.scene.matrixAutoUpdate = false;
+
+            light = new THREE.PointLight( 0xffffff );
+            result.scene.add( light );
+
+            light = new THREE.DirectionalLight( 0x111111 );
+            light.position.x = 1;
+            result.scene.add( light );
+
+            return result;
 
         }
 

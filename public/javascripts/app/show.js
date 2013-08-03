@@ -451,15 +451,9 @@ require(list, function($,_) {
                         theObject = object;
                         var radius = object.geometry.boundingSphere.radius;
 
-                        //                Posts.update({"name" : object.name}, {"$set" :{"scale" : 60/radius}});
                     }
                 }
 
-                //        if ( object.properties.rotating === true ) {
-                //
-                //            rotatingObjects.push( object );
-                //
-                //        }
 
                 if ( object instanceof THREE.MorphAnimMesh ) {
 
