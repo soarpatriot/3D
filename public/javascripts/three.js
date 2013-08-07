@@ -10213,6 +10213,7 @@ THREE.Loader.prototype = {
 			message += ( progress.loaded / 1000 ).toFixed(2) + " KB";
 
 		}
+        console.log('M'+message);
         return function(){ return message};
         //this.statusDomElement.innerHTML = message;
 		//$("#statusDomElement")[0].innerHTML = message;

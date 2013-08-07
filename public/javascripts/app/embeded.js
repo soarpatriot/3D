@@ -80,6 +80,7 @@ require.config({
     paths: {
         'bootstrap': 'bootstrap',
         'jquery': 'jquery-1.10.2.min',
+        'Spinner': 'spin.min',
         'rails': 'rails',
         'three':'three',
         'underscore': 'underscore-min',
@@ -106,14 +107,14 @@ require.config({
     }
 });
 
-list = ['jquery', 'underscore','three','bootstrap','noty',
+list = ['jquery', 'underscore','Spinner','three','bootstrap','noty',
     'noty-top','noty-topCenter','noty-default','tip',
     'three-fullscreen','three-screenshot','OrbitControls-Touch',
     'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
     'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
     'MTLLoader'
 ];
-require(list, function($,_) {
+require(list, function($,_,Spinner) {
 
     $(function(){
 
@@ -163,6 +164,26 @@ require(list, function($,_) {
             container.appendChild( renderer.domElement );
 
             loader = new THREE.SceneLoader();
+            loader.updateProgress = function ( progress ) {
+
+                var message = "Loaded sdfsdfsdf";
+
+                if ( progress.total ) {
+
+                    message += ( 100 * progress.loaded / progress.total ).toFixed(0) + "%";
+
+
+                } else {
+
+                    message += ( progress.loaded / 1000 ).toFixed(2) + " KB";
+
+                }
+                console.log('M'+message);
+                return function(){ return message};
+                //this.statusDomElement.innerHTML = message;
+                //$("#statusDomElement")[0].innerHTML = message;
+
+            };
 
             loader.addGeometryHandler( "binary", THREE.BinaryLoader );
             loader.addGeometryHandler( "ctm", THREE.CTMLoader );
@@ -175,11 +196,23 @@ require(list, function($,_) {
             window.addEventListener( 'resize', onWindowResize, false );
 
             console.log("postUrl: "+postUrl);
+            loader.onLoadStart = function(){
+                var opts = {};
+                //var $spinContainer = $('<div id="preview"></div>');
+                //$('body').append($spinContainer);
+                //$('#preview').spin(opts);
+                var target= document.getElementById('spinner');
+                var spinner = new Spinner(opts).spin(target);
+                
+                console.log('start');
+            };
+            loader.onLoadComplete = function () {
+                spinner.stop();
+                console.log('end');
+            };
 //            container.appendChild(loader.statusDomElement);
             loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
-            loader.updateProgress(function(message){
-                console.log("message:"+message);
-            }); 
+
 
         }
         /**
