@@ -80,6 +80,7 @@ require.config({
     paths: {
         'bootstrap': 'bootstrap',
         'jquery': 'jquery-1.10.2.min',
+        'jquery.spin': 'jquery.spin',
         'rails': 'rails',
         'three':'three',
         'underscore': 'underscore-min',
@@ -106,7 +107,7 @@ require.config({
     }
 });
 
-list = ['jquery', 'underscore','three','bootstrap','noty',
+list = ['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
     'noty-top','noty-topCenter','noty-default','tip',
     'three-fullscreen','three-screenshot','OrbitControls-Touch',
     'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
@@ -267,7 +268,22 @@ require(list, function($,_) {
             loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );
 
             window.addEventListener( 'resize', onWindowResize, false );
+            var $spinContainer = $('<div class="spin-container"></div>');
+            var $spinner = $('<div class="preview"></div>');
+            var $spinMessage = $('<div id="spinMessage" class="spin-message">0%</div>');
+            loader.onLoadStart = function(){
+                $spinContainer.append($spinner);
+                $spinContainer.append($spinMessage);
+                $('body').append($spinContainer);
+                $spinner.spin({color: '#fff'});
 
+                console.log('start');
+            };
+            loader.onLoadComplete = function () {
+                $spinner.spin(false);
+                $spinContainer.remove();
+                console.log('end');
+            };
             console.log("postUrl: "+postUrl);
 //            container.appendChild(loader.statusDomElement);
             loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);

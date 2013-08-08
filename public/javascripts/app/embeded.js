@@ -80,7 +80,8 @@ require.config({
     paths: {
         'bootstrap': 'bootstrap',
         'jquery': 'jquery-1.10.2.min',
-        'Spinner': 'spin.min',
+
+        'jquery.spin': 'jquery.spin',
         'rails': 'rails',
         'three':'three',
         'underscore': 'underscore-min',
@@ -107,14 +108,14 @@ require.config({
     }
 });
 
-list = ['jquery', 'underscore','Spinner','three','bootstrap','noty',
+list = ['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
     'noty-top','noty-topCenter','noty-default','tip',
     'three-fullscreen','three-screenshot','OrbitControls-Touch',
     'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
     'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
     'MTLLoader'
 ];
-require(list, function($,_,Spinner) {
+require(list, function($,_) {
 
     $(function(){
 
@@ -196,18 +197,21 @@ require(list, function($,_,Spinner) {
             window.addEventListener( 'resize', onWindowResize, false );
 
             console.log("postUrl: "+postUrl);
+            var $spinContainer = $('<div class="spin-container"></div>');
+            var $spinner = $('<div class="preview"></div>');
+            var $spinMessage = $('<div id="spinMessage" class="spin-message">0%</div>');
+
             loader.onLoadStart = function(){
-                var opts = {};
-                //var $spinContainer = $('<div id="preview"></div>');
-                //$('body').append($spinContainer);
-                //$('#preview').spin(opts);
-                var target= document.getElementById('spinner');
-                var spinner = new Spinner(opts).spin(target);
-                
+                $spinContainer.append($spinner);
+                $spinContainer.append($spinMessage);
+                $('body').append($spinContainer);
+                $spinner.spin({color: '#fff'});
+
                 console.log('start');
             };
             loader.onLoadComplete = function () {
-                spinner.stop();
+                $spinner.spin(false);
+                $spinContainer.remove();
                 console.log('end');
             };
 //            container.appendChild(loader.statusDomElement);

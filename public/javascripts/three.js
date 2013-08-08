@@ -10201,20 +10201,23 @@ THREE.Loader.prototype = {
 
 	updateProgress: function ( progress ) {
 
-		var message = "Loaded ";
+		var message = "";
 
 		if ( progress.total ) {
 
-			message += ( 100 * progress.loaded / progress.total ).toFixed(0) + "%";
+			message = ( 100 * progress.loaded / progress.total ).toFixed(0) + "%";
 
 
 		} else {
 
-			message += ( progress.loaded / 1000 ).toFixed(2) + " KB";
+			message = ( progress.loaded / 1000 ).toFixed(2) + " KB";
 
 		}
-        console.log('M'+message);
-        return function(){ return message};
+
+        if($('#spinMessage')){
+
+            $('#spinMessage').text(message);
+        }
         //this.statusDomElement.innerHTML = message;
 		//$("#statusDomElement")[0].innerHTML = message;
 
