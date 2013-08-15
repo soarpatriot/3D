@@ -233,13 +233,14 @@ action(function destroy() {
 
 function loadPost() {
 
-    console.log("load Post :");
+    //console.log("load Post :");
     Post.findOne({'_id': params.id}, function(err, post){
         if (err || !post) {
             if (!err && !post && params.format === 'json') {
                 return send({code: 404, error: 'Not found'});
             }
             redirect(path_to.posts);
+            next();
         } else {
             this.post = post;
             next();

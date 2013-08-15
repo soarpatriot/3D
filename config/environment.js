@@ -1,6 +1,7 @@
 module.exports = function (compound) {
 
-    var express = require('express');
+    var express = require('express')
+        , path = require('path');
     var app = compound.app;
     require('./mongoose').init(compound);
 
@@ -21,7 +22,9 @@ module.exports = function (compound) {
 
     app.configure(function(){
         //app.use(compound.assetsCompiler.init());
-        app.use(express.static(app.root + '/public', { maxAge: 86400000 }));
+        console.log(app.root);
+        app.use(express.static(path.join(app.root, 'public'), { maxAge: 86400000 }));
+        //app.use(express.static(app.root + '/public', { maxAge: 86400000 }));
         app.set('jsDirectory', '/javascripts/');
         app.set('cssDirectory', '/stylesheets/');
         app.set('cssEngine', 'stylus');
