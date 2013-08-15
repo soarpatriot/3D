@@ -43,16 +43,22 @@
   border-bottom: 2px solid silver;
 }
 .embeded-container {
+  margin: 0;
+  padding: 0;
   height: 394px;
   background-color: #282828;
   background-image: url("../images/grid.png");
   border: 6px white solid;
+  scroll: no;
 }
 .embeded-iframe {
+  margin: 0;
+  padding: 0;
   border: 0;
   overflow: hidden;
   height: 100%;
   width: 100%;
+  scroll: no;
 }
 .public-header {
   text-align: center;

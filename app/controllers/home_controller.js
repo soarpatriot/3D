@@ -2,7 +2,7 @@ load('application');
 
 
 action('index', function () {
-    this.title = '3D Studio';
+    this.title = '三维云';
     Post.findOne({})
         .nin('url',[null,''])
         .sort('-publishDate')

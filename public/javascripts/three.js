@@ -19746,7 +19746,7 @@ THREE.ShaderLib = {
 
 THREE.WebGLRenderer = function ( parameters ) {
 
-	console.log( 'THREE.WebGLRenderer', THREE.REVISION );
+	//console.log( 'THREE.WebGLRenderer', THREE.REVISION );
 
 	parameters = parameters || {};
 
@@ -26951,7 +26951,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 		} catch ( error ) {
 
-			console.error( error );
+			console.log( error );
 
 		}
 
