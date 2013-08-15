@@ -443,7 +443,7 @@ require(list, function($,_) {
             opts1.element = document.getElementById("postShowContainer");
             if( THREEx.FullScreen.available() ) {
                 THREEx.FullScreen.bindKey(opts1);
-            }
+            };
             //full screen button click
             $("#full-btn").click(function(){
                 if( THREEx.FullScreen.available() ) {
@@ -454,7 +454,16 @@ require(list, function($,_) {
                         THREEx.FullScreen.request(opts1.element);
                     }
                 }
-            })
+            });
+            $("body").click(function(){
+                if( THREEx.FullScreen.available() ) {
+
+                    if( THREEx.FullScreen.activated() ){
+                        THREEx.FullScreen.cancel();
+                    }
+                }
+            });
+
 
             scene.traverse( function ( object ) {
 

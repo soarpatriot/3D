@@ -196,7 +196,6 @@ require(list, function($,_) {
 
             window.addEventListener( 'resize', onWindowResize, false );
 
-            console.log("postUrl: "+postUrl);
             var $spinContainer = $('<div class="spin-container"></div>');
             var $spinner = $('<div class="preview"></div>');
             var $spinMessage = $('<div id="spinMessage" class="spin-message">0%</div>');
@@ -206,13 +205,10 @@ require(list, function($,_) {
                 $spinContainer.append($spinMessage);
                 $('body').append($spinContainer);
                 $spinner.spin({color: '#fff'});
-
-                console.log('start');
-            };
+          };
             loader.onLoadComplete = function () {
                 $spinner.spin(false);
                 $spinContainer.remove();
-                console.log('end');
             };
 //            container.appendChild(loader.statusDomElement);
             loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
@@ -341,7 +337,16 @@ require(list, function($,_) {
                         THREEx.FullScreen.request(opts1.element);
                     }
                 }
-            })
+            });
+            //full screen button click
+            $("body").click(function(){
+                if( THREEx.FullScreen.available() ) {
+
+                    if( THREEx.FullScreen.activated() ){
+                        THREEx.FullScreen.cancel();
+                    }
+                }
+            });
 
             scene.traverse( function ( object ) {
 
