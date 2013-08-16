@@ -7,14 +7,9 @@
 
     </head>
     <body>
-    <!--<div id="viewport">-->
-        <!--<div id="view-frame">-->
-
             <div id="postShowContainer">
-                <!--<canvas id="3DView" oncontextmenu="return false">-->
             </div>
-        <!--</div>-->
-    <!--</div>-->
+
 <div class="container">
 
     <input type="hidden" id="post-url" name="post-url" value="<%= post.url %>">
@@ -38,8 +33,10 @@
 
 
     <input id="pictureTaking" type="button" value="拍照" class="hud-top hud-pic-button">
-        <span><i class="icon-cogs"></i></span>
+       <span><i class="icon-cogs"></i></span>
     </input>
+
+
 
 
     <img id="picture" hidden="true" style="position:absolute;left:80px;top:110px;border:1;border-color: black;">
@@ -50,18 +47,7 @@
     <button class="btn btn-large"><i class="icon-heart"></i></button>
     <button id="full-btn" class="btn btn-large"><i class="icon-fullscreen"></i></button>
 </div>
-<!--
-<div id="user-toolbar-options">
-    <a href="#"><i class="icon-user"></i></a>
-    <a href="#"><i class="icon-star"></i></a>
-    <a href="#"><i class="icon-edit"></i></a>
-    <a href="#"><i class="icon-delete"></i></a>
-    <a href="#"><i class="icon-ban"></i></a>
-    <button class="btn btn-large">分享</button>
-    <button class="btn btn-large">嵌入</button>
 
-</div>
--->
 <div class="hud-top hud-edit-button">
     编辑
     <span><i class="icon-cogs"></i></span>
@@ -239,14 +225,6 @@
                         <br>
                         <span class="hsl-value" id="hsl-a-value">1.00</span> <input id="hsl-a" type="range" min="0" max="100" value="100">
                     </div>
-
-
-                    <!--<div class="noUiSlider js-material-channel-factor"-->
-                         <!--data-min="0"-->
-                         <!--data-max="1"-->
-                         <!--data-step="0.001">-->
-                    <!--</div>-->
-
                 </fieldset>
 
                 <fieldset id="channel-EmitColor">

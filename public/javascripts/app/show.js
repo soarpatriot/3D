@@ -427,7 +427,7 @@ require(list, function($,_) {
                     url: '/posts/snapshot',
                     data: params,
                     success: function(){
-                        console.log("fdsafasfd");
+                        console.log("success");
                     },
                     dataType: 'json'
                 });
