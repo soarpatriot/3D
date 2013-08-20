@@ -1,0 +1,1 @@
+importScripts("lzma.js","ctm.js"),self.onmessage=function(e){var t=[];for(var n=0;n<e.data.offsets.length;n++){var r=new CTM.Stream(e.data.data);r.offset=e.data.offsets[n],t[n]=new CTM.File(r)}self.postMessage(t),self.close()};

@@ -1,0 +1,1 @@
+function generate(e,t,n){var r=noty({text:n,type:e,dismissQueue:!1,layout:t,theme:"defaultTheme"});setTimeout(function(){r.close()},3e3)}function success(e){generate("success","topCenter",e)}function error(e){generate("error","topCenter",e)};
