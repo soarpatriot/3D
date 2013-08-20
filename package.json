@@ -3,27 +3,39 @@
     , "engines": ["node >= 0.8.0"]
     , "main": "server.js"
     , "dependencies":
-{ "ejs":              "*"
-    , "ejs-ext":          "latest"
-    , "express":          "~3.x"
-    , "compound":       ">= 1.1.0"
-    , "jugglingdb":       ">= 0.1.0"
-    , "coffee-script":    ">= 1.1.1"
-    , "stylus":           "latest"
-    , "seedjs": "latest"
-    , "mongoose":"3.4.0"
-    , "supervisor":"0.5.2"
-    , "blueimp-file-upload-node": ">=2.0.0"
-    , "jquery-file-upload-middleware":"0.0.8"
-    , "underscore":">=1.4.4"
-    , "node-uuid":"1.4.0"
-},
-"devDependencies":
-{ "nodeunit":         "*"
-, "sinon":            "*"
-, "semicov":          "*"
-}
-, "scripts":
-{ "test": "nodeunit test/*/*"
-}
+    { "ejs":              "*"
+        , "ejs-ext":          "latest"
+        , "express":          "~3.x"
+        , "compound":       ">= 1.1.0"
+        , "jugglingdb":       ">= 0.1.0"
+        , "coffee-script":    ">= 1.1.1"
+        , "stylus":           "latest"
+        , "seedjs": "latest"
+        , "mongoose":"3.4.0"
+        , "supervisor":"0.5.2"
+        , "blueimp-file-upload-node": ">=2.0.0"
+        , "jquery-file-upload-middleware":"0.0.8"
+        , "underscore":">=1.4.4"
+        , "node-uuid":"1.4.0"
+    },
+    "devDependencies":
+    {   "nodeunit":         "*",
+        "sinon":            "*",
+        "semicov":          "*",
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-contrib-nodeunit": "~0.2.0",
+        "grunt-contrib-uglify": "~0.2.2",
+        "grunt-contrib-concat": ">0.1.1",
+        "grunt-contrib-requirejs": "~0.4.1",
+        "grunt-css": ">0.0.0",
+        "grunt-contrib-watch": "~0.4.4",
+        "grunt-contrib-clean": "~0.5.0"
+    }
+    , "scripts":
+    { 
+        "test": "nodeunit test/*/*"
+    }
+
+    
 }

@@ -48,10 +48,10 @@ require.config({
     }
 });
 
-list = ['jquery', 'underscore','bootstrap','three','noty','noty-top','noty-topCenter','noty-default','tip'];
 
 
-require(list, function($,_) {
+
+require(['jquery', 'underscore','bootstrap','three','noty','noty-top','noty-topCenter','noty-default','tip'], function($,_) {
 
     $(function(){
 

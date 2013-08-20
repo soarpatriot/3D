@@ -108,14 +108,14 @@ require.config({
     }
 });
 
-list = ['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
+
+require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
     'noty-top','noty-topCenter','noty-default','tip',
     'three-fullscreen','three-screenshot','OrbitControls-Touch',
     'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
     'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
     'MTLLoader'
-];
-require(list, function($,_) {
+    ], function($,_) {
 
     $(function(){
 

@@ -35,15 +35,10 @@ require.config({
      'noty': 'noty/jquery.noty',
      'noty-top': 'noty/layouts/top',
      'noty-topCenter': 'noty/layouts/topCenter',
-     'noty-default': 'noty/themes/default',
-     'masonry':'masonry.pkgd.min'
+     'noty-default': 'noty/themes/default'
 
    }
 });
 
-list = ['jquery', 'underscore','bootstrap','noty',
-        'noty-top','noty-topCenter','noty-default','masonry'
 
-];
-
-require list, ($,_) ->
+require ['jquery', 'underscore','bootstrap','noty','noty-top','noty-topCenter','noty-default'], ($,_) ->

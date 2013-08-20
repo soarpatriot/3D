@@ -42,11 +42,7 @@ require.config
   }
 
 
-list = ['jquery', 'underscore','bootstrap','noty',
-        'noty-top','noty-topCenter','noty-default'
-];
-
-require list, ($,_) ->
+require ['jquery', 'underscore','bootstrap','noty','noty-top','noty-topCenter','noty-default'], ($,_) ->
   $ ->
     tipInfoType = $('#tip-info-type').val()
     tipInfo  = $('#tip-info').val()
