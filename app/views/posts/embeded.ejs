@@ -2,12 +2,16 @@
 <html lang="en">
     <head>
         <title><%= title %></title>
-
-        <%- stylesheet_link_tag('jquery-toolbars','bootstrap-icons') %>
-
     </head>
 <body>
     <div id="postShowContainer">
+        <div class="full-screen-container">
+                <div class="row-fluid">
+                    <div class="btn-group span12 btn-group-float">
+                        <button id="full-btn" class="btn btn-mini"><i class="icon-fullscreen"></i></button>
+                    </div>
+                </div>
+        </div>
     </div>
     <div class="container">
 
@@ -32,16 +36,7 @@
            <input type="hidden" id="post-id" name="post-id" value="<%= post._id %>">
         <%- form.end() %>
     </div>
-    <div class="container">
 
-        <div class="row-fluid">
-
-            <div class="btn-group span12 btn-group-float">
-
-                <button id="full-btn" class="btn btn-mini"><i class="icon-fullscreen"></i></button>
-            </div>
-        </div>
-    </div>
     <script data-main="/build/app/embeded" src="/javascripts/require.js"></script>
 
 </body>

@@ -6,7 +6,7 @@
     { "ejs":              "*"
         , "ejs-ext":          "latest"
         , "express":          "~3.x"
-        , "compound":       ">= 1.1.0"
+        , "compound":       ">= 1.1.5"
         , "jugglingdb":       ">= 0.1.0"
         , "coffee-script":    ">= 1.1.1"
         , "stylus":           "latest"

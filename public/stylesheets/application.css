@@ -242,6 +242,8 @@
   background: white;
   background-image: url("../images/grid.png");
   position: absolute;
+  text-align: center;
+  margin: 0 auto;
   left: 0px;
   top: 0px;
   z-index: 0;
@@ -259,6 +261,13 @@
   left: 0;
   right: 0;
   margin: auto;
+}
+.full-screen-container {
+  position: absolute;
+  bottom: 0px;
+  margin: 0 auto;
+  text-align: center;
+  left: 49%;
 }
 .preview {
   background: #666;
