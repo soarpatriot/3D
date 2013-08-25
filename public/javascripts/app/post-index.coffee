@@ -30,7 +30,7 @@ require.config({
      'bootstrap': 'bootstrap',
      'jquery': 'jquery-1.10.2.min',
      'rails': 'rails',
-
+     'masonry':'masonry.pkgd.min',
      'underscore': 'underscore-min',
      'noty': 'noty/jquery.noty',
      'noty-top': 'noty/layouts/top',

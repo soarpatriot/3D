@@ -7,6 +7,9 @@ require.config({
         'underscore': {
             exports: '_'
         },
+        'masonry':{
+            deps: ['jquery']
+        },
         'bootstrap':{
             deps: ['jquery']
         },
