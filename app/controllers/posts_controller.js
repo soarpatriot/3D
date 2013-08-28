@@ -69,8 +69,11 @@ action(function create() {
                     });
                 } else {
                     console.log("fsuccess");
-                    flash('info', 'Post created');
-                    redirect(path_to.post(post));
+                    
+                    render('show', {
+                        post: post,
+                        title: '模型浏览'
+                    });
                 }
             });
         });
