@@ -108,7 +108,10 @@ module.exports = function (mongoose, compound) {
         controlsX: 'Number',
         controlsY: 'Number',
         controlsZ: 'Number',
-        background: 'String'
+        background: 'String',
+
+        user: {type: ObjectId, ref: 'User'}
+
     },schemaOptions);
 
     var Post = mongoose.model('PostSchema', PostSchema);
@@ -125,6 +128,7 @@ module.exports = function (mongoose, compound) {
         gender: { type: String, default: '未知' },
         email:'String',
         regTime:{ type: Date, default: Date.now }
+        
     },schemaOptions);
 
     var User = mongoose.model('UserSchema', UserSchema);

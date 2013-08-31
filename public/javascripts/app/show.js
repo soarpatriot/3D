@@ -503,7 +503,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 }
 
             } );
-            if (background == "undefined" || background == "no") {
+            if (background) {
                 //        background= "room";
             } else {
                 $(".js-edit-environment-list")[0].value = background;
@@ -515,29 +515,32 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
             controls = new THREE.OrbitControls( camera, renderer.domElement);
 //        controls.addEventListener( 'change', render );
-            if (controlsX == "undefined" ||
-                controlsY == "undefined" ||
-                controlsZ == "undefined") {
+            if (controlsX ||
+                controlsY  ||
+                controlsZ ) {
             } else {
                 controls.center.x = parseFloat(controlsX);
                 controls.center.y = parseFloat(controlsY);
                 controls.center.z = parseFloat(controlsZ);
             }
-//        controls.center.x = -0.6275427832484903;
-//        controls.center.y = 42.21773787259461;
-//        controls.center.z = -34.91293222591709;
-//        camera.lookAt({ x:-22, y:46, z:-12});
+
             var radius = theObject.geometry.boundingSphere.radius;
             theObject.scale.x = 60/radius;
             theObject.scale.y = 60/radius;
             theObject.scale.z = 60/radius;
-            theObject.material.wireframe = document.getElementById("check_wireframe").checked;
+            
+            if($("#check_wireframe")){
+                theObject.material.wireframe = $("#check_wireframe").attr("checked");
+            }
+           
             animate();
 
-            var thumbnail = $("#thumbnail").val();
-            if(thumbnail == "undefined") {
-                var target =document.getElementById("pictureTaking");
-                target.click();
+            if($("#thumbnail") && document.getElementById("pictureTaking")){
+                var thumbnail = $("#thumbnail").val();
+                if(thumbnail) {
+                    var target =document.getElementById("pictureTaking");
+                    target.click();
+                }
             }
 
         }

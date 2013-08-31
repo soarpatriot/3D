@@ -4,6 +4,11 @@ before(loadPost,{
     only: ['show','embeded', 'edit', 'update', 'destroy']
     });
 before(userLogined,{only:['new','create']});
+
+before(loadUser,{
+    only:['create']
+});
+
 before(applicationLayout,{all:[]});
 
 action('new', function () {
@@ -46,10 +51,11 @@ action(function create() {
         url: req.body.Post.url,
         delete_url: req.body.Post.delete_url,
         size: req.body.Post.size,
-        published:req.body.Post.published
+        published:req.body.Post.published,
+        user:this.user._id
     });
     this.post = post;
-
+  
     this.post.save(function (err, post) {
         respondTo(function (format) {
             format.json(function () {
@@ -250,6 +256,25 @@ function loadPost() {
         }
     }.bind(this));
 }
+
+
+function loadUser() {
+
+    //console.log("load Post :");
+    User.findOne({'_id': req.session.user._id}, function(err, user){
+        if (err || !user) {
+            if (!err && !user && params.format === 'json') {
+                return send({code: 404, error: 'Not found'});
+            }
+            redirect(path_to.posts);
+            next();
+        } else {
+            this.user = user;
+            next();
+        }
+    }.bind(this));
+}
+
 
 function applicationLayout() {
     console.log('filter applicationLayout');
