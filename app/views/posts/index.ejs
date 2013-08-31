@@ -1,18 +1,22 @@
 <div class="container padding-top-30">
 
-    <div>
-        <h1>模型列表</h1>
+
+    <h3>模型列表</h3>
+    <div class="row">
+        <div class="span12">
+            <ul class='breadcrumb'>
+                <li class="active">
+                    all models
+                    <span class='divider'>/</span>
+                </li>
+                <li>
+                    <a href="/posts/me">my model</a>
+                </li>
+            </ul>
+        </div>   
     </div>
-
-    <!--<div class="row">-->
-        <!--<div class="span12">-->
-            <!--<p><%- link_to('<i class="icon-plus icon-white"></i> 上传我的模型', pathTo.new_post(), {class: 'btn btn-primary'}) %></>-->
-        <!--</div>-->
-    <!--</div>-->
-
     <div class="wrapper">
-        <!--<div class="row">-->
-        <!--<div class="span8">-->
+
         <article class="left-column">
             <nav>
                 <ul class="menu">
@@ -51,7 +55,6 @@
                             <a class="model-link" href="/posts/<%=post.id %>">
                                 <img src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
 
-                                <!--<a href="/posts/<%=post.id %>"><img src="<%=post.thumbnail %>" class="item"></a>-->
                             </a>
                             <div class="model-meta">
                                 <p class="model-author js-model-author">by <a href="/garret559" title="garret559's profile">garret559</a>
@@ -74,31 +77,7 @@
                 </ul>
             </div>
 
-            <!--<table class="table table-striped">-->
-                <!--<thead>-->
-                    <!--<tr>-->
-                        <!--&lt;!&ndash;<th>3D Model</th>&ndash;&gt;-->
-                        <!--<th>Thumbnail</th>-->
-                        <!--&lt;!&ndash;<th>Actions</th>&ndash;&gt;-->
-                    <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                    <!--<% posts.forEach(function (post) { %>-->
-                    <!--<tr>-->
-                        <!--<td><strong><%- link_to(post.name, pathTo.post(post)) %></strong></td>-->
-                        <!--<td>-->
-                            <!--<% if(post.thumbnail) { %>-->
-                                <!--<img src="<%=post.thumbnail %>">-->
-                            <!--<% } %>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<%- link_to('<i class="icon-edit"></i> Edit', pathTo.edit_post(post), {class: 'btn btn-mini'}) %>-->
-                            <!--<%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.post(post), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<% }); %>-->
-                <!--</tbody>-->
-            <!--</table>-->
+           
             <% } else { %>
             <p class="alert alert-block alert-info">
                 <strong>No posts were found.</strong>
@@ -114,22 +93,6 @@
 
                     <li class="tag-"><a href="/tag/vehicle">车辆</a></li>
 
-                    <li class="tag-"><a href="/tag/architecture">建筑</a></li>
-
-                    <li class="tag-"><a href="/tag/animal">动物</a></li>
-
-                    <li class="tag-"><a href="/tag/military">军事</a></li>
-
-                    <li class="tag-"><a href="/tag/nature">自然</a></li>
-
-                    <li class="tag-"><a href="/tag/electronic">电子设备</a></li>
-
-                    <li class="tag-"><a href="/tag/stuff">物品</a></li>
-
-                    <li class="tag-"><a href="/tag/science">科学</a></li>
-
-                    <li class="tag-"><a href="/tag/game">游戏</a></li>
-
                     <li class="tag-"><a href="/tag/furniture">家居</a></li>
 
                     <li class="tag-"><a href="/tag/art">技术</a></li>
@@ -139,9 +102,7 @@
                 </ul>
             </article>
         </aside>
-        <!--</div>-->
-        <!--<div class="span4"></div>-->
-        <!--</div>-->
+
     </div>
 </div>
 <script data-main="/build/app/post-index" src="/javascripts/require.js"></script>

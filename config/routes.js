@@ -2,11 +2,14 @@ exports.routes = function (map) {
 
     map.get('/', 'home#index',{as:"root"});
 
+
+    map.get('/posts/me','posts#me'); 
     map.resources('posts');
     map.resource('posts', function (post) {
 
         //vincent521
         post.post('snapshot','posts#snapshot');               // /users/:user_id/avatar
+
         post.post('embeded/:id','posts#embeded');
         //user.get('top', 'users#top', {collection: true}); // /users/top
     });

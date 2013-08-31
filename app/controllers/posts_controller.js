@@ -117,6 +117,9 @@ action(function index() {
     });
 });
 
+
+
+
 action(function show() {
     this.title = 'Post show';
     switch(params.format) {
@@ -128,6 +131,28 @@ action(function show() {
                 layout:"application"
             });
     }
+});
+
+action(function me() {
+    
+    this.title = 'wo de';
+    
+    if(req.session.user){
+        Post.find({'user':req.session.user._id},function (err, posts) {
+            switch (params.format) {
+                case "json":
+                    send({code: 200, data: posts});
+                    break;
+                default:
+                    render('me',{
+                        posts: posts
+                    });
+            }
+        });
+    }else{
+        res.redirect("/");
+    }
+    
 });
 
 
