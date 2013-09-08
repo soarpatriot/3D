@@ -9091,3 +9091,8 @@ ul#taglist {
 .spin-message {
   text-align: center;
 }
+/** me post models **/
+.model-img {
+  width: 200px;
+  height: 160px;
+}

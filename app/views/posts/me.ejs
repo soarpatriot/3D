@@ -44,31 +44,26 @@
                 </ul>
             </nav>
             <div id="article_content">
-                <ul class="ul-thumbnails">
+                <ul class="thumbnails">
                     <% if (posts.length > 0) { %>
                         <% posts.forEach(function (post) { %>
                             <% if(post.thumbnail) { %>
-                                <li class="athumbnail" data-model="<%= post._id %>">
-                                    <div class="model-thumbnail">
-                                        <a class="model-link" href="/posts/<%=post.id %>">
-                                            <img src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
+                                <li class="span3" data-model="<%= post._id %>">
+                                    <div class="thumbnail">
+                                        <a href="/posts/<%=post.id %>">
+                                            <img data-src="holder.js/260x180" class="model-img" src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
 
-                                            <!--<a href="/posts/<%=post.id %>"><img src="<%=post.thumbnail %>" class="item"></a>-->
+                                      
                                         </a>
-                                        <div class="model-meta">
-                                            <p class="model-author js-model-author">by <a href="/garret559" title="garret559's profile">garret559</a>
+                                        <p> 
+                                            <%=post.title %>
+                                            <button name="del-post-btn" class="btn btn-danger btn-mini">shanchu</button>
+                                        </p>
 
-                                            </p>
-                                            <p class="model-name js-model-name model-name-active"><%=post.title %></p>
-                                            <p class="model-stats js-model-stats model-stats-active">
-                                                <span><i class="icon-eye-open"></i></span>
-                                                <span class="hits">78</span>
-                                                <span><i class="icon-heart"></i></span>
-                                                <span class="likes">4</span>
-                                                <span><i class="icon-comment"></i></span>
-                                                <span class="comments-total"><a href="/show/8A8B74fOPkMjF0LjIsrCaYXTWSG#comment#disqus_thread" title="Comments" data-disqus-identifier='8A8B74fOPkMjF0LjIsrCaYXTWSG'>0</a></span>
-                                            </p>
-                                        </div>
+                                        
+                                           
+
+                                        
                                     </div>
                                 </li>
                             <% } %>
