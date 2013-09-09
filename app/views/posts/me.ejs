@@ -14,68 +14,50 @@
         </div>
     </div>
 
-    <div class="wrapper">
-
-        <article class="left-column">
-            <nav>
-                <ul class="menu">
-                    <li id="recent"class="current">
-                        <a href="/dashboard/recent">浏览量排序</a>
-                    </li>
-                    <li id="views">
-                        <a href="/dashboard/views">喜欢数排序</a>
-                    </li>
-                    <li id="faved">
-                        <a href="/dashboard/faved">时间排序</a>
-                    </li>
-                    <li>
-                        <a href="/dashboard/folders">编辑选择</a>
-                    </li>
-
-                    <li class="dotme">
-
-                        <a href="/portfolio?ref=dashboard-nav" target="_blank">
-                            <span class="dotme-badge"></span>
-                            我的3D模型
-                        </a>
-
-                    </li>
-
-                </ul>
-            </nav>
-            <div id="article_content">
-                <ul class="thumbnails">
-                    <% if (posts.length > 0) { %>
-                        <% posts.forEach(function (post) { %>
-                            <% if(post.thumbnail) { %>
-                                <li class="span3" data-model="<%= post._id %>">
-                                    <div class="thumbnail">
+    <div class="model-container">
+        <div class="model-thumbnails">
+            <ul class="thumbnails">
+                <% if (posts.length > 0) { %>
+                    <% posts.forEach(function (post) { %>
+                        <% if(post.thumbnail) { %>
+                            <li class="span3" data-model="<%= post._id %>">
+                               <div class="thumbnail model-one">
+                                    <p class="">名字：<%=post.title %></p>
+                                    <p class="text-center">
                                         <a href="/posts/<%=post.id %>">
-                                            <img data-src="holder.js/260x180" class="model-img" src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
-
-                                      
+                                            <img data-src="holder.js/260x180" class="img-polaroid model-img" src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
                                         </a>
-                                        <p> 
-                                            <%=post.title %>
-                                            <button name="del-post-btn" class="btn btn-danger btn-mini">shanchu</button>
-                                        </p>
+                                    </p>
+                                    <p>
+                                        <a href="#myModal" role="button" class="btn btn-danger btn-mini" data-toggle="modal">删除</a>
 
-                                        
-                                           
-
-                                        
-                                    </div>
-                                </li>
-                            <% } %>
-                        <% }); %>
-                    <% } %>
-                </ul>
-                
-            </div>
-
-        
-        </article>
-
-
+                                    </p>
+                                </div>
+                            </li>
+                        <% } %>
+                    <% }); %>
+                <% } %>
+            </ul>
+        </div>
     </div>
 </div>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">删除模型</h3>
+    </div>
+        <div class="modal-body">
+        <p>
+            <div class="alert alert-danger alert-block">
+                确认删除此模型，此操作将不可回复，模型将永久移除
+            </div>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+        <button class="btn btn-danger">删除</button>
+    </div>
+</div>
+
+<script data-main="/javascripts/app/me" src="/javascripts/require.js"></script>
