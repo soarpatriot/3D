@@ -41,3 +41,12 @@ require.config({
 });
 
 require ['jquery', 'underscore','bootstrap','noty','noty-top','noty-topCenter','noty-default'], ($,_) ->
+
+  $('a[name="delete-link"]').click ->
+    postId = $(this).attr('data-id')
+    $('#post-id').val(postId)
+
+  $('#confirm-delete-btn').click ->
+    token = $('meta[name="csrf-token"]').attr('content')
+    $('#authenticity_token').val(token)
+    $('#delete-post-form').submit()
