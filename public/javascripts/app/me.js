@@ -36,6 +36,18 @@
     }
   });
 
-  require(['jquery', 'underscore', 'bootstrap', 'noty', 'noty-top', 'noty-topCenter', 'noty-default'], function($, _) {});
+  require(['jquery', 'underscore', 'bootstrap', 'noty', 'noty-top', 'noty-topCenter', 'noty-default'], function($, _) {
+    $('a[name="delete-link"]').click(function() {
+      var postId;
+      postId = $(this).attr('data-id');
+      return $('#post-id').val(postId);
+    });
+    return $('#confirm-delete-btn').click(function() {
+      var token;
+      token = $('meta[name="csrf-token"]').attr('content');
+      $('#authenticity_token').val(token);
+      return $('#delete-post-form').submit();
+    });
+  });
 
 }).call(this);

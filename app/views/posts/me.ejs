@@ -28,8 +28,10 @@
                                             <img class="model-img" src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
                                         </a>
                                     </p>
-                                    <p class="p-row">
-                                        <a href="#myModal" role="button" class="btn btn-danger btn-mini" data-toggle="modal">删除</a>
+
+                                    <p>
+                                        <a href="#myModal" role="button"  name="delete-link" data-id="<%=post.id %>" class="btn btn-danger btn-mini" data-toggle="modal">删除</a>
+
 
                                     </p>
                                 </div>
@@ -41,6 +43,12 @@
         </div>
     </div>
 </div>
+
+<form id="delete-post-form" action="/posts" method="post">
+   <input type="hidden" name="_method" value="delete">
+   <input type="hidden" id="authenticity_token" name="authenticity_token">
+   <input type="hidden" id="post-id" name="id">
+</form>
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
@@ -56,8 +64,8 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-        <button class="btn btn-danger">删除</button>
+        <button id="confirm-delete-btn" class="btn btn-danger">删除</button>
     </div>
 </div>
 
-<script data-main="/javascripts/app/me" src="/javascripts/require.js"></script>
+<script data-main="/build/app/me" src="/javascripts/require.js"></script>

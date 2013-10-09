@@ -243,25 +243,39 @@ action(function update() {
 });
 
 action(function destroy() {
-    this.post.remove(function (error) {
-        respondTo(function (format) {
-            format.json(function () {
-                if (error) {
-                    send({code: 500, error: error});
-                } else {
-                    send({code: 200});
-                }
+
+    Post.findOne({'_id': req.body.id}, function(err, post){
+        if (err || !post) {
+            if (!err && !post && params.format === 'json') {
+                return send({code: 404, error: 'Not found'});
+            }
+            redirect(path_to.posts);
+
+        } else {
+            this.post = post;
+            console.log("this.post:"+this.post);
+            this.post.remove(function (error) {
+                respondTo(function (format) {
+                    format.json(function () {
+                        if (error) {
+                            send({code: 500, error: error});
+                        } else {
+                            send({code: 200});
+                        }
+                    });
+                    format.html(function () {
+                        if (error) {
+                            flash('error', 'Can not destroy post');
+                        } else {
+                            flash('info', 'Post successfully removed');
+                        }
+                        send("'" + path_to.posts + "'");
+                    });
+                });
             });
-            format.html(function () {
-                if (error) {
-                    flash('error', 'Can not destroy post');
-                } else {
-                    flash('info', 'Post successfully removed');
-                }
-                send("'" + path_to.posts + "'");
-            });
-        });
+        }
     });
+
 });
 
 
