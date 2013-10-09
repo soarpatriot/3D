@@ -39,7 +39,3 @@
   require(['jquery', 'underscore', 'bootstrap', 'noty', 'noty-top', 'noty-topCenter', 'noty-default'], function($, _) {});
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=me.map
-*/

@@ -268,7 +268,7 @@
 }
 /** me post models **/
 .model-container {
-  background: repeat-y scroll right center / 28% auto #ffffff;
+  background-color: white;
   border: 1px solid #CCC;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -280,4 +280,16 @@
 }
 .model-container .model-one {
   margin: auto;
+  padding: 5px 10px 0px 10px;
+}
+.model-container .model-link {
+  background: none repeat scroll 0 0 #EEE;
+  color: #4A4A4A;
+}
+.model-container .p-row {
+  width: 100%;
+}
+.model-img {
+  height: 129px;
+  width: 100%;
 }

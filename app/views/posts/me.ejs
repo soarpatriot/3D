@@ -20,15 +20,15 @@
                 <% if (posts.length > 0) { %>
                     <% posts.forEach(function (post) { %>
                         <% if(post.thumbnail) { %>
-                            <li class="span3" data-model="<%= post._id %>">
+                            <li class="span3 model-li" data-model="<%= post._id %>">
                                <div class="thumbnail model-one">
-                                    <p class="">名字：<%=post.title %></p>
-                                    <p class="text-center">
-                                        <a href="/posts/<%=post.id %>">
-                                            <img data-src="holder.js/260x180" class="img-polaroid model-img" src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
+                                    <p class="p-row">名字：<%=post.title %></p>
+                                    <p class="p-row">
+                                        <a href="/posts/<%=post.id %>" class="model-link">
+                                            <img class="model-img" src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
                                         </a>
                                     </p>
-                                    <p>
+                                    <p class="p-row">
                                         <a href="#myModal" role="button" class="btn btn-danger btn-mini" data-toggle="modal">删除</a>
 
                                     </p>
