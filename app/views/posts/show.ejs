@@ -19,8 +19,12 @@
     <input type="hidden" id="background" name="background" value="<%= post.background %>">
     <input type="hidden" id="wireframe" name="wireframe" value="<%= post.wireframe %>">
 
+
     <input type="hidden" id="userId" name="userId" value="<%= post.user %>">
-    <input type="hidden" id="sessionId" name="sessionId" value="<%= request.session.user._id %>">
+
+    <% if(request.session.user) {%>
+        <input type="hidden" id="sessionId" name="sessionId" value="<%= request.session.user._id %>">
+    <% } %>
     <% var form = formFor(post, {action: pathTo.posts, method: 'POST', id: "post-form", class: 'form-horizontal'}) %>
     <%- form.begin() %>
        <input type="hidden" id="post-id" name="post-id" value="<%= post._id %>">

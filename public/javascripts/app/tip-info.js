@@ -71,7 +71,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=tip-info.map
-*/
