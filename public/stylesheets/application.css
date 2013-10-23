@@ -293,3 +293,8 @@
   height: 129px;
   width: 100%;
 }
+/** about page **/
+.me-picture {
+  width: 200px;
+  height: 200px;
+}
