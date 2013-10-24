@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title><%= title %></title>
-        <%- stylesheet_link_tag('application-all-min') %>
-        <%- csrf_meta_tag() %>
-
+        <%- include _meta-css %>
 
     </head>
     <body class="main-body">
@@ -12,8 +9,13 @@
         <div class="navbar navbar-inverse navbar-fixed-top nav-3d">
             <div class="navbar-inner">
                 <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="brand" href="/"><i class="icon-cloud"></i>&nbsp;三维云</a>
-                    <div class="nav-collapse.collapse">
+                    <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active">
                                 <a href="/posts"><i class="icon-th"></i><strong>&nbsp;浏览</strong></a>
