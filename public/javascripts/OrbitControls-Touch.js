@@ -348,6 +348,14 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function onMouseWheel( event ) {
 
+		//remove default wheel scrool event
+	   	if (event&&event.preventDefault){ 
+	        event.preventDefault();
+	        event.stopPropagation();
+	    }else{ 
+	     	event.returnvalue=false;  
+	     	//return false;     
+	    }
 		if ( scope.enabled === false ) { return; }
 		if ( scope.noZoom === true ) { return; }
 
