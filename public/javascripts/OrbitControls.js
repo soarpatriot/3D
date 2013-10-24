@@ -298,7 +298,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 
 	function onMouseWheel( event ) {
-
+		
 		if ( ! scope.userZoom ) return;
 
 		var delta = 0;
