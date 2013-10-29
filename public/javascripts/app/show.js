@@ -230,7 +230,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                     url: '/posts/save',
                     data: params,
                     success: function(){
-                        console.log("fdsafasfd");
+                        
                     },
                     dataType: 'json'
                 });
@@ -276,15 +276,13 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 $spinContainer.append($spinMessage);
                 $('body').append($spinContainer);
                 $spinner.spin({color: '#fff'});
-
-                console.log('start');
             };
             loader.onLoadComplete = function () {
                 $spinner.spin(false);
                 $spinContainer.remove();
-                console.log('end');
+                
             };
-            console.log("postUrl: "+postUrl);
+            
 //            container.appendChild(loader.statusDomElement);
             loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
             //loader.load(postUrl, callbackFinished);
@@ -427,7 +425,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                     url: '/posts/snapshot',
                     data: params,
                     success: function(){
-                        console.log("success");
+                        
                     },
                     dataType: 'json'
                 });
@@ -456,12 +454,13 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 }
             });
             $("body").click(function(){
+                /**
                 if( THREEx.FullScreen.available() ) {
 
                     if( THREEx.FullScreen.activated() ){
                         THREEx.FullScreen.cancel();
                     }
-                }
+                }**/
             });
 
 

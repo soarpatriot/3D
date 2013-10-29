@@ -1,6 +1,11 @@
 
 <!-- models show container -->
 <div id="postShowContainer">
+    <div class="btn-group span12 btn-group-float">
+        <a id="share-toolbar" href="#share-model" role="button" class="btn btn-large" data-toggle="modal"><i class="icon-share"></i></a>
+        <button class="btn btn-large"><i class="icon-heart"></i></button>
+        <button id="full-btn" class="btn btn-large"><i class="icon-fullscreen"></i></button>
+    </div>
 </div>
 
 <div class="container">
@@ -40,12 +45,9 @@
 
     <img id="picture" hidden="true" style="position:absolute;left:80px;top:110px;border:1;border-color: black;">
 
+
 </div>
-<div class="btn-group span12 btn-group-float">
-    <a id="share-toolbar" href="#share-model" role="button" class="btn btn-large" data-toggle="modal"><i class="icon-share"></i></a>
-    <button class="btn btn-large"><i class="icon-heart"></i></button>
-    <button id="full-btn" class="btn btn-large"><i class="icon-fullscreen"></i></button>
-</div>
+
 
 
 <% var user = request.session.user; if (user && (user._id == post.user)) { %>
@@ -310,5 +312,5 @@
     </iframe>
 </script>
 
-<script data-main="/build/app/show" src="/javascripts/require.js"></script>
+<script data-main="/javascripts/app/show" src="/javascripts/require.js"></script>
 
