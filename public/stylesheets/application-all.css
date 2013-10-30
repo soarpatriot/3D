@@ -9015,6 +9015,7 @@ ul#taglist {
 }
 /** show one post page css**/
 .btn-group-float {
+  width: 100%;
   position: absolute;
   z-index: 1000000000;
   text-align: center;
