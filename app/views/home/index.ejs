@@ -24,7 +24,6 @@
                     <div id='contents' class="span7 embeded-container">
                     </div>
                     <div class="offset1 span4 site-simple-intro">
-
                         <ul class="introduce-3d">
 
                             <li>
@@ -45,13 +44,32 @@
                             </li>
                             
                             <li>
-
-                                <a href="/signup" class="btn btn-success btn-large">
+                                <a href="/posts" class="btn btn-success btn-large">
                                     <i class="icon-signin"></i>
-                                    开始你的3D奇幻之旅
+                                    浏览更多模型
                                 </a>
                             </li>
                         </ul>
+                        <div>
+                            <div class="row-fluid">
+                                <ul class="thumbnails">
+                                    <% if (posts.length > 0) { %>
+                                        <% posts.forEach(function (post) { %>
+                                            <% if(post.thumbnail) { %>
+                                                <li class="span6">
+                                                    <div class="thumbnail">
+                                                        <a class="model-link" href="/posts/<%=post.id %>">
+                                                            <img src="<%=post.thumbnail %>" alt="<%=post.title%>" class="img-circle img-share">
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            <% } %>
+                                        <% }); %>
+                                    <% } %>
+
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
