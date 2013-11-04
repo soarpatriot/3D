@@ -128,7 +128,7 @@ action(function show() {
             break;
         default:
             render({
-                layout:"application"
+                layout:"show"
             });
     }
 });

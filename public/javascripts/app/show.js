@@ -120,8 +120,8 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
         var fov = 70;
 
-        var SCREEN_WIDTH = document.body.clientWidth ;
-        var SCREEN_HEIGHT = document.body.clientHeight ;
+        var SCREEN_WIDTH = document.body.scrollWidth;
+        var SCREEN_HEIGHT = document.body.scrollHeight;
 
         var container;
 
@@ -251,7 +251,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 preserveDrawingBuffer: true  // required to support .toDataURL()
             });
 
-            renderer.setSize( widthNum,heightNum);
+            renderer.setSize(widthNum,heightNum);
             renderer.gammaInput = true;
             renderer.gammaOutput = true;
             renderer.physicallyBasedShading = true;

@@ -8,7 +8,6 @@
     </div>
 </div>
 
-<div class="container">
 
     <input type="hidden" id="post-url" name="post-url" value="<%= post.url %>">
     <input type="hidden" id="post-name" name="post-name" value="<%= post.name %>">
@@ -34,7 +33,7 @@
     <%- form.begin() %>
        <input type="hidden" id="post-id" name="post-id" value="<%= post._id %>">
     <%- form.end() %>
-    <%=  post.user %>
+    
     <% var user = request.session.user; if (user && (user._id == post.user)) { %>
         <input id="pictureTaking" type="button" value="拍照" class="hud-top hud-pic-button">
            <span><i class="icon-cogs"></i></span>
@@ -46,7 +45,7 @@
     <img id="picture" hidden="true" style="position:absolute;left:80px;top:110px;border:1;border-color: black;">
 
 
-</div>
+
 
 
 
