@@ -179,10 +179,9 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                     message += ( progress.loaded / 1000 ).toFixed(2) + " KB";
 
                 }
-                console.log('M'+message);
+                
                 return function(){ return message};
-                //this.statusDomElement.innerHTML = message;
-                //$("#statusDomElement")[0].innerHTML = message;
+                
 
             };
 
@@ -338,15 +337,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                     }
                 }
             });
-            //full screen button click
-            $("body").click(function(){
-                if( THREEx.FullScreen.available() ) {
-
-                    if( THREEx.FullScreen.activated() ){
-                        THREEx.FullScreen.cancel();
-                    }
-                }
-            });
+            
 
             scene.traverse( function ( object ) {
 

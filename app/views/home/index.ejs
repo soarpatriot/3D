@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="row-fluid">
                     <div class="span12">
-                        <h3 class="public-header">发布，分享3D模型</h3>
+                        <h3 class="public-header">发布、分享、打印3D模型</h3>
                     </div>
                 </div>
                 <% if(post) {%>
@@ -55,7 +55,7 @@
                                 <ul class="thumbnails">
                                     <% if (posts.length > 0) { %>
                                         <% posts.forEach(function (post) { %>
-                                            <% if(post.thumbnail) { %>
+                                            <% if(post && post.thumbnail) { %>
                                                 <li class="span6">
                                                     <div class="thumbnail">
                                                         <a class="model-link" href="/posts/<%=post.id %>">

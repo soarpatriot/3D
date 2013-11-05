@@ -9,7 +9,7 @@ action('index', function () {
         .skip(0)
         .limit(3)
         .nin('url',[null,''])
-        .sort('-publishDate')
+        .sort('+publishDate')
         .exec(function(err,posts){
             if(err){
                 console.log('load post for home page error');

@@ -78,7 +78,8 @@ action(function create() {
                     
                     render('show', {
                         post: post,
-                        title: '模型浏览'
+                        title: '模型浏览',
+                        layout:"show"
                     });
                 }
             });
@@ -121,7 +122,7 @@ action(function index() {
 
 
 action(function show() {
-    this.title = 'Post show';
+    this.title = 'model';
     switch(params.format) {
         case "json":
             send({code: 200, data: this.post});
