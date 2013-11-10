@@ -503,7 +503,9 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
             } );
             if (background) {
-                //        background= "room";
+
+
+
             } else {
                 $(".js-edit-environment-list")[0].value = background;
                 theBackground = background;

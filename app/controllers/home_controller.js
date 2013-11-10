@@ -9,7 +9,7 @@ action('index', function () {
         .skip(0)
         .limit(3)
         .nin('url',[null,''])
-        .sort('+publishDate')
+        .sort('-publishDate')
         .exec(function(err,posts){
             if(err){
                 console.log('load post for home page error');
@@ -22,20 +22,6 @@ action('index', function () {
                 });
             }
         });
-
-    /**
-    Post.findOne({})
-        .nin('url',[null,''])
-        .sort('-publishDate')
-        .exec(function(err,post){
-            if(err){
-                console.log('load post for home page error');
-            }else{
-                Post.findOne({})
-                //console.log('post url:'+this.post.url); //{post:post}
-                render({post:post});
-            }
-        })**/
 
 });
 
