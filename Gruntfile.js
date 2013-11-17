@@ -2,7 +2,7 @@
 (function() {
   module.exports = function(grunt) {
     var cssFiles, delOptions;
-    cssFiles = ['public/stylesheets/bootstrap.css', 'public/stylesheets/bootstrap-responsive.css', 'public/stylesheets/bootstrap-icons.css', 'public/stylesheets/font-awesome.min.css', 'public/stylesheets/font-awesome.ie7.min.css', 'public/stylesheets/jquery.fileupload-ui.css', 'public/stylesheets/jquery.toolbars.css', 'public/stylesheets/show.css', 'public/stylesheets/application.css'];
+    cssFiles = ['public/stylesheets/bootstrap.css', 'public/stylesheets/bootstrap-responsive.css', 'public/stylesheets/bootstrap-icons.css', 'public/stylesheets/font-awesome.min.css', 'public/stylesheets/font-awesome.ie7.min.css', 'public/stylesheets/jquery.fileupload-ui.css', 'public/stylesheets/jquery.toolbars.css', 'public/stylesheets/bootstrap-switch.css', 'public/stylesheets/flat-ui-fonts.css', 'public/stylesheets/show.css', 'public/stylesheets/application.css'];
     delOptions = {
       force: true
     };

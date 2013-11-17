@@ -29,7 +29,7 @@ require.config({
         "underscore": "underscore-min",
         "backbone": "backbone-1.0.0.min",
         'bootstrap': 'bootstrap',
-
+        'bootstrap-switch': 'bootstrap-switch',
 
         "jquery.ui.widget": "fileupload/vendor/jquery.ui.widget",
         "jquery.iframe-transport":"fileupload/jquery.iframe-transport",
@@ -39,7 +39,7 @@ require.config({
 
 });
 
-require(["require","jquery","jquery.iframe-transport","jquery.fileupload","bootstrap"],function(require,$) {
+require(["require","jquery","jquery.iframe-transport","jquery.fileupload","bootstrap","bootstrap-switch"],function(require,$) {
 
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:

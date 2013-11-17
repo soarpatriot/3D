@@ -105,7 +105,7 @@ action(function upload() {
 action(function index() {
     this.title = 'Posts index';
 
-    Post.find({},function (err, posts) {
+    Post.find({published:true},function (err, posts) {
         switch (params.format) {
             case "json":
                 send({code: 200, data: posts});

@@ -6,6 +6,8 @@ module.exports = (grunt) ->
               'public/stylesheets/font-awesome.ie7.min.css',
               'public/stylesheets/jquery.fileupload-ui.css',
               'public/stylesheets/jquery.toolbars.css',
+              'public/stylesheets/bootstrap-switch.css',
+              'public/stylesheets/flat-ui-fonts.css',
               'public/stylesheets/show.css',
               'public/stylesheets/application.css']
   delOptions = {
