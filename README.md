@@ -1,17 +1,18 @@
 ### awesome world
 
-varsion 0.2.13.6
+varsion 0.2.14.0
 
-project  : 3D
- repo age : 7 months
- active   : 57 days
- commits  : 99
- files    : 166
- authors  : 
-    77	Soar                    77.8%
-    16	liuwei                  16.2%
-     4	soar                    4.0%
-     2	liuhb7                  2.0%
+	project  : 3D
+	repo age : 9 months
+	active   : 73 days
+	commits  : 122
+	files    : 186
+	authors  : 
+		100	Soar                    82.0%
+		16	liuwei                  13.1%
+		 4	soar                    3.3%
+		 2	liuhb7                  1.6%
+
 
 
 
