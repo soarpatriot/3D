@@ -16,6 +16,7 @@
             <input id="file-delete_type" type="hidden" name="Post[delete_type]" value="">
             <input id="file-url" type="hidden" name="Post[url]" value="">
             <input id="file-delete_url" type="hidden" name="Post[delete_url]" value="">
+            <input id="model-published" type="hidden" name="Post[published]" value="">
         <%- form.end() %>
     </div>
 
@@ -68,7 +69,7 @@
                         是否发布？ （也可稍后设置）
                     </div>
 
-                    <div class="make-switch" data-on-label="是" data-off-label="否">
+                    <div class="make-switch" data-on="primary" data-off="warning" data-on-label="是" data-off-label="否">
                         <input type="radio">
                     </div>
                     <p></p>
@@ -85,5 +86,5 @@
 
     </div>
 </div>
-<script data-main="/javascripts/app/post" src="/javascripts/require.js"></script>
+<script data-main="/build/app/post" src="/javascripts/require.js"></script>
 

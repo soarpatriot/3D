@@ -9,7 +9,7 @@ exports.routes = function (map) {
 
         //vincent521
         post.post('snapshot','posts#snapshot');               // /users/:user_id/avatar
-
+        post.post('published','posts#published');
         post.post('embeded/:id','posts#embeded');
         //user.get('top', 'users#top', {collection: true}); // /users/top
     });

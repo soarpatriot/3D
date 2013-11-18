@@ -86,6 +86,7 @@ require.config({
         'noty-default': 'noty/themes/default',
         'tip' : 'app/tip',
         'masonry':'masonry.pkgd.min',
+        'bootstrap-switch': 'bootstrap-switch',
 
         "jquery.ui.widget": "fileupload/vendor/jquery.ui.widget",
         "jquery.iframe-transport":"fileupload/jquery.iframe-transport",

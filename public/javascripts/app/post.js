@@ -93,7 +93,8 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload","boots
              */
             var jqXHR = data.submit()
                 .success(function (result, textStatus, jqXHR) {
-                    console.log("result: "+JSON.stringify(result[0]));
+                    //console.log("result: "+JSON.stringify(result[0]));
+                    var publish = $('.make-switch').bootstrapSwitch('status');
 
                     $("#file-name").val(result[0].name);
                     $("#file-original").val(result[0].originalName);
@@ -101,7 +102,7 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload","boots
                     $("#file-delete_type").val(result[0].delete_type);
                     $("#file-url").val(result[0].url);
                     $("#file-delete_url").val(result[0].delete_url);
-
+                    $("#model-published").val(publish)
                     $("#post-form").submit();
 
 

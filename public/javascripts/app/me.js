@@ -26,6 +26,7 @@
     paths: {
       'bootstrap': 'bootstrap',
       'jquery': 'jquery-1.10.2.min',
+      'bootstrap-switch': 'bootstrap-switch',
       'rails': 'rails',
       'masonry': 'masonry.pkgd.min',
       'underscore': 'underscore-min',
@@ -36,17 +37,36 @@
     }
   });
 
-  require(['jquery', 'underscore', 'bootstrap', 'noty', 'noty-top', 'noty-topCenter', 'noty-default'], function($, _) {
+  require(['jquery', 'underscore', 'bootstrap', 'noty', 'noty-top', 'noty-topCenter', 'noty-default', 'bootstrap-switch'], function($, _) {
     $('a[name="delete-link"]').click(function() {
       var postId;
       postId = $(this).attr('data-id');
       return $('#post-id').val(postId);
     });
-    return $('#confirm-delete-btn').click(function() {
+    $('#confirm-delete-btn').click(function() {
       var token;
       token = $('meta[name="csrf-token"]').attr('content');
       $('#authenticity_token').val(token);
       return $('#delete-post-form').submit();
+    });
+    return $('.make-switch').on('switch-change', function(e, data) {
+      var params, postId, publish, token;
+      publish = $(this).bootstrapSwitch('status');
+      token = $('meta[name="csrf-token"]').attr('content');
+      postId = $(this).attr('data-id');
+      console.log('published: ' + publish);
+      params = {
+        authenticity_token: token,
+        id: postId,
+        published: publish
+      };
+      return $.ajax({
+        type: 'POST',
+        url: '/posts/published',
+        data: params,
+        dataType: 'json',
+        success: function() {}
+      });
     });
   });
 

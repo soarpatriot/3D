@@ -29,11 +29,22 @@
                                         </a>
                                     </p>
 
-                                    <p>
-                                        <a href="#myModal" role="button"  name="delete-link" data-id="<%=post.id %>" class="btn btn-danger btn-mini" data-toggle="modal">删除</a>
+                                    <div class="row-fluid">
+                                        <div class="span3">
+                                            <a href="#myModal" role="button"  name="delete-link" data-id="<%=post.id %>" class="btn btn-danger btn-mini" data-toggle="modal">删除</a>
+                                        </div>
+                                        <div class="offset5 span4" data-toggle="tooltip" title="first tooltip">
+                                            <div class="make-switch switch-mini" data-on="primary" data-off="warning" data-on-label="是" data-off-label="否" data-id="<%=post.id %>">
 
+                                            <% if (post.published) { %>
+                                                <input type="radio" checked="checked">
+                                            <% }else { %>
+                                                <input type="radio">
+                                            <% } %>
 
-                                    </p>
+                                            </div>
+                                        </span2>
+                                    </div>
                                 </div>
                             </li>
                         <% } %>
@@ -48,6 +59,13 @@
    <input type="hidden" name="_method" value="delete">
    <input type="hidden" id="authenticity_token" name="authenticity_token">
    <input type="hidden" id="post-id" name="id">
+</form>
+
+<form id="switch-post-form" action="/posts/switch" method="post">
+   <input type="hidden" name="_method" value="put">
+   <input type="hidden" id="authenticity_token_switch" name="authenticity_token">
+   <input type="hidden" id="post-id-switch" name="id">
+   <input type="hidden" id="publish-model" name="published">
 </form>
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

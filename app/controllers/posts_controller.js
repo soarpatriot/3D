@@ -40,7 +40,10 @@ action(function create() {
      originalName: 'String'
     **/
     console.log("fileInfo: "+req.body.Post.name);
-
+    var pub = true;
+    if(req.body.Post.published==='false'){
+        pub = false;
+    }
 
     var post = new Post({
         title: req.body.Post.originalName,
@@ -51,7 +54,7 @@ action(function create() {
         url: req.body.Post.url,
         delete_url: req.body.Post.delete_url,
         size: req.body.Post.size,
-        published:req.body.Post.published,
+        published:pub,
         user:this.user._id
     });
     this.post = post;
@@ -193,6 +196,23 @@ action(function snapshot() {
             this.post = post;
             next();
 
+        }
+    }.bind(this));
+});
+
+action(function published() {
+    //, background: req.body.background
+    console.log(req.body.id);
+    var pub = true;
+    if(req.body.published==='false'){
+        pub = false;
+    }
+    Post.findOneAndUpdate({'_id': req.body.id}, {'published':pub},  function(err, post){
+        if (err || post) {
+            return send({code: 404, error: 'Not found'});
+        } else {
+            this.post = post;
+            next();
         }
     }.bind(this));
 });
