@@ -1,13 +1,13 @@
-<div class="container padding-top-30">
 
-    <div class="row-fluid">
+<div class="container well">
+    <div class="row">
         <div class="span12">
             <div class="page-header">
                     <h4>发布我的3D..</h4>
                     <a href="#myModal" role="button" class="btn btn-success" data-toggle="modal">添加模型</a>
             </div>
         </div>
-
+        
         <% var form = formFor(post, {action: pathTo.posts, method: 'POST', id: "post-form", class: 'form-horizontal'}) %>
         <%- form.begin() %>
             <input id="file-name" type="hidden" name="Post[name]" value="">
@@ -19,7 +19,13 @@
             <input id="model-published" type="hidden" name="Post[published]" value="">
         <%- form.end() %>
     </div>
-
+    <div class="row">
+        <div class="span12">
+            <p>
+                自发发布模型
+            </p>
+        </div>
+    </div>
 </div>
 
 
@@ -70,7 +76,7 @@
                     </div>
 
                     <div class="make-switch" data-on="primary" data-off="warning" data-on-label="是" data-off-label="否">
-                        <input type="radio">
+                        <input type="radio" checked="checked">
                     </div>
                     <p></p>
                     <p>
