@@ -6,9 +6,11 @@ action('index', function () {
     var start = 0;
     var fetchSize = 3
     Post.find()
-        .skip(0)
+        
         .limit(3)
         .nin('url',[null,''])
+        .nin('thumbnail',[null,''])
+        
         .sort('-publishDate')
         .exec(function(err,posts){
             if(err){

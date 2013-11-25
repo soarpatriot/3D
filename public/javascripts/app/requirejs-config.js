@@ -1,7 +1,7 @@
 require.config({
 
     baseUrl: '/javascripts',
-    waitSeconds: 30,
+    waitSeconds: 60,
     shim: {
 
         'underscore': {
