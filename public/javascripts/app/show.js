@@ -502,7 +502,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 }
 
             } );
-            if (background) {
+            if (background != "undefined") {
 //                $(".js-edit-environment-list")[0].value = background;
                 theBackground = background;
                 mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
