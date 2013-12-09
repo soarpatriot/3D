@@ -51,7 +51,7 @@
 
                 <% if (posts.length > 0) { %>
                     <% posts.forEach(function (post) { %>
-                        <% if(post.thumbnail) { %>
+                        
                             <li class="athumbnail" data-model="<%= post._id %>">
                                 <div class="model-thumbnail">
                                     <a class="model-link" href="/posts/<%=post.id %>">
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             </li>
-                        <% } %>
+                       
                     <% }); %>
                 <% } %>
                 </ul>

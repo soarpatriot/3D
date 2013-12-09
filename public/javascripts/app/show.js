@@ -289,7 +289,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
         }
 
         /**
-         * create object wrapper camera and light
+         * create object wrapper camral and light
          * @param filePathName
          * @param postUrl
          * @returns {Object}
@@ -502,28 +502,27 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 }
 
             } );
-            if (background != "undefined") {
-//                $(".js-edit-environment-list")[0].value = background;
+            if (background) {
+
+
+
+            } else {
+                $(".js-edit-environment-list")[0].value = background;
                 theBackground = background;
                 mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
                 mesh.scale.x = -1;
                 scene.add( mesh );
-
-
-            } else {
-
             }
 
             controls = new THREE.OrbitControls( camera, renderer.domElement);
-        controls.addEventListener( 'change', render );
+//        controls.addEventListener( 'change', render );
             if (controlsX ||
                 controlsY  ||
                 controlsZ ) {
+            } else {
                 controls.center.x = parseFloat(controlsX);
                 controls.center.y = parseFloat(controlsY);
                 controls.center.z = parseFloat(controlsZ);
-            } else {
-
             }
 
             var radius = theObject.geometry.boundingSphere.radius;
@@ -539,7 +538,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
             if($("#thumbnail") && document.getElementById("pictureTaking")){
                 var thumbnail = $("#thumbnail").val();
-                if(thumbnail == "undefined") {
+                if(thumbnail) {
                     var target =document.getElementById("pictureTaking");
                     target.click();
                 }
