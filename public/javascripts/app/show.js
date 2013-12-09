@@ -400,36 +400,41 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
             opts.callback = function(snapshotUrl) {
 //            theObject.material.shininess=theObject.material.shininess+50;
+                var thumbnail = $("#thumbnail").val();
+                if(!thumbnail || thumbnail ==='undefined'){
+                    document.getElementById("picture").src = snapshotUrl;
+                    document.getElementById("picture").hidden = false;
+                    setTimeout("document.getElementById('picture').hidden=true",2000);
+                    var id = $("#post-id").val();
+                    
+                    var authenticity_token = $("input[name='authenticity_token']").val();
 
-                document.getElementById("picture").src = snapshotUrl;
-                document.getElementById("picture").hidden = false;
-                setTimeout("document.getElementById('picture').hidden=true",2000);
-                var id = $("#post-id").val();
-                var authenticity_token = $("input[name='authenticity_token']").val();
-
-                var params = {
-                    authenticity_token:authenticity_token,
-                    id:id,
-                    snapshotUrl:snapshotUrl,
-                    radius:theObject.geometry.boundingSphere.radius,
-                    cameraX: camera.position.x,
-                    cameraY: camera.position.y,
-                    cameraZ: camera.position.z,
-                    controlsX: controls.center.x,
-                    controlsY: controls.center.y,
-                    controlsZ: controls.center.z,
-                    background: theBackground
-                };
-                $.ajax({
-                    type: 'POST',
-                    url: '/posts/snapshot',
-                    data: params,
-                    success: function(){
-                        
-                    },
-                    dataType: 'json'
-                });
-
+                    var params = {
+                        authenticity_token:authenticity_token,
+                        id:id,
+                        snapshotUrl:snapshotUrl,
+                        radius:theObject.geometry.boundingSphere.radius,
+                        cameraX: camera.position.x,
+                        cameraY: camera.position.y,
+                        cameraZ: camera.position.z,
+                        controlsX: controls.center.x,
+                        controlsY: controls.center.y,
+                        controlsZ: controls.center.z,
+                        background: theBackground
+                    };
+                    console.log("thumbnail: "+thumbnail);
+                   
+                    console.log("take phote ");
+                    $.ajax({
+                        type: 'POST',
+                        url: '/posts/snapshot',
+                        data: params,
+                        success: function(){
+                            
+                        },
+                        dataType: 'json'
+                    });
+                }
 
             }
 
@@ -536,11 +541,12 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
            
             animate();
 
-            if($("#thumbnail") && document.getElementById("pictureTaking")){
+            if($("#thumbnail") && $("pictureTaking")){
                 var thumbnail = $("#thumbnail").val();
-                if(thumbnail) {
+                if(!thumbnail || thumbnail==='undefined') {
                     var target =document.getElementById("pictureTaking");
                     target.click();
+                    
                 }
             }
 
