@@ -274,7 +274,6 @@ action(function destroy() {
 
         } else {
             this.post = post;
-            console.log("this.post:"+this.post);
             this.post.remove(function (error) {
                 respondTo(function (format) {
                     format.json(function () {
