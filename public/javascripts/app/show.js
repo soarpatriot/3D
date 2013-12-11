@@ -502,11 +502,8 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 }
 
             } );
-            if (background) {
+            if (background && background!=='undefined') {
 
-
-
-            } else {
                 $(".js-edit-environment-list")[0].value = background;
                 theBackground = background;
                 mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
@@ -515,11 +512,11 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             }
 
             controls = new THREE.OrbitControls( camera, renderer.domElement);
-//        controls.addEventListener( 'change', render );
-            if (controlsX ||
-                controlsY  ||
-                controlsZ ) {
-            } else {
+            controls.addEventListener( 'change', render );
+            if (controlsX && controlsX!=='undefined' &&
+                controlsY && controlsY!=='undefined' &&
+                controlsZ && controlsZ!=='undefined' ) {
+       
                 controls.center.x = parseFloat(controlsX);
                 controls.center.y = parseFloat(controlsY);
                 controls.center.z = parseFloat(controlsZ);

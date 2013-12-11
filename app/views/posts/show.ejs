@@ -287,7 +287,7 @@
                 </p>
 
                 <div class="span12">
-                    <div id="iframeEmbedDiv" class="span10 share-link">
+                    <div id="iframe-embed-div" class="span10 share-link">
                     </div>
                 </div>
             </div>
@@ -301,9 +301,7 @@
 
 <script type="text/template" id="simple-html-template">
     <h3>{{ title }} (<a href="{{ url }}" title="查看模型在 3D " target="_blank">3D模型</a>)</h3>
-    <a href="{{ url }}" title="iPhone 5" target="_blank">
-    <div style="position: absolute; top: 140px; left: 183px; height: 82px; width: 82px; cursor: pointer; background: url("http://localhost") no-repeat;background-size: cover;">
-    </div>
+    <a href="{{ url }}" title="{{ title }}" target="_blank"></a>
 
 </script>
 <script type="text/template" id="iframe-template">
@@ -311,5 +309,5 @@
     </iframe>
 </script>
 
-<script data-main="/javascripts/app/show" src="/javascripts/require.js"></script>
+<script data-main="/build/app/show" src="/javascripts/require.js"></script>
 
