@@ -38,6 +38,10 @@
         <input id="pictureTaking" type="button" value="拍照" class="hud-top hud-pic-button">
            <span><i class="icon-cogs"></i></span>
         </input>
+    <% }else{ %>
+        <input id="pictureTaking" type="button" value="拍照" class="hidden hud-top hud-pic-button">
+           <span><i class="icon-cogs"></i></span>
+        </input   
     <% } %>
 
 
@@ -83,7 +87,7 @@
                     <div class="form-box">
                         <div>
                             <fieldset class='environment-background'>
-                                <select class="js-edit-environment-list" type="checkbox" name="activate-environment">
+                                <select id="env-select" class="js-edit-environment-list" type="checkbox" name="activate-environment">
                                     <option value ="no">no</option>
                                     <option value ="room">room</option>
                                     <option value="lawn">lawn</option>
@@ -309,5 +313,5 @@
     </iframe>
 </script>
 
-<script data-main="/build/app/show" src="/javascripts/require.js"></script>
+<script data-main="/javascripts/app/show" src="/javascripts/require.js"></script>
 

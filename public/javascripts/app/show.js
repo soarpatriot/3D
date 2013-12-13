@@ -381,14 +381,14 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             var background = $("#background").val();
             camera = result.currentCamera;
             //    camera.aspect = container.clientWidth/container.clientHeight;
-            if (cameraX == "undefined" ||
-                cameraY == "undefined" ||
-                cameraZ == "undefined") {
-            } else {
+            if (cameraX && cameraX !== "undefined" && 
+                cameraY && cameraY !== "undefined" &&
+                cameraZ && cameraZ !== "undefined") {
+
                 camera.position.x = cameraX;
                 camera.position.y = cameraY;
                 camera.position.z = cameraZ;
-            }
+            } 
 
 
 
@@ -502,10 +502,15 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 }
 
             } );
-            if (background && background!=='undefined') {
 
-                $(".js-edit-environment-list")[0].value = background;
-                theBackground = background;
+            if (background && background!=='undefined') {
+                if($("#env-select")){
+                    $("#env-select").val(background);
+                }
+                if(theBackground && theBackground!=='undefined'){
+                    theBackground = background;                  
+                }
+
                 mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/images/background/'+ background +'.jpg') } ) );
                 mesh.scale.x = -1;
                 scene.add( mesh );
