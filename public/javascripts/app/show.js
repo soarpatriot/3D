@@ -82,7 +82,7 @@ require.config({
         'jquery': 'jquery-1.10.2.min',
         'jquery.spin': 'jquery.spin',
         'rails': 'rails',
-        'three':'three.min',
+        'three':'three',
         'underscore': 'underscore-min',
         'noty': 'noty/jquery.noty',
         'noty-top': 'noty/layouts/top',
@@ -120,19 +120,11 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
 
         var container;
-
-
-    
-
-
         var windowHalfX = window.innerWidth / 2;
         var windowHalfY = window.innerHeight / 2;
 
         var SCREEN_WIDTH = window.innerWidth;
         var SCREEN_HEIGHT = window.innerHeight;
-        var FLOOR = -250;
-
-
 
         var camera, scene;
         var renderer;
@@ -146,12 +138,10 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
         var render_canvas = 1, render_gl = 1;
         var has_gl = 0;
+        
+        var postUrl = $("#post-url").val();
+        var controls;
 
-
-        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-
-
-   
         init();
         animate();
         function init() {
@@ -174,63 +164,35 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             directionalLight.position.set( 0, -70, 100 ).normalize();
             scene.add( directionalLight );
 
-            // RENDERER
-            /**
-            webglRenderer = new THREE.WebGLRenderer();
-            webglRenderer.setClearColor( 0xffffff );
-            webglRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-            webglRenderer.domElement.style.position = "relative";
-
-            container.appendChild( webglRenderer.domElement );
-
-            has_gl = 1;**/
-
-
-
-
-
-
-
-
-
-
-
-            renderer = new THREE.WebGLRenderer();
-            renderer.setClearColor( 0xffffff );
-            renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-            renderer.domElement.style.position = "relative";
-
-            container.appendChild( renderer.domElement );
-
-            has_gl = 1;
-
-            var loader = new THREE.JSONLoader();
-
-
-
-            /**
+            
             renderer = new THREE.WebGLRenderer( {
                 antialias: true,
                 preserveDrawingBuffer: true  // required to support .toDataURL()
             });
-
-            renderer.setSize(widthNum,heightNum);
+            renderer.setClearColor( 0xffffff );
+            renderer.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
             renderer.gammaInput = true;
             renderer.gammaOutput = true;
             renderer.physicallyBasedShading = true;
             container.appendChild( renderer.domElement );
 
-            loader = new THREE.SceneLoader();
-
+            var loader = new THREE.JSONLoader();
+            
+            /**
+            var loader = new THREE.SceneLoader();
+            
+            loader.addGeometryHandler( "js", THREE.JSONLoader );
             loader.addGeometryHandler( "binary", THREE.BinaryLoader );
             loader.addGeometryHandler( "ctm", THREE.CTMLoader );
             loader.addGeometryHandler( "vtk", THREE.VTKLoader );
             loader.addGeometryHandler( "stl", THREE.STLLoader );
             loader.addHierarchyHandler( "obj", THREE.OBJLoader );
             loader.addHierarchyHandler( "dae", THREE.ColladaLoader );
-            loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );
+            loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );**/
 
             window.addEventListener( 'resize', onWindowResize, false );
+
+        
             var $spinContainer = $('<div class="spin-container"></div>');
             var $spinner = $('<div class="preview"></div>');
             var $spinMessage = $('<div id="spinMessage" class="spin-message">0%</div>');
@@ -244,14 +206,30 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
                 $spinner.spin(false);
                 $spinContainer.remove();
                 
-            };**/
+            };
 
             var callbackMale = function ( geometry, materials ) { 
-                createScene( geometry, materials, 90, FLOOR, 50, 105 ) 
+                createScene( geometry, materials, 0, 0, 0, 105 ) 
             };
-//            container.appendChild(loader.statusDomElement);
+//          
+
+
+            //container.appendChild(loader.statusDomElement);
             //loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
-            loader.load('/libs/Male02_dds.js', callbackMale);
+            //loader.load('/libs/Male02_dds.js', callbackMale);
+            //loader.load('/libs/flamingo.js', callbackMale);
+
+            //add controls
+            controls = new THREE.OrbitControls( camera, renderer.domElement);
+            controls.addEventListener( 'change', render );
+
+            controls.center.x = 0;
+            controls.center.y = 0;
+            controls.center.z = 0;
+
+            loader.load(postUrl, callbackMale);
+            
+
         }
 
         function onWindowResize() {
@@ -271,40 +249,28 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
             zmesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial( materials ) );
             zmesh.position.set( x, y, z );
-            zmesh.scale.set( 3, 3, 3 );
+            zmesh.scale.set( 1, 1, 1 );
             scene.add( zmesh );
 
             //createMaterialsPalette( materials, 100, b );
 
         } 
-        function onDocumentMouseMove(event) {
 
-            mouseX = ( event.clientX - windowHalfX );
-            mouseY = ( event.clientY - windowHalfY );
-
-        }
-
-        //
 
         function animate() {
 
             requestAnimationFrame( animate );
-
+            controls.update();
             render();
-
         }
 
         function render() {
-
-            camera.position.x += ( mouseX - camera.position.x ) * .05;
-            camera.position.y += ( - mouseY - camera.position.y ) * .05;
-
             camera.lookAt( scene.position );
-
             renderer.render( scene, camera );
             //if ( render_canvas ) canvasRenderer.render( scene, camera );
+        }   
 
-        }        
 
+         
     });
 });
