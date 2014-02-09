@@ -103,7 +103,11 @@ require.config({
         'ColladaLoader':'loaders/ColladaLoader',
         'UTF8Loader':'loaders/UTF8Loader',
         'MTLLoader':'loaders/MTLLoader',
-        'OrbitControls-Touch':'OrbitControls-Touch'
+        'OrbitControls-Touch':'OrbitControls-Touch',
+
+        'zip':'zip',
+        'zip-fs':'zip-fs',
+        'zip-ext':'zip-ext'
     }
 });
 
@@ -114,7 +118,8 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
     'three-fullscreen','three-screenshot','OrbitControls-Touch',
     'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
     'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
-    'MTLLoader'
+    'MTLLoader',
+    'zip','zip-fs','zip-ext'
     ], function($,_) {
     $(function(){
 
@@ -227,7 +232,32 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             controls.center.y = 0;
             controls.center.z = 0;
 
-            loader.load(postUrl, callbackMale);
+            /**
+            function onerror(message) {
+                console.error(message);
+            }**/
+
+
+            //var testUrl = "http://localhost:8080/files/Male02_dds.js";
+            var zipUrl = "http://localhost:8080/files/male02.js";
+            /**
+            zip.useWebWorkers = true;
+            zip.createReader(new zip.HttpReader(zipUrl), function(zipReader) {
+                zipReader.getEntries(function(entries) {
+                    
+                    console.log("entries:"+entries);
+                    var i = 0;
+                    for(;i<entries.length;i++){
+                        var filename = entries[i].filename;
+                        if(filename==="Male02_dds.js"){
+                            loader.load(testUrl, callbackMale);
+                        }
+                        console.log("filename: "+filename);
+                    }
+                });
+            }, onerror);**/
+
+            loader.load(zipUrl, callbackMale);
             
 
         }
@@ -246,13 +276,14 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
         }
 
         function createScene( geometry, materials, x, y, z, b ) {
-
+            
             zmesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial( materials ) );
             zmesh.position.set( x, y, z );
             zmesh.scale.set( 1, 1, 1 );
             scene.add( zmesh );
 
-            //createMaterialsPalette( materials, 100, b );
+            //changeBackground("grid.png");
+            //createMaterialsPalette( materials, 100, b );**/
 
         } 
 

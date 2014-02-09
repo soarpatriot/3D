@@ -1,5 +1,5 @@
 { "name": "blog"
-    , "version": "0.0.1"
+    , "version": "0.2.3"
     , "engines": ["node >= 0.8.0"]
     , "main": "server.js"
     , "dependencies":
@@ -17,6 +17,7 @@
         , "jquery-file-upload-middleware":"0.0.8"
         , "underscore":">=1.4.4"
         , "node-uuid":"1.4.0"
+        , "adm-zip":"0.4.3"
     },
     "devDependencies":
     {   "nodeunit":         "*",
