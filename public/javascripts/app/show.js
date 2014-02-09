@@ -195,7 +195,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             controls.center.y = 0;
             controls.center.z = 0;
             var zipUrl = "http://localhost:8080/files/male02.js";
-            loader.load(zipUrl, callbackMale);
+            loader.load(postUrl, callbackMale);
         }
 
         function onWindowResize() {

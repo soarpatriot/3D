@@ -44,7 +44,8 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload","boots
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url:'http://106.186.22.114:8080/upload'
+        //url:'http://106.186.22.114:8080/upload'
+        url:'http://localhost:8080/upload'
     });
     $('#fileupload').fileupload('option', {
 
