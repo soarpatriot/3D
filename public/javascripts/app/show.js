@@ -103,11 +103,7 @@ require.config({
         'ColladaLoader':'loaders/ColladaLoader',
         'UTF8Loader':'loaders/UTF8Loader',
         'MTLLoader':'loaders/MTLLoader',
-        'OrbitControls-Touch':'OrbitControls-Touch',
-
-        'zip':'zip',
-        'zip-fs':'zip-fs',
-        'zip-ext':'zip-ext'
+        'OrbitControls-Touch':'OrbitControls-Touch'
     }
 });
 
@@ -118,8 +114,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
     'three-fullscreen','three-screenshot','OrbitControls-Touch',
     'lzma','ctm','CTMLoader','BinaryLoader','OBJLoader',
     'VTKLoader','STLLoader','ColladaLoader', 'UTF8Loader',
-    'MTLLoader',
-    'zip','zip-fs','zip-ext'
+    'MTLLoader'
     ], function($,_) {
     $(function(){
 
@@ -134,12 +129,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
         var camera, scene;
         var renderer;
 
-        var mesh, zmesh, geometry;
-
-        var mouseX = 0, mouseY = 0;
-
-        var windowHalfX = window.innerWidth / 2;
-        var windowHalfY = window.innerHeight / 2;
+        var zmesh, geometry;
 
         var render_canvas = 1, render_gl = 1;
         var has_gl = 0;
@@ -150,7 +140,6 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
         init();
         animate();
         function init() {
-            
 
             container = document.getElementById("postShowContainer");
             camera = new THREE.PerspectiveCamera( 75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 100000 );
@@ -158,23 +147,19 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
 
             scene = new THREE.Scene();
 
-
-
             // LIGHTS
-
             var ambient = new THREE.AmbientLight( 0x221100 );
             scene.add( ambient );
 
             var directionalLight = new THREE.DirectionalLight( 0xffeedd );
             directionalLight.position.set( 0, -70, 100 ).normalize();
             scene.add( directionalLight );
-
             
             renderer = new THREE.WebGLRenderer( {
                 antialias: true,
                 preserveDrawingBuffer: true  // required to support .toDataURL()
             });
-            renderer.setClearColor( 0xffffff );
+            //renderer.setClearColor( 0xffffff );
             renderer.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
             renderer.gammaInput = true;
             renderer.gammaOutput = true;
@@ -182,22 +167,7 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             container.appendChild( renderer.domElement );
 
             var loader = new THREE.JSONLoader();
-            
-            /**
-            var loader = new THREE.SceneLoader();
-            
-            loader.addGeometryHandler( "js", THREE.JSONLoader );
-            loader.addGeometryHandler( "binary", THREE.BinaryLoader );
-            loader.addGeometryHandler( "ctm", THREE.CTMLoader );
-            loader.addGeometryHandler( "vtk", THREE.VTKLoader );
-            loader.addGeometryHandler( "stl", THREE.STLLoader );
-            loader.addHierarchyHandler( "obj", THREE.OBJLoader );
-            loader.addHierarchyHandler( "dae", THREE.ColladaLoader );
-            loader.addHierarchyHandler( "utf8", THREE.UTF8Loader );**/
-
             window.addEventListener( 'resize', onWindowResize, false );
-
-        
             var $spinContainer = $('<div class="spin-container"></div>');
             var $spinner = $('<div class="preview"></div>');
             var $spinMessage = $('<div id="spinMessage" class="spin-message">0%</div>');
@@ -216,13 +186,6 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             var callbackMale = function ( geometry, materials ) { 
                 createScene( geometry, materials, 0, 0, 0, 105 ) 
             };
-//          
-
-
-            //container.appendChild(loader.statusDomElement);
-            //loader.parse(createWrapperJson(filePathName,postUrl), callbackFinished,postUrl);
-            //loader.load('/libs/Male02_dds.js', callbackMale);
-            //loader.load('/libs/flamingo.js', callbackMale);
 
             //add controls
             controls = new THREE.OrbitControls( camera, renderer.domElement);
@@ -231,35 +194,8 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             controls.center.x = 0;
             controls.center.y = 0;
             controls.center.z = 0;
-
-            /**
-            function onerror(message) {
-                console.error(message);
-            }**/
-
-
-            //var testUrl = "http://localhost:8080/files/Male02_dds.js";
             var zipUrl = "http://localhost:8080/files/male02.js";
-            /**
-            zip.useWebWorkers = true;
-            zip.createReader(new zip.HttpReader(zipUrl), function(zipReader) {
-                zipReader.getEntries(function(entries) {
-                    
-                    console.log("entries:"+entries);
-                    var i = 0;
-                    for(;i<entries.length;i++){
-                        var filename = entries[i].filename;
-                        if(filename==="Male02_dds.js"){
-                            loader.load(testUrl, callbackMale);
-                        }
-                        console.log("filename: "+filename);
-                    }
-                });
-            }, onerror);**/
-
             loader.load(zipUrl, callbackMale);
-            
-
         }
 
         function onWindowResize() {
@@ -281,10 +217,6 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             zmesh.position.set( x, y, z );
             zmesh.scale.set( 1, 1, 1 );
             scene.add( zmesh );
-
-            //changeBackground("grid.png");
-            //createMaterialsPalette( materials, 100, b );**/
-
         } 
 
 
@@ -300,8 +232,6 @@ require(['jquery', 'underscore','jquery.spin','three','bootstrap','noty',
             renderer.render( scene, camera );
             //if ( render_canvas ) canvasRenderer.render( scene, camera );
         }   
-
-
          
     });
 });
