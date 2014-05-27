@@ -44,7 +44,8 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload","boots
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url:'http://106.186.22.114:8080/upload'
+        //url:'http://106.186.22.114:8080/upload'
+        url:'//localhost:8888/upload'
     });
     $('#fileupload').fileupload('option', {
 
@@ -93,15 +94,15 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload","boots
              */
             var jqXHR = data.submit()
                 .success(function (result, textStatus, jqXHR) {
-                    //console.log("result: "+JSON.stringify(result[0]));
+                    console.log("result: "+JSON.stringify(result));
                     var publish = $('.make-switch').bootstrapSwitch('status');
 
-                    $("#file-name").val(result[0].name);
-                    $("#file-original").val(result[0].originalName);
-                    $("#file-size").val(result[0].size);
-                    $("#file-delete_type").val(result[0].delete_type);
-                    $("#file-url").val(result[0].url);
-                    $("#file-delete_url").val(result[0].delete_url);
+                    $("#file-name").val(result.files[0].name);
+                    //$("#file-original").val(result.files[0].originalName);
+                    $("#file-size").val(result.files[0].size);
+                    $("#file-delete_type").val(result.files[0].deleteType);
+                    $("#file-url").val(result.files[0].url);
+                    $("#file-delete_url").val(result.files[0].deleteUrl);
                     $("#model-published").val(publish)
                     $("#post-form").submit();
 
