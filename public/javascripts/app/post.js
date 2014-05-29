@@ -45,7 +45,7 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload","boots
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
         //url:'http://106.186.22.114:8080/upload'
-        url:'//localhost:8888/upload'
+        url:'//106.186.22.114:8888/upload'
     });
     $('#fileupload').fileupload('option', {
 
@@ -109,7 +109,8 @@ require(["require","jquery","jquery.iframe-transport","jquery.fileupload","boots
 
                 })
                 .error(function (jqXHR, textStatus, errorThrown) {
-
+                    console.log("textStatus: "+JSON.stringify(textStatus));
+                    console.log("errorThrown: "+errorThrown);
                 })
                 .complete(function (result, textStatus, jqXHR) {
                     console.log("result complete: "+JSON.stringify(result));
