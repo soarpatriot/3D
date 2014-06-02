@@ -23,8 +23,9 @@
             <nav>
                 <ul class="menu">
                     <li id="recent"class="current">
-                        <a href="/dashboard/recent">浏览量排序</a>
+                        <a href="#2">浏览量排序</a>
                     </li>
+                    <!--
                     <li id="views">
                         <a href="/dashboard/views">喜欢数排序</a>
                     </li>
@@ -43,7 +44,7 @@
                         </a>
 
                     </li>
-
+                    -->
                 </ul>
             </nav>
             <div id="article_content">
@@ -55,7 +56,7 @@
                             <li class="athumbnail" data-model="<%= post._id %>">
                                 <div class="model-thumbnail">
                                     <a class="model-link" href="/posts/<%=post.id %>">
-                                        <img src="<%=post.thumbnail %>" alt="screenshot of 3d model The Grey City Build">
+                                        <img src="<%=post.thumbnail %>" alt="screenshot of 3d model">
 
                                     </a>
                                     <div class="model-meta">
@@ -87,6 +88,7 @@
         <aside>
             <article class="tags">
                 <h2>标签浏览</h2>
+                <!--
                 <ul id="taglist">
 
                     <li class="tag-"><a href="/tag/character">角色</a></li>
@@ -100,6 +102,7 @@
                     <li class="tag-"><a href="/tag/3dscan">3d扫描</a></li>
 
                 </ul>
+                -->
             </article>
         </aside>
 
